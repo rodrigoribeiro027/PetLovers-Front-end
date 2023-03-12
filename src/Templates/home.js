@@ -4,7 +4,7 @@ import {
     StyleSheet,
     Text,
     View,StatusBar,TextInput,
-    TouchableOpacity,KeyboardAvoidingView,Keyboard,TouchableWithoutFeedback,Platform,Icon,
+    TouchableOpacity,KeyboardAvoidingView,Keyboard,TouchableWithoutFeedback,Platform,Icon,Button
 } from 'react-native';
 
 import * as Animatable from 'react-native-animatable'
@@ -15,16 +15,20 @@ const App = ({navigation}) => {
         <>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios'? 'padding' : 'position'}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            
             <View style={styles.container}>
                 <StatusBar backgroundColor="#FFF" traslucent={false}></StatusBar>
+                <TouchableOpacity style={styles.VoltarButon}  onPress={()=>navigation.navigate("Login")} >
+                    <Text style={styles.loginButonText}>Voltar</Text>
+                </TouchableOpacity>
                 <Animatable.Text animation='fadeInRight'  style={styles.TextPrincipaltextobv}>Seja Bem-Vindo(a)</Animatable.Text>
                 <Animatable.Image  animation='fadeInUp' source={require("../assets/Welcome.png")} style={styles.imgpets}/>
                 <Animatable.View animation='fadeInRight' style={styles.divButton}>
                     <TouchableOpacity style={styles.menuUsuario} >
-                            <Text style={styles.menuUsuarioText}  onPress={()=>navigation.navigate("Home")}>Agendar Consulta</Text>
+                            <Text style={styles.menuUsuarioText}  onPress={()=>navigation.navigate("AgendarConsulta")}>Agendar Consulta</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuUsuario} >
-                            <Text style={styles.menuUsuarioText}  onPress={()=>navigation.navigate("Home")}>Meus Pets</Text>
+                            <Text style={styles.menuUsuarioText}  onPress={()=>navigation.navigate("MeusPets")}>Meus Pets</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuUsuario} >
                             <Text style={styles.menuUsuarioText}  onPress={()=>navigation.navigate("Home")}>Historico de Agendamentos</Text>
@@ -38,6 +42,16 @@ const App = ({navigation}) => {
     )
 };
 const styles = StyleSheet.create({
+    VoltarButon:{
+        width:'100%',
+        backgroundColor:"#399fff",
+        height:50,
+        justifyContent:'center',
+        alignItems:"center",
+    },
+    containerStart:{
+        width:"100%",
+    },
     espaco:{
         width:'90%',
         marginTop:170

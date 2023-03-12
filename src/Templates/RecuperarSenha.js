@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
     espacamento:{
         width:'90%',
         marginTop:'10%', 
-        paddingBottom:'10%'
+        paddingBottom:'10%',
+        fontSize:20
     }
 });
 
