@@ -55,7 +55,6 @@ const CadastrarUsuario = ({navigation}) => {
                 style={styles.input}>
                 </TextInput>
 
-
                 <TouchableOpacity style={styles.loginButon} onPress={()=>navigation.navigate("Login")} >
                     <Text style={styles.loginButonText}>Enviar</Text>
                 </TouchableOpacity>

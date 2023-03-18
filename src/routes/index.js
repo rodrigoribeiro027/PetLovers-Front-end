@@ -21,7 +21,6 @@ const Routes = () => {
                     <Stack.Screen name="CadastrarUsuario" component={CadastrarUsuario}/>
                     <Stack.Screen name="AgendarConsulta" component={AgendarConsulta}/>
                     <Stack.Screen name="MeusPets" component={MeusPets}/>
-
                 </Stack.Navigator>
             </NavigationContainer>
     )
