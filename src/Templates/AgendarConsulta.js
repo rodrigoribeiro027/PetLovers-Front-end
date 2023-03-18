@@ -4,7 +4,7 @@ import {
     Image, Button,
     StyleSheet,
     Text,
-    View, StatusBar, TextInput,
+    View, TextInput,
     TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, Icon,
 } from 'react-native';
 
@@ -12,7 +12,7 @@ import * as Animatable from 'react-native-animatable'
 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
-
+import StatusBar from '../components/StatusBar.js';
 
 
 const AgendarConsulta = ({navigation}) => {
@@ -42,9 +42,9 @@ setMode(currentMode);
     return (
         <>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'position'}>
+            <StatusBar/>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <Animatable.View style={styles.container}>
-                        <StatusBar backgroundColor="#FFF" traslucent={false}></StatusBar>
                         <TouchableOpacity style={styles.VoltarButon}  onPress={()=>navigation.navigate("Home")} >
                             <Text style={styles.loginButonText}>Voltar</Text>
                         </TouchableOpacity>

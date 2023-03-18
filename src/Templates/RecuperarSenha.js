@@ -4,9 +4,11 @@ import {
     Image,
     StyleSheet,
     Text,
-    View,StatusBar,TextInput,
+    View,
+    TextInput,
     TouchableOpacity,KeyboardAvoidingView,Keyboard,TouchableWithoutFeedback,Platform,Icon
 } from 'react-native';
+import StatusBar from '../components/StatusBar';
 
 const RecuperarSenha = ({navigation}) => {
     return (
@@ -14,7 +16,7 @@ const RecuperarSenha = ({navigation}) => {
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'position'}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.container}>
-                <StatusBar backgroundColor="#FFF" traslucent={false}></StatusBar>
+                <StatusBar/>
                 <Text style={styles.TextPrincipal}>Recuperar Senha</Text>
                 <Image source={require("../assets/recuperar.png")} style={styles.imgpets}/>
                 <Text style={styles.espacamento}>Para Recuperar sua senha,Digite seu Email no campo abaixo e enviaremos no seu Email.</Text> 
@@ -41,7 +43,7 @@ const styles = StyleSheet.create({
         backgroundColor:"#FFF",
         alignItems:"center",
         justifyContent:"center",
-        
+        height:"100%"
     },
     input:{
         backgroundColor:"#F4F3F3",
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
         border: '3px solid #000000',
     },imgpets:{
         width:'100%',
-        height:410,
+        height:310,
     },
     espacamento:{
         width:'90%',

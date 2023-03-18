@@ -3,21 +3,20 @@ import React from 'react';
 import {
     StyleSheet,
     Text,
-    View,StatusBar,TextInput,
-    TouchableOpacity,KeyboardAvoidingView,Keyboard,TouchableWithoutFeedback,Platform,Icon,Button
+    View,
+    TouchableOpacity,KeyboardAvoidingView,Keyboard,TouchableWithoutFeedback,Platform,
 } from 'react-native';
-
+import StatusBar from '../components/StatusBar.js';
 import * as Animatable from 'react-native-animatable'
 
-
-const App = ({navigation}) => {
+const Home = ({navigation}) => {
     return (
         <>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios'? 'padding' : 'position'}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             
             <View style={styles.container}>
-                <StatusBar backgroundColor="#FFF" traslucent={false}></StatusBar>
+                <StatusBar/>
                 <TouchableOpacity style={styles.VoltarButon}  onPress={()=>navigation.navigate("Login")} >
                     <Text style={styles.loginButonText}>Voltar</Text>
                 </TouchableOpacity>
@@ -93,4 +92,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default App;
+export default Home;
