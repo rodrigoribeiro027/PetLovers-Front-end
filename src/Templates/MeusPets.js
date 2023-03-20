@@ -19,8 +19,8 @@ const MeusPets = ({ navigation }) => {
                     <Text style={styles.loginButonText}>Voltar</Text>
                 </TouchableOpacity>
                 <Animatable.Text animation='fadeInRight' style={styles.TextPrincipal}>Meus Pets</Animatable.Text>
-                <TouchableOpacity style={{...styles.VoltarButon, ...styles.novoPets}} onPress={() => navigation.navigate("Home")} >
-                    <Text style={styles.loginButonText}>Cadastrar Novo Pet</Text>
+                <TouchableOpacity style={{...styles.VoltarButon, ...styles.novoPets}} onPress={() => navigation.navigate('CadastrarPet')} >
+                    <Text style={styles.loginButonText} >Cadastrar Novo Pet</Text>
                 </TouchableOpacity>
                 <View style={styles.meusPets}>
                     <View style={styles.viewPetImage}>

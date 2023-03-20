@@ -116,7 +116,6 @@ const styles = StyleSheet.create({
         backgroundColor:"#FFF",
         alignItems:"center",
         justifyContent:"center",
-        
         paddingBottom: 20
     },
     imgpets:{

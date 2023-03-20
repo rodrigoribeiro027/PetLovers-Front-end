@@ -23,14 +23,14 @@ const Home = ({navigation}) => {
                 <Animatable.Text animation='fadeInRight'  style={styles.TextPrincipaltextobv}>Seja Bem-Vindo(a)</Animatable.Text>
                 <Animatable.Image  animation='fadeInUp' source={require("../assets/Welcome.png")} style={styles.imgpets}/>
                 <Animatable.View animation='fadeInRight' style={styles.divButton}>
-                    <TouchableOpacity style={styles.menuUsuario} >
-                            <Text style={styles.menuUsuarioText}  onPress={()=>navigation.navigate("AgendarConsulta")}>Agendar Consulta</Text>
+                    <TouchableOpacity style={styles.menuUsuario} onPress={()=>navigation.navigate("AgendarConsulta")}>
+                            <Text style={styles.menuUsuarioText} >Agendar Consulta</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuUsuario} >
-                            <Text style={styles.menuUsuarioText}  onPress={()=>navigation.navigate("MeusPets")}>Meus Pets</Text>
+                    <TouchableOpacity style={styles.menuUsuario} onPress={()=>navigation.navigate("MeusPets")}>
+                            <Text style={styles.menuUsuarioText} >Meus Pets</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuUsuario} >
-                            <Text style={styles.menuUsuarioText}  onPress={()=>navigation.navigate("Home")}>Historico de Agendamentos</Text>
+                    <TouchableOpacity style={styles.menuUsuario} onPress={()=>navigation.navigate("Home")}>
+                            <Text style={styles.menuUsuarioText} >Historico de Agendamentos</Text>
                     </TouchableOpacity>
                     <View style={styles.espaco}></View>
                 </Animatable.View>

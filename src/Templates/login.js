@@ -10,6 +10,8 @@ import {
 import StatusBar from '../components/StatusBar.js';
 import * as Animatable from 'react-native-animatable'
 
+
+
 const Login = ({navigation}) => {
     return (
         <>
@@ -31,8 +33,8 @@ const Login = ({navigation}) => {
                                     <Text style={styles.esqueceuSenhaText}>Esqueceu sua senha?</Text>
                                 </TouchableOpacity>
                             </View>
-                            <TouchableOpacity style={styles.loginButon} >
-                                <Text style={styles.loginButonText}  onPress={()=>navigation.navigate("Home")}>Acessar</Text>
+                            <TouchableOpacity style={styles.loginButon} onPress={()=>navigation.navigate("Home")}>
+                                <Text style={styles.loginButonText} >Acessar</Text>
                             </TouchableOpacity>
                             <View style={styles.criarConta}>
                                 <TouchableOpacity onPress={()=>navigation.navigate("CadastrarUsuario")}>

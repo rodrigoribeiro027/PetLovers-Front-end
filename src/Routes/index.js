@@ -1,13 +1,14 @@
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React  from 'react'
-import Login from '../templates/Login';
-import RecuperarSenha from '../templates/RecuperarSenha';
-import CadastrarUsuario from '../templates/CadastrarUsuario';
-import AgendarConsulta from '../templates/AgendarConsulta';
-import MeusPets from '../templates/MeusPets';
-import Home from '../templates/Home';
+import React from 'react'
+import Login from '../Templates/login';
+import RecuperarSenha from '../Templates/RecuperarSenha';
+import CadastrarUsuario from '../Templates/CadastrarUsuario';
+import AgendarConsulta from '../Templates/AgendarConsulta';
+import MeusPets from '../Templates/MeusPets';
+import Home from '../Templates/home';
+import CadastrarPet from '../Templates/CadastrarPet';
 
 
 
@@ -22,6 +23,7 @@ const Routes = () => {
                 <Stack.Screen name="CadastrarUsuario" component={CadastrarUsuario}/>
                 <Stack.Screen name="AgendarConsulta" component={AgendarConsulta}/>
                 <Stack.Screen name="MeusPets" component={MeusPets}/>
+                <Stack.Screen name='CadastrarPet' component={CadastrarPet}/>
             </Stack.Navigator>
         </NavigationContainer>
     )
