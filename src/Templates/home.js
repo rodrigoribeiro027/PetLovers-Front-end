@@ -18,7 +18,7 @@ const Home = ({navigation}) => {
             <View style={styles.container}>
                 <StatusBar/>
                 <TouchableOpacity style={styles.VoltarButon}  onPress={()=>navigation.navigate("Login")} >
-                    <Text style={styles.loginButonText}>Voltar</Text>
+                    <Text style={styles.loginButonText}>Logout</Text>
                 </TouchableOpacity>
                 <Animatable.Text animation='fadeInRight'  style={styles.TextPrincipaltextobv}>Seja Bem-Vindo(a)</Animatable.Text>
                 <Animatable.Image  animation='fadeInUp' source={require("../assets/Welcome.png")} style={styles.imgpets}/>
@@ -29,10 +29,13 @@ const Home = ({navigation}) => {
                     <TouchableOpacity style={styles.menuUsuario} onPress={()=>navigation.navigate("MeusPets")}>
                             <Text style={styles.menuUsuarioText} >Meus Pets</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuUsuario} onPress={()=>navigation.navigate("CriarServico")}>
+                            <Text style={styles.menuUsuarioText} >Cadastrar Serviço</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity style={styles.menuUsuario} onPress={()=>navigation.navigate("Home")}>
                             <Text style={styles.menuUsuarioText} >Historico de Agendamentos</Text>
                     </TouchableOpacity>
-                    <View style={styles.espaco}></View>
+                    
                 </Animatable.View>
             </View>
             </TouchableWithoutFeedback>
@@ -81,7 +84,6 @@ const styles = StyleSheet.create({
         fontfamily: 'Inter',
         fontWeight:800,
         fontSize:30,
-        border: '3px solid #000000',
     },
     container:{
         backgroundColor:"#FFF",
