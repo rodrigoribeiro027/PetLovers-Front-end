@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         fontSize:17
     },
     TextPrincipaltextobv:{
-        fontfamily: 'Inter',
+        fontFamily: "Inter",
         fontWeight:800,
         fontSize:30,
     },

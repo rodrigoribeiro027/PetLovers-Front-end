@@ -129,10 +129,9 @@ const styles = StyleSheet.create({
         fontSize: 17
     },
     TextPrincipalAgendamento: {
-        fontfamily: 'Inter',
+        fontFamily: 'Inter',
         fontWeight: 800,
         fontSize: 30,
-        border: '3px solid #000000',
     },
     container: {
         backgroundColor: "#FFF",

@@ -19,7 +19,7 @@ const CriarServico = ({ navigation }) => {
                 </TouchableOpacity>
                 <Animatable.Text animation='fadeInRight' style={styles.TextPrincipaltextoCadastro}>Cadastrar Serviço</Animatable.Text>
                 <Animatable.View animation='fadeInRight' style={styles.divButton}>
-                    <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("AgendarConsulta")}>
+                    <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("CadastrarServico")}>
                         <Text style={styles.menuUsuarioText} >Cadastrar Serviço</Text>
                     </TouchableOpacity>
                 </Animatable.View>

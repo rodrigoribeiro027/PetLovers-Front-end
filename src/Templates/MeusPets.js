@@ -24,7 +24,7 @@ const MeusPets = ({ navigation }) => {
                 </TouchableOpacity>
                 <View style={styles.meusPets}>
                     <View style={styles.viewPetImage}>
-                        <Animatable.Image animation='fadeInUp' source={require("../assets/pets.png")} style={styles.meusImgPets} />
+                        <Animatable.Image animation='fadeInUp' source={require("../assets/pets.png")} style={styles.meusImgPets} /> 
                     </View>
                     <View style={styles.containerCard}>
                         <Text style={styles.textoPet}>Nome:</Text>
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         marginBottom: 30
     },
     textoPet: {
-        fontfamily: 'Inter',
+        fontFamily: 'Inter',
         fontWeight: 800,
         fontSize: 16,
     },
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         fontSize: 17
     },
     TextPrincipal: {
-        fontfamily: 'Inter',
+        fontFamily: 'Inter',
         fontWeight: 800,
         fontSize: 45,
         marginTop: 20

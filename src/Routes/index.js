@@ -10,7 +10,7 @@ import MeusPets from '../Templates/MeusPets';
 import Home from '../Templates/home';
 import CadastrarPet from '../Templates/CadastrarPet';
 import CriarServico from '../Templates/CriarServico';
-
+import CadastrarServico from '../Templates/CadastrarServico';
 
 const Routes = () => {
     const Stack = createNativeStackNavigator();
@@ -25,6 +25,7 @@ const Routes = () => {
                 <Stack.Screen name="MeusPets" component={MeusPets}/>
                 <Stack.Screen name='CadastrarPet' component={CadastrarPet}/>
                 <Stack.Screen name='CriarServico' component={CriarServico}/>
+                <Stack.Screen name='CadastrarServico' component={CadastrarServico}/>
             </Stack.Navigator>
         </NavigationContainer>
     )
