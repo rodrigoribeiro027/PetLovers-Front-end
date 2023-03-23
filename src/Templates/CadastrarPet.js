@@ -54,8 +54,7 @@ const CadastrarPet = ({ navigation }) => {
                         <StatusBarDefault />
 
                         <Text style={styles.textCadastroPet}>Cadastrar Pet</Text>
-
-                        <Image style={styles.imagemUploadPet} source={Foto} />
+                        <Image onPress={()=> uploadImage()} style={styles.imagemUploadPet} source={Foto ? { uri: Foto.uri } : require('../assets/user.png')}/>
 
                         <TouchableOpacity style={{ ...stylesDefault.buttonDefault, marginBottom: 20 }} onPress={() => uploadImage()} >
                             <Text style={styles.uploadImageText} >Upload Foto</Text>

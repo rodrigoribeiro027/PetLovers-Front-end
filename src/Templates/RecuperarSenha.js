@@ -72,10 +72,9 @@ const styles = StyleSheet.create({
         fontSize: 17
     },
     TextPrincipal: {
-        fontfamily: 'Inter',
+        fontFamily: 'Inter',
         fontWeight: 800,
         fontSize: 45,
-        border: '3px solid #000000',
         marginTop: 20
     }, imgpets: {
         width: '100%',

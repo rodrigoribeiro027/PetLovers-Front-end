@@ -73,10 +73,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     TextPrincipaltextoCadastro: {
-        fontfamily: 'Inter',
+        fontFamily: 'Inter',
         fontWeight: 800,
         fontSize: 30,
-        border: '3px solid #000000',
     },
     containerCadastro: {
         backgroundColor: "#FFF",
@@ -98,7 +97,7 @@ const styles = StyleSheet.create({
         fontSize: 17
     },
     TextPrincipaltextobv: {
-        fontfamily: 'Inter',
+        fontFamily: 'Inter',
         fontWeight: 800,
         fontSize: 30,
         border: '3px solid #000000',
