@@ -92,7 +92,6 @@ const CadastrarPet = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     textCadastroPet: {
-        fontfamily: 'Inter',
         fontWeight: 800,
         fontSize: 35,
         marginBottom: 25

@@ -9,7 +9,7 @@ import AgendarConsulta from '../Templates/AgendarConsulta';
 import MeusPets from '../Templates/MeusPets';
 import Home from '../Templates/home';
 import CadastrarPet from '../Templates/CadastrarPet';
-import CriarServico from '../Templates/CriarServico';
+import Servicos from '../Templates/Servicos';
 import CadastrarServico from '../Templates/CadastrarServico';
 
 const Routes = () => {
@@ -24,7 +24,7 @@ const Routes = () => {
                 <Stack.Screen name="AgendarConsulta" component={AgendarConsulta}/>
                 <Stack.Screen name="MeusPets" component={MeusPets}/>
                 <Stack.Screen name='CadastrarPet' component={CadastrarPet}/>
-                <Stack.Screen name='CriarServico' component={CriarServico}/>
+                <Stack.Screen name='Servicos' component={Servicos}/>
                 <Stack.Screen name='CadastrarServico' component={CadastrarServico}/>
             </Stack.Navigator>
         </NavigationContainer>

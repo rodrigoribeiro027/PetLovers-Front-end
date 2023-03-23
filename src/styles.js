@@ -24,6 +24,17 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:"center",
         borderRadius:5
+    },
+    buttonVoltarDefault:{
+        width:'100%',
+        backgroundColor:"#399fff",
+        height:50,
+        justifyContent:'center',
+        alignItems:"center",
+    },
+    buttonTextDefault:{
+        color:"#FFF",
+        fontSize:17
     }
 })
 

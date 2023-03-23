@@ -11,6 +11,7 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import styleDefault from "../styles";
 import StatusBar from '../components/StatusBar.js';
 
+
 const CadastrarUsuario = ({navigation}) => {
 
     const [Foto, SetFoto] = React.useState('');
@@ -41,12 +42,19 @@ const CadastrarUsuario = ({navigation}) => {
 
     return (
         <ScrollView>
-            <KeyboardAvoidingView behavior={Platform.OS === 'ios'? 'padding' : 'padding'}>
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios'? 'padding' : 'position'}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <SafeAreaView style={styles.container}>
                         <StatusBar/>
+
+                        <TouchableOpacity style={styleDefault.buttonVoltarDefault}  onPress={()=>navigation.navigate("Login")} >
+                            <Text style={styleDefault.buttonTextDefault}>Voltar</Text>
+                        </TouchableOpacity>
+
                         <Text style={styles.TextPrincipalCadastro}>Cadastrar Usuario</Text>
-                        <Image style={styles.imagenUploadUsuario} source={Foto}/>
+
+                        <Image onPress={()=> uploadImage()} style={styles.imagenUploadUsuario} source={Foto ? { uri: Foto.uri } : require('../assets/user.png')}/>
+
                         <TouchableOpacity style={{...styles.loginButon, marginBottom:20}}  onPress={()=> uploadImage()} >
                             <Text style={styles.uploadImageText} >Upload Foto</Text>
                         </TouchableOpacity>
@@ -88,7 +96,7 @@ const CadastrarUsuario = ({navigation}) => {
                         </TextInput>
 
                         <TouchableOpacity style={styles.loginButon} onPress={()=>navigation.navigate("Login")} >
-                            <Text style={styles.loginButonText}>Enviar</Text>
+                            <Text style={styleDefault.buttonTextDefault}>Enviar</Text>
                         </TouchableOpacity> 
                     </SafeAreaView>
                 </TouchableWithoutFeedback>
@@ -103,8 +111,7 @@ const styles = StyleSheet.create({
         height:200, 
         width:200, 
         borderColor:"#E0E0E0", 
-        borderStyle:'solid',
-        borderWidth:2,
+        
         borderRadius:100,
         backgroundColor:"#E0E0E0"
     },
@@ -131,10 +138,6 @@ const styles = StyleSheet.create({
         alignItems:"center",
         borderRadius:5
     },
-    loginButonText:{
-        color:"#FFF",
-        fontSize:17
-    },
     esqueceuSenha:{
         width:'90%',
         alignItems:"flex-end"
@@ -143,10 +146,10 @@ const styles = StyleSheet.create({
         color:"#399fff"
     },
     TextPrincipalCadastro:{
-        fontfamily: 'Inter',
         fontWeight:800,
         fontSize:35,
-        marginBottom:25
+        marginBottom:25,
+        marginTop:20
     },
     criarConta:{
         width:'90%',

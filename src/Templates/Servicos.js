@@ -8,16 +8,17 @@ import {
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
 import * as Animatable from 'react-native-animatable'
+import stylesDefault from '../styles.js';
 
 const CriarServico = ({ navigation }) => {
     return (
         <>
             <View style={styles.containerCadastro}>
                 <StatusBar />
-                <TouchableOpacity style={styles.VoltarButon} onPress={() => navigation.navigate("Home")} >
-                    <Text style={styles.loginButonText}>Voltar</Text>
+                <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Home")} >
+                    <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
                 </TouchableOpacity>
-                <Animatable.Text animation='fadeInRight' style={styles.TextPrincipaltextoCadastro}>Cadastrar Serviço</Animatable.Text>
+                <Animatable.Text animation='fadeInRight' style={styles.TextPrincipaltextoCadastro}>Serviços</Animatable.Text>
                 <Animatable.View animation='fadeInRight' style={styles.divButton}>
                     <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("CadastrarServico")}>
                         <Text style={styles.menuUsuarioText} >Cadastrar Serviço</Text>
@@ -42,7 +43,7 @@ const CriarServico = ({ navigation }) => {
 };
 const styles = StyleSheet.create({
     ServicoConteiner:{
-        borderWidth:2,
+        borderWidth:1.2,
         borderRadius:5,
         padding: 5,
         fontSize:10,

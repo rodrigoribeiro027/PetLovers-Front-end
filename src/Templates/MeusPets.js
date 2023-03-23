@@ -7,7 +7,8 @@ import {
     TouchableOpacity
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
-import * as Animatable from 'react-native-animatable'
+import * as Animatable from 'react-native-animatable';
+import stylesDefault from '../styles'
 
 
 const MeusPets = ({ navigation }) => {
@@ -15,12 +16,12 @@ const MeusPets = ({ navigation }) => {
         <>
             <StatusBar/>
             <View style={styles.container}>
-                <TouchableOpacity style={styles.VoltarButon} onPress={() => navigation.navigate("Home")} >
-                    <Text style={styles.loginButonText}>Voltar</Text>
+                <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Home")} >
+                    <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
                 </TouchableOpacity>
                 <Animatable.Text animation='fadeInRight' style={styles.TextPrincipal}>Meus Pets</Animatable.Text>
                 <TouchableOpacity style={{...styles.VoltarButon, ...styles.novoPets}} onPress={() => navigation.navigate('CadastrarPet')} >
-                    <Text style={styles.loginButonText} >Cadastrar Novo Pet</Text>
+                    <Text style={stylesDefault.buttonTextDefault} >Cadastrar Novo Pet</Text>
                 </TouchableOpacity>
                 <View style={styles.meusPets}>
                     <View style={styles.viewPetImage}>
@@ -125,10 +126,6 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: 'center',
         alignItems: "center",
-    },
-    loginButonText: {
-        color: "#FFF",
-        fontSize: 17
     },
     TextPrincipal: {
         fontFamily: 'Inter',

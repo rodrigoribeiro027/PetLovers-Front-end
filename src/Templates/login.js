@@ -8,7 +8,8 @@ import {
     TouchableOpacity,KeyboardAvoidingView,Keyboard,TouchableWithoutFeedback,Platform,Icon,
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
-import * as Animatable from 'react-native-animatable'
+import * as Animatable from 'react-native-animatable';
+import stylesDefault from '../styles'
 
 
 
@@ -34,7 +35,7 @@ const Login = ({navigation}) => {
                                 </TouchableOpacity>
                             </View>
                             <TouchableOpacity style={styles.loginButon} onPress={()=>navigation.navigate("Home")}>
-                                <Text style={styles.loginButonText} >Acessar</Text>
+                                <Text style={stylesDefault.buttonTextDefault} >Acessar</Text>
                             </TouchableOpacity>
                             <View style={styles.criarConta}>
                                 <TouchableOpacity onPress={()=>navigation.navigate("CadastrarUsuario")}>
@@ -81,10 +82,6 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:"center",
         borderRadius:5
-    },
-    loginButonText:{
-        color:"#FFF",
-        fontSize:17
     },
     esqueceuSenha:{
         width:'90%',

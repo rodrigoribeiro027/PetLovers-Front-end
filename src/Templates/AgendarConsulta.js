@@ -13,6 +13,7 @@ import * as Animatable from 'react-native-animatable'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import StatusBar from '../components/StatusBar.js';
+import stylesDefault from "../styles"
 
 
 const AgendarConsulta = ({navigation}) => {
@@ -46,7 +47,7 @@ setMode(currentMode);
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <Animatable.View style={styles.container}>
                         <TouchableOpacity style={styles.VoltarButon}  onPress={()=>navigation.navigate("Home")} >
-                            <Text style={styles.loginButonText}>Voltar</Text>
+                            <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
                         </TouchableOpacity>
                         <Animatable.Text animation='fadeInRight' style={styles.TextPrincipalAgendamento}>Criar Agendamento</Animatable.Text>
                         
