@@ -1,4 +1,5 @@
-import React from 'react';
+
+import { useEffect, useState } from 'react';
 import {
     StyleSheet,
     Text, ScrollView,
@@ -10,14 +11,28 @@ import { Image } from 'react-native-animatable';
 import { launchImageLibrary } from 'react-native-image-picker';
 import styleDefault from "../styles";
 import StatusBar from '../components/StatusBar.js';
+import axios from 'axios';
+import Toast from 'react-native-toast-message';
 
 
 const CadastrarUsuario = ({navigation}) => {
 
-    const [Foto, SetFoto] = React.useState('');
+
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [bairro, setBairro] = useState('');
+    const [rua, setRua] = useState('');
+    const [numero, setNumero] = useState('');
+    const [complemento, setComplemento] = useState('');
+    const [telefone, setTelefone] = useState('');
+
+    const [Foto, SetFoto] = useState('');
+
     const setToast = (msg) => {
         ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT,ToastAndroid.CENTER);
     }
+
 
     const uploadImage = () => {
         let options = {
@@ -40,6 +55,41 @@ const CadastrarUsuario = ({navigation}) => {
         })
     }
 
+
+    const cadastrarUsuario = () => {
+
+        const dados = {
+            nome: nome,
+            email: email,
+            senha: senha,
+            endereco:{
+                bairro: bairro,
+                rua: rua,
+                numero: Number(numero),
+                complemento: complemento
+            },
+            telefone:{
+                numero: Number(telefone)
+            }
+        }
+
+        axios.post('https://pet-lovers-back-end.vercel.app/usuario/cadastrar', dados).then( res => {
+            navigation.navigate("Login")
+            Toast.show({
+                type: 'success',
+                text1: 'Cadastro Realizado com Sucesso.',
+            });
+        }).catch( error => {
+            Toast.show({
+                type: 'error',
+                text1: 'Ocorreu algum problema',
+            });
+            console.error('Erro', error.response)
+        })
+
+    }
+
+
     return (
         <ScrollView>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios'? 'padding' : 'position'}>
@@ -59,16 +109,34 @@ const CadastrarUsuario = ({navigation}) => {
                             <Text style={styles.uploadImageText} >Upload Foto</Text>
                         </TouchableOpacity>
 
-                        <TextInput placeholder='Email'
-                        style={styleDefault.input}>
+                        <TextInput placeholder='Nome'
+                        style={styleDefault.input}
+                        value={nome}
+                        onChangeText={e => setNome(e)}
+                        >
                         </TextInput>
 
-                        <TextInput placeholder='Senha' secureTextEntry={true}
-                        style={styleDefault.input}>
+                        <TextInput 
+                        placeholder='Email'
+                        textContentType='emailAddress'
+                        style={styleDefault.input}
+                        value={email}
+                        onChangeText={e => setEmail(e)}
+                        >
+                        </TextInput>
+
+                        <TextInput 
+                        placeholder='Senha' 
+                        secureTextEntry={true}
+                        style={styleDefault.input}
+                        value={senha}
+                        onChangeText={e => setSenha(e)}
+                        >
                         </TextInput>
 
                         <TextInput placeholder='Rg'
-                        style={styleDefault.input}>
+                        style={styleDefault.input}
+                        >
                         </TextInput>
 
                         <TextInput placeholder='Cpf'
@@ -76,26 +144,46 @@ const CadastrarUsuario = ({navigation}) => {
                         </TextInput>
 
                         <TextInput placeholder='Bairro'
-                        style={styleDefault.input}>
+                        style={styleDefault.input}
+                        value={bairro}
+                        onChangeText={e => setBairro(e)}
+                        >
                         </TextInput>
 
-                        <TextInput placeholder='rua'
-                        style={styleDefault.input}>
+                        <TextInput placeholder='Rua'
+                        style={styleDefault.input}
+                        value={rua}
+                        onChangeText={e => setRua(e)}
+                        >
                         </TextInput>
 
-                        <TextInput placeholder='numero'
-                        style={styleDefault.input}>
+                        <TextInput 
+                        placeholder='Numero'
+                        style={styleDefault.input}
+                        keyboardType={'numeric'}
+                        value={numero}
+                        onChangeText={e => setNumero(e)}
+                        >
                         </TextInput>
 
-                        <TextInput placeholder='Complemento'
-                        style={styleDefault.input}>
+                        <TextInput 
+                        placeholder='Complemento'
+                        style={styleDefault.input}
+                        value={complemento}
+                        onChangeText={e => setComplemento(e)}
+                        >
                         </TextInput>
 
-                        <TextInput placeholder='Telefone'
-                        style={styleDefault.input}>
+                        <TextInput 
+                        placeholder='Telefone'
+                        style={styleDefault.input}
+                        keyboardType={'numeric'}
+                        value={telefone}
+                        onChangeText={e => setTelefone(e)}
+                        >
                         </TextInput>
 
-                        <TouchableOpacity style={styles.loginButon} onPress={()=>navigation.navigate("Login")} >
+                        <TouchableOpacity style={styles.loginButon} onPress={()=>cadastrarUsuario()} >
                             <Text style={styleDefault.buttonTextDefault}>Enviar</Text>
                         </TouchableOpacity> 
                     </SafeAreaView>
