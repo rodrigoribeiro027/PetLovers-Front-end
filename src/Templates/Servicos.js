@@ -42,23 +42,23 @@ const CriarServico = ({ navigation }) => {
     )
 };
 const styles = StyleSheet.create({
-    ServicoConteiner:{
-        borderWidth:1.2,
-        borderRadius:5,
+    ServicoConteiner: {
+        borderWidth: 1.2,
+        borderRadius: 5,
         padding: 5,
-        fontSize:10,
-        backgroundColor:"#D3E5ED",
-        marginBottom:10,
-        
+        fontSize: 10,
+        backgroundColor: "#D3E5ED",
+        marginBottom: 10,
+
     },
     servicoText: {
-        flexDirection:"row",
-        justifyContent:'space-between',
-        alignItems:'center',
-        marginBottom:10,
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 10,
     },
-    servicoTexto:{
-        color:'black'
+    servicoTexto: {
+        color: 'black'
     },
     VoltarButon: {
         width: '100%',

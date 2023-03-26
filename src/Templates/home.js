@@ -9,9 +9,21 @@ import {
 import StatusBar from '../components/StatusBar.js';
 import * as Animatable from 'react-native-animatable';
 import stylesDefault from '../styles'
+import { clearStorageItem, getStorageItem } from '../functions/encryptedStorageFunctions.js';
 
 
 const Home = ({ navigation }) => {
+
+
+    const deslogar = async () => {
+        const token = await getStorageItem('token')
+        if (token) {
+            await clearStorageItem('token');
+        }
+        navigation.navigate("Login")
+    }
+
+
     return (
         <>
             <ScrollView>
@@ -20,7 +32,7 @@ const Home = ({ navigation }) => {
 
                         <View style={styles.container}>
                             <StatusBar />
-                            <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Login")} >
+                            <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => deslogar()} >
                                 <Text style={stylesDefault.buttonTextDefault}>Logout</Text>
                             </TouchableOpacity>
                             <Animatable.Text animation='fadeInRight' style={styles.TextPrincipaltextobv}>Seja Bem-Vindo(a)</Animatable.Text>

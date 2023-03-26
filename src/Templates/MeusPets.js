@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     StyleSheet,
     Text,
@@ -9,66 +9,63 @@ import {
 import StatusBar from '../components/StatusBar.js';
 import * as Animatable from 'react-native-animatable';
 import stylesDefault from '../styles'
+import axios from 'axios';
+import { getStorageItem } from '../functions/encryptedStorageFunctions.js';
 
 
 const MeusPets = ({ navigation }) => {
+
+    const [pets, setPets] = useState([]);
+
+    const buscarPets = async () => {
+        const token = await getStorageItem('token');
+        axios.get('https://pet-lovers-back-end.vercel.app/pet/buscar-pets-usuario', { headers: { Authorization: token } }).then((res) => {
+            console.log(res.data)
+            setPets(res.data);
+        })
+    }
+
+
+    useEffect(() => {
+        buscarPets()
+    }, [])
+
+
     return (
         <>
-            <StatusBar/>
+            <StatusBar />
             <View style={styles.container}>
                 <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Home")} >
                     <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
                 </TouchableOpacity>
                 <Animatable.Text animation='fadeInRight' style={styles.TextPrincipal}>Meus Pets</Animatable.Text>
-                <TouchableOpacity style={{...styles.VoltarButon, ...styles.novoPets}} onPress={() => navigation.navigate('CadastrarPet')} >
+                <TouchableOpacity style={{ ...styles.VoltarButon, ...styles.novoPets }} onPress={() => navigation.navigate('CadastrarPet')} >
                     <Text style={stylesDefault.buttonTextDefault} >Cadastrar Novo Pet</Text>
                 </TouchableOpacity>
-                <View style={styles.meusPets}>
-                    <View style={styles.viewPetImage}>
-                        <Animatable.Image animation='fadeInUp' source={require("../assets/pets.png")} style={styles.meusImgPets} /> 
-                    </View>
-                    <View style={styles.containerCard}>
-                        <Text style={styles.textoPet}>Nome:</Text>
-                        <Text style={styles.textoPet}>bolinha de pelo</Text>
-                        <Text style={styles.textoPet}>Idade:</Text>
-                        <Text style={styles.textoPet}>5 anos</Text>
-                        <Text style={styles.textoPet}>Tamanho do Pet:</Text>
-                        <Text style={styles.textoPet}>Porte Pequeno</Text>
-                    </View>
-                </View>
-                <View style={styles.meusPets}>
-                    <View style={styles.viewPetImage}>
-                        <Animatable.Image animation='fadeInUp' source={require("../assets/pets.png")} style={styles.meusImgPets} />
-                    </View>
-                    <View style={styles.containerCard}>
-                        <Text style={styles.textoPet}>Nome:</Text>
-                        <Text style={styles.textoPet}>bolinha de pelo</Text>
-                        <Text style={styles.textoPet}>Idade:</Text>
-                        <Text style={styles.textoPet}>5 anos</Text>
-                        <Text style={styles.textoPet}>Tamanho do Pet:</Text>
-                        <Text style={styles.textoPet}>Porte Pequeno</Text>
-                    </View>
-                </View>
-                <View style={styles.meusPets}>
-                    <View style={styles.viewPetImage}>
-                        <Animatable.Image animation='fadeInUp' source={require("../assets/pets.png")} style={styles.meusImgPets} />
-                    </View>
-                    <View style={styles.containerCard}>
-                        <Text style={styles.textoPet}>Nome:</Text>
-                        <Text style={styles.textoPet}>bolinha de pelo</Text>
-                        <Text style={styles.textoPet}>Idade:</Text>
-                        <Text style={styles.textoPet}>5 anos</Text>
-                        <Text style={styles.textoPet}>Tamanho do Pet:</Text>
-                        <Text style={styles.textoPet}>Porte Pequeno</Text>
-                    </View>
-                </View>
+
+                {
+                    pets.map((pet) => (
+                        <View style={styles.meusPets}>
+                            <View style={styles.viewPetImage}>
+                                <Animatable.Image animation='fadeInUp' source={require("../assets/pets.png")} style={styles.meusImgPets} />
+                            </View>
+                            <View style={styles.containerCard}>
+                                <Text style={styles.textoPet}>Nome: {pet.nome ? pet.nome : 'Não informado'}</Text>
+                                <Text style={styles.textoPet}>Idade: {pet.idade ? pet.idade : 'Não informado'}</Text>
+                                <Text style={styles.textoPet}>Tamanho do Pet: {pet.tamanho ? pet.tamanho : 'Não informado'}</Text>
+                                <Text style={styles.textoPet}>Raça: {pet.raca ? pet.raca : 'Não informado'} </Text>
+                            </View>
+                        </View>
+                    ))
+                }
+
             </View>
         </>
     )
 };
 
 const styles = StyleSheet.create({
-    novoPets:{
+    novoPets: {
         width: '90%',
         borderRadius: 10,
         marginVertical: 20

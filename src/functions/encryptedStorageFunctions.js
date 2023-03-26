@@ -19,3 +19,12 @@ export const getStorageItem = async (key) => {
         throw error;
     }
 }
+
+export const clearStorageItem = async (key) => {
+    try {
+        await EncryptedStorage.removeItem(key);
+    } catch (error) {
+        console.error(`Erro ao remover o item '${key}' no armazenamento seguro:`, error);
+        throw error;
+    }
+}

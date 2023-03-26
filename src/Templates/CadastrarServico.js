@@ -39,9 +39,9 @@ const CadastrarServico = ({ navigation }) => {
                             }}
                         />
 
-                        <TouchableOpacity style={{...stylesDefault.input, backgroundColor:"#399fff", alignItems:"center", marginTop: 40}} onPress={()=>navigation.navigate("Servicos")} >
+                        <TouchableOpacity style={{ ...stylesDefault.input, backgroundColor: "#399fff", alignItems: "center", marginTop: 40 }} onPress={() => navigation.navigate("Servicos")} >
                             <Text style={stylesDefault.buttonTextDefault}>Cadastrar</Text>
-                        </TouchableOpacity> 
+                        </TouchableOpacity>
                     </View>
                 </TouchableWithoutFeedback>
             </KeyboardAvoidingView>

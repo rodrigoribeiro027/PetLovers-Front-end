@@ -11,8 +11,7 @@ import * as Animatable from 'react-native-animatable';
 import stylesDefault from '../styles';
 import axios from "axios";
 import Toast from 'react-native-toast-message';
-import { getStorageItem, storageItem } from '../functions/encryptedStorageFunctions.js';
-
+import { storageItem } from '../functions/encryptedStorageFunctions.js';
 
 
 
@@ -21,7 +20,6 @@ const Login = ({ navigation }) => {
 
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-
 
     const logar = () => {
         const dados = {
@@ -47,6 +45,7 @@ const Login = ({ navigation }) => {
             console.error('Erro', error.response)
         })
     }
+
 
 
     return (

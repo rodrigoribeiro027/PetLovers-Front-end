@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import {
     StyleSheet,
     Text, ScrollView,
-    TextInput, 
+    TextInput,
     SafeAreaView,
-    TouchableOpacity,KeyboardAvoidingView,Keyboard,TouchableWithoutFeedback,Platform, ToastAndroid, Alert
+    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, ToastAndroid, Alert
 } from 'react-native';
 import { Image } from 'react-native-animatable';
 import { launchImageLibrary } from 'react-native-image-picker';
@@ -15,7 +15,7 @@ import axios from 'axios';
 import Toast from 'react-native-toast-message';
 
 
-const CadastrarUsuario = ({navigation}) => {
+const CadastrarUsuario = ({ navigation }) => {
 
 
     const [nome, setNome] = useState('');
@@ -30,7 +30,7 @@ const CadastrarUsuario = ({navigation}) => {
     const [Foto, SetFoto] = useState('');
 
     const setToast = (msg) => {
-        ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT,ToastAndroid.CENTER);
+        ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
     }
 
 
@@ -41,15 +41,15 @@ const CadastrarUsuario = ({navigation}) => {
             includeBase64: false,
         };
         launchImageLibrary(options, res => {
-            if(res.didCancel){
+            if (res.didCancel) {
                 setToast('Seleção de Imagem Cancelada.')
-            } else if((res.errorCode =='Permissão')){
+            } else if ((res.errorCode == 'Permissão')) {
                 setToastMsg('Sem Autorização!!!')
-            }else if((res.errorCode =='outros')){
+            } else if ((res.errorCode == 'outros')) {
                 setToastMsg(res.errorMessage);
-            } else if (res.assets[0].fileSize > 2097152){
-                Alert.alert('Só aceitamos imagens de Tamanho 2 MB!!!', [{text: 'Ok'}])
-            }else {
+            } else if (res.assets[0].fileSize > 2097152) {
+                Alert.alert('Só aceitamos imagens de Tamanho 2 MB!!!', [{ text: 'Ok' }])
+            } else {
                 SetFoto(res.assets[0]);
             }
         })
@@ -62,24 +62,24 @@ const CadastrarUsuario = ({navigation}) => {
             nome: nome,
             email: email,
             senha: senha,
-            endereco:{
+            endereco: {
                 bairro: bairro,
                 rua: rua,
                 numero: Number(numero),
                 complemento: complemento
             },
-            telefone:{
+            telefone: {
                 numero: Number(telefone)
             }
         }
 
-        axios.post('https://pet-lovers-back-end.vercel.app/usuario/cadastrar', dados).then( res => {
+        axios.post('https://pet-lovers-back-end.vercel.app/usuario/cadastrar', dados).then(res => {
             navigation.navigate("Login")
             Toast.show({
                 type: 'success',
                 text1: 'Cadastro Realizado com Sucesso.',
             });
-        }).catch( error => {
+        }).catch(error => {
             Toast.show({
                 type: 'error',
                 text1: 'Ocorreu algum problema',
@@ -92,100 +92,100 @@ const CadastrarUsuario = ({navigation}) => {
 
     return (
         <ScrollView>
-            <KeyboardAvoidingView behavior={Platform.OS === 'ios'? 'padding' : 'position'}>
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'position'}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <SafeAreaView style={styles.container}>
-                        <StatusBar/>
+                        <StatusBar />
 
-                        <TouchableOpacity style={styleDefault.buttonVoltarDefault}  onPress={()=>navigation.navigate("Login")} >
+                        <TouchableOpacity style={styleDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Login")} >
                             <Text style={styleDefault.buttonTextDefault}>Voltar</Text>
                         </TouchableOpacity>
 
                         <Text style={styles.TextPrincipalCadastro}>Cadastrar Usuario</Text>
 
-                        <Image onPress={()=> uploadImage()} style={styles.imagenUploadUsuario} source={Foto ? { uri: Foto.uri } : require('../assets/user.png')}/>
+                        <Image onPress={() => uploadImage()} style={styles.imagenUploadUsuario} source={Foto ? { uri: Foto.uri } : require('../assets/user.png')} />
 
-                        <TouchableOpacity style={{...styles.loginButon, marginBottom:20}}  onPress={()=> uploadImage()} >
+                        <TouchableOpacity style={{ ...styles.loginButon, marginBottom: 20 }} onPress={() => uploadImage()} >
                             <Text style={styles.uploadImageText} >Upload Foto</Text>
                         </TouchableOpacity>
 
                         <TextInput placeholder='Nome'
-                        style={styleDefault.input}
-                        value={nome}
-                        onChangeText={e => setNome(e)}
+                            style={styleDefault.input}
+                            value={nome}
+                            onChangeText={e => setNome(e)}
                         >
                         </TextInput>
 
-                        <TextInput 
-                        placeholder='Email'
-                        textContentType='emailAddress'
-                        style={styleDefault.input}
-                        value={email}
-                        onChangeText={e => setEmail(e)}
+                        <TextInput
+                            placeholder='Email'
+                            textContentType='emailAddress'
+                            style={styleDefault.input}
+                            value={email}
+                            onChangeText={e => setEmail(e)}
                         >
                         </TextInput>
 
-                        <TextInput 
-                        placeholder='Senha' 
-                        secureTextEntry={true}
-                        style={styleDefault.input}
-                        value={senha}
-                        onChangeText={e => setSenha(e)}
+                        <TextInput
+                            placeholder='Senha'
+                            secureTextEntry={true}
+                            style={styleDefault.input}
+                            value={senha}
+                            onChangeText={e => setSenha(e)}
                         >
                         </TextInput>
 
                         <TextInput placeholder='Rg'
-                        style={styleDefault.input}
+                            style={styleDefault.input}
                         >
                         </TextInput>
 
                         <TextInput placeholder='Cpf'
-                        style={styleDefault.input}>
+                            style={styleDefault.input}>
                         </TextInput>
 
                         <TextInput placeholder='Bairro'
-                        style={styleDefault.input}
-                        value={bairro}
-                        onChangeText={e => setBairro(e)}
+                            style={styleDefault.input}
+                            value={bairro}
+                            onChangeText={e => setBairro(e)}
                         >
                         </TextInput>
 
                         <TextInput placeholder='Rua'
-                        style={styleDefault.input}
-                        value={rua}
-                        onChangeText={e => setRua(e)}
+                            style={styleDefault.input}
+                            value={rua}
+                            onChangeText={e => setRua(e)}
                         >
                         </TextInput>
 
-                        <TextInput 
-                        placeholder='Numero'
-                        style={styleDefault.input}
-                        keyboardType={'numeric'}
-                        value={numero}
-                        onChangeText={e => setNumero(e)}
+                        <TextInput
+                            placeholder='Numero'
+                            style={styleDefault.input}
+                            keyboardType={'numeric'}
+                            value={numero}
+                            onChangeText={e => setNumero(e)}
                         >
                         </TextInput>
 
-                        <TextInput 
-                        placeholder='Complemento'
-                        style={styleDefault.input}
-                        value={complemento}
-                        onChangeText={e => setComplemento(e)}
+                        <TextInput
+                            placeholder='Complemento'
+                            style={styleDefault.input}
+                            value={complemento}
+                            onChangeText={e => setComplemento(e)}
                         >
                         </TextInput>
 
-                        <TextInput 
-                        placeholder='Telefone'
-                        style={styleDefault.input}
-                        keyboardType={'numeric'}
-                        value={telefone}
-                        onChangeText={e => setTelefone(e)}
+                        <TextInput
+                            placeholder='Telefone'
+                            style={styleDefault.input}
+                            keyboardType={'numeric'}
+                            value={telefone}
+                            onChangeText={e => setTelefone(e)}
                         >
                         </TextInput>
 
-                        <TouchableOpacity style={styles.loginButon} onPress={()=>cadastrarUsuario()} >
+                        <TouchableOpacity style={styles.loginButon} onPress={() => cadastrarUsuario()} >
                             <Text style={styleDefault.buttonTextDefault}>Enviar</Text>
-                        </TouchableOpacity> 
+                        </TouchableOpacity>
                     </SafeAreaView>
                 </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
@@ -195,58 +195,58 @@ const CadastrarUsuario = ({navigation}) => {
 
 
 const styles = StyleSheet.create({
-    imagenUploadUsuario:{
-        height:200, 
-        width:200, 
-        borderColor:"#E0E0E0", 
-        
-        borderRadius:100,
-        backgroundColor:"#E0E0E0"
+    imagenUploadUsuario: {
+        height: 200,
+        width: 200,
+        borderColor: "#E0E0E0",
+
+        borderRadius: 100,
+        backgroundColor: "#E0E0E0"
     },
-    uploadImageText:{
-        color:"#FFF",
-        fontSize:17
+    uploadImageText: {
+        color: "#FFF",
+        fontSize: 17
     },
-    container:{
-        backgroundColor:"#FFF",
-        alignItems:"center",
-        justifyContent:"center",
+    container: {
+        backgroundColor: "#FFF",
+        alignItems: "center",
+        justifyContent: "center",
         paddingBottom: 20
     },
-    imgpets:{
-        width:'100%',
-        height:410,
+    imgpets: {
+        width: '100%',
+        height: 410,
     },
-    loginButon:{
-        width:'90%',
-        marginTop:'5%',
-        backgroundColor:"#399fff",
-        height:42,
-        justifyContent:'center',
-        alignItems:"center",
-        borderRadius:5
+    loginButon: {
+        width: '90%',
+        marginTop: '5%',
+        backgroundColor: "#399fff",
+        height: 42,
+        justifyContent: 'center',
+        alignItems: "center",
+        borderRadius: 5
     },
-    esqueceuSenha:{
-        width:'90%',
-        alignItems:"flex-end"
+    esqueceuSenha: {
+        width: '90%',
+        alignItems: "flex-end"
     },
-    esqueceuSenhaText:{
-        color:"#399fff"
+    esqueceuSenhaText: {
+        color: "#399fff"
     },
-    TextPrincipalCadastro:{
-        fontWeight:800,
-        fontSize:35,
-        marginBottom:25,
-        marginTop:20
+    TextPrincipalCadastro: {
+        fontWeight: 800,
+        fontSize: 35,
+        marginBottom: 25,
+        marginTop: 20
     },
-    criarConta:{
-        width:'90%',
-        alignItems:"center"
+    criarConta: {
+        width: '90%',
+        alignItems: "center"
     },
-    criarContaText:{
-        color:"#399fff",
-        fontWeight:800,
-        height:75,marginTop:'3%',
+    criarContaText: {
+        color: "#399fff",
+        fontWeight: 800,
+        height: 75, marginTop: '3%',
     }
 });
 

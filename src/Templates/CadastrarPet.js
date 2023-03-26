@@ -54,7 +54,7 @@ const CadastrarPet = ({ navigation }) => {
                         <StatusBarDefault />
 
                         <Text style={styles.textCadastroPet}>Cadastrar Pet</Text>
-                        <Image onPress={()=> uploadImage()} style={styles.imagemUploadPet} source={Foto ? { uri: Foto.uri } : require('../assets/user.png')}/>
+                        <Image onPress={() => uploadImage()} style={styles.imagemUploadPet} source={Foto ? { uri: Foto.uri } : require('../assets/user.png')} />
 
                         <TouchableOpacity style={{ ...stylesDefault.buttonDefault, marginBottom: 20 }} onPress={() => uploadImage()} >
                             <Text style={styles.uploadImageText} >Upload Foto</Text>
@@ -74,7 +74,7 @@ const CadastrarPet = ({ navigation }) => {
                             setValue={setValue}
                             setItems={setItems}
                             dropDownContainerStyle={styles.dropDownContainer}
-                            style={{...stylesDefault.input, marginLeft: 20, borderWidth: 0}}
+                            style={{ ...stylesDefault.input, marginLeft: 20, borderWidth: 0 }}
                         />
 
 
@@ -108,11 +108,11 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 17
     },
-    dropDownContainer:{
-        backgroundColor:'#F4F3F3',
-        width:'90%',
-        padding:8,
-        borderRadius:5,
+    dropDownContainer: {
+        backgroundColor: '#F4F3F3',
+        width: '90%',
+        padding: 8,
+        borderRadius: 5,
         marginLeft: 20,
         borderColor: '#E0E0E0',
         borderWidth: 1

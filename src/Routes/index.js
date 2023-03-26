@@ -16,16 +16,16 @@ const Routes = () => {
     const Stack = createNativeStackNavigator();
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown:false}}>
+            <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Home" component={Home} />
-                <Stack.Screen name="Login" component={Login}/>
-                <Stack.Screen name="RecuperarSenha" component={RecuperarSenha}/>
-                <Stack.Screen name="CadastrarUsuario" component={CadastrarUsuario}/>
-                <Stack.Screen name="AgendarConsulta" component={AgendarConsulta}/>
-                <Stack.Screen name="MeusPets" component={MeusPets}/>
-                <Stack.Screen name='CadastrarPet' component={CadastrarPet}/>
-                <Stack.Screen name='Servicos' component={Servicos}/>
-                <Stack.Screen name='CadastrarServico' component={CadastrarServico}/>
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} />
+                <Stack.Screen name="CadastrarUsuario" component={CadastrarUsuario} />
+                <Stack.Screen name="AgendarConsulta" component={AgendarConsulta} />
+                <Stack.Screen name="MeusPets" component={MeusPets} />
+                <Stack.Screen name='CadastrarPet' component={CadastrarPet} />
+                <Stack.Screen name='Servicos' component={Servicos} />
+                <Stack.Screen name='CadastrarServico' component={CadastrarServico} />
             </Stack.Navigator>
         </NavigationContainer>
     )

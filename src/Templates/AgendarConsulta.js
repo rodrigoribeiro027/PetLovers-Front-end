@@ -79,19 +79,19 @@ const AgendarConsulta = ({ navigation }) => {
                                     textAlignVertical: 'top'
                                 }}
                             />
-                        
-                                <DropDownPicker
-                                    placeholder='Selecione seu Pet'
-                                    open={open}
-                                    value={value}
-                                    items={items}
-                                    setOpen={setOpen}
-                                    setValue={setValue}
-                                    setItems={setItems}
-                                    dropDownContainerStyle={styles.dropDownContainer}
-                                    style={{ ...stylesDefault.input, marginLeft: 20, borderWidth: 0 ,marginBottom:40}}
-                                />
-                            
+
+                            <DropDownPicker
+                                placeholder='Selecione seu Pet'
+                                open={open}
+                                value={value}
+                                items={items}
+                                setOpen={setOpen}
+                                setValue={setValue}
+                                setItems={setItems}
+                                dropDownContainerStyle={styles.dropDownContainer}
+                                style={{ ...stylesDefault.input, marginLeft: 20, borderWidth: 0, marginBottom: 40 }}
+                            />
+
                             <View style={styles.DataButon}>
                                 <Button title='Data da Consulta' onPress={() => showMode('date')} />
                                 <Text style={styles.TextDataHora}>{text}</Text>
