@@ -50,6 +50,9 @@ const Home = ({ navigation }) => {
                                 <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("Home")}>
                                     <Text style={styles.menuUsuarioText} >Historico de Agendamentos</Text>
                                 </TouchableOpacity>
+                                <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("Usuarios")}>
+                                    <Text style={styles.menuUsuarioText} >Listagem de Usuarios</Text>
+                                </TouchableOpacity>
 
                             </Animatable.View>
                         </View>
