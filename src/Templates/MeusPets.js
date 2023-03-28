@@ -3,7 +3,8 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
 import * as Animatable from 'react-native-animatable';
@@ -31,7 +32,7 @@ const MeusPets = ({ navigation }) => {
 
 
     return (
-        <>
+        <ScrollView>
             <StatusBar />
             <View style={styles.container}>
                 <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Home")} >
@@ -59,7 +60,7 @@ const MeusPets = ({ navigation }) => {
                 }
 
             </View>
-        </>
+        </ScrollView>
     )
 };
 

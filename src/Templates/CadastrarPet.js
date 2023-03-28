@@ -1,23 +1,58 @@
-import React from 'react';
+import { useState } from 'react';
 import { TextInput, TouchableOpacity, StyleSheet, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, SafeAreaView } from "react-native";
 import StatusBarDefault from "../components/StatusBar";
 import stylesDefault from "../styles";
 import { Image, Text } from "react-native-animatable";
 import { launchImageLibrary } from 'react-native-image-picker';
 import DropDownPicker from 'react-native-dropdown-picker';
+import axios from 'axios';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
+import { getStorageItem } from '../functions/encryptedStorageFunctions';
 
 const CadastrarPet = ({ navigation }) => {
 
 
-    const [Foto, SetFoto] = React.useState('');
-    const [open, setOpen] = React.useState(false);
-    const [value, setValue] = React.useState(null);
-    const [items, setItems] = React.useState([
+    const [nome, setNome] = useState('');
+    const [idade, setIdade] = useState('');
+    const [genero, setGenero] = useState('');
+    const [raca, setRaca] = useState('');
+    const [tamanho, setTamanho] = useState('');
+
+    const [Foto, SetFoto] = useState('');
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
+    const [items, setItems] = useState([
         { label: 'Tamanho do Pet', value: 'Tamanho do Pet', disabled: true },
         { label: 'Pequeno', value: 'pequeno' },
         { label: 'Médio', value: 'medio' },
         { label: 'Grande', value: 'grande' }
     ]);
+
+
+    const cadastrarPet = async () => {
+        const token = await getStorageItem('token');
+        const dados={
+            nome: nome,
+            idade: idade,
+            genero: genero,
+            raca: raca
+        }
+
+        axios.post('https://pet-lovers-back-end.vercel.app/pet/cadastrar', dados, { headers: { Authorization: token } }).then((res)=>{
+            console.log(res);
+            navigation.navigate('MeusPets')
+            Toast.show({
+                type: 'success',
+                text1: 'Cadastro Realizado com Sucesso.',
+            });
+        }).catch(error => {
+            Toast.show({
+                type: 'error',
+                text1: 'Ocorreu algum problema',
+            });
+            console.error('Erro', error.response)
+        })
+    };
 
 
     const setToast = (msg) => {
@@ -53,6 +88,10 @@ const CadastrarPet = ({ navigation }) => {
                     <SafeAreaView style={{ ...stylesDefault.container }}>
                         <StatusBarDefault />
 
+                        <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("MeusPets")} >
+                            <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
+                        </TouchableOpacity>
+
                         <Text style={styles.textCadastroPet}>Cadastrar Pet</Text>
                         <Image onPress={() => uploadImage()} style={styles.imagemUploadPet} source={Foto ? { uri: Foto.uri } : require('../assets/user.png')} />
 
@@ -60,10 +99,10 @@ const CadastrarPet = ({ navigation }) => {
                             <Text style={styles.uploadImageText} >Upload Foto</Text>
                         </TouchableOpacity>
 
-                        <TextInput placeholder='Nome' style={{ ...stylesDefault.input }} />
-                        <TextInput placeholder='Idade' style={{ ...stylesDefault.input }} />
-                        <TextInput placeholder='Genero' style={{ ...stylesDefault.input }} />
-                        <TextInput placeholder='Raça' style={{ ...stylesDefault.input }} />
+                        <TextInput value={nome} onChangeText={e => setNome(e)} placeholder='Nome' style={{ ...stylesDefault.input }} />
+                        <TextInput value={idade} onChangeText={e => setIdade(e)} placeholder='Idade' style={{ ...stylesDefault.input }} />
+                        <TextInput value={genero} onChangeText={e => setGenero(e)} placeholder='Genero' style={{ ...stylesDefault.input }} />
+                        <TextInput value={raca} onChangeText={e => setRaca(e)} placeholder='Raça' style={{ ...stylesDefault.input }} />
 
                         <DropDownPicker
                             placeholder='Tamanho do Pet'
@@ -78,7 +117,7 @@ const CadastrarPet = ({ navigation }) => {
                         />
 
 
-                        <TouchableOpacity style={{ ...stylesDefault.buttonDefault }} onPress={() => navigation.navigate('MeusPets')} >
+                        <TouchableOpacity style={{ ...stylesDefault.buttonDefault }} onPress={() => cadastrarPet()} >
                             <Text style={styles.cadastrarButonText}>Cadastrar</Text>
                         </TouchableOpacity>
 
