@@ -13,13 +13,20 @@ import axios from 'axios';
 import { getStorageItem } from '../functions/encryptedStorageFunctions.js';
 
 
-const ListagemUsuarios = () => {
+const ListagemUsuarios = ({ navigation }) => {
+
 
     return (
         <>
+
+            <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Home")} >
+                <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
+            </TouchableOpacity>
+
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'padding'} style={{ paddingTop: 30 }}>
                 <Text style={styles.titulo}>Listagem dos Usuarios</Text>
             </KeyboardAvoidingView>
+                <StatusBar/>
 
                     <View style={styles.item}>
                         <View style={styles.square}></View>
@@ -40,6 +47,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
+        backgroundColor: "#FFF",
 
     },
     item: {

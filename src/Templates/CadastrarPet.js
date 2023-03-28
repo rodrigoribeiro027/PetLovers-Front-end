@@ -9,6 +9,8 @@ import axios from 'axios';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { getStorageItem } from '../functions/encryptedStorageFunctions';
 
+
+
 const CadastrarPet = ({ navigation }) => {
 
 
