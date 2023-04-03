@@ -15,6 +15,20 @@ import { getStorageItem } from '../functions/encryptedStorageFunctions.js';
 
 const ListagemUsuarios = ({ navigation }) => {
 
+    const [usuarios, setUsuarios] = useState([]);
+
+    const buscarUsuarios = async () => {
+        axios.get('https://pet-lovers-back-end.vercel.app/usuario/buscar').then((res) => {
+            setUsuarios(res.data)
+        }).catch(error => {
+            console.error('Erro', error.response)
+        })
+    }
+
+    useEffect(() => {
+        buscarUsuarios()
+    }, [])
+
 
     return (
         <>
@@ -26,17 +40,20 @@ const ListagemUsuarios = ({ navigation }) => {
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'padding'} style={{ paddingTop: 30 }}>
                 <Text style={styles.titulo}>Listagem dos Usuarios</Text>
             </KeyboardAvoidingView>
-                <StatusBar/>
+            <StatusBar />
 
-                    <View style={styles.item}>
-                        <View style={styles.square}></View>
-                        <View style={{ flex: 1 }}>
-                            <Text>Nicolas</Text>
-                        </View>
-                        <View style={{ flex: 1 }}>
-                            <Text>129111111</Text>
-                        </View>
+            {usuarios.map((usuario) => (
+                <View style={styles.item} key={usuario.id}>
+                    <View style={styles.square}></View>
+                    <View style={{ flex: 1 }}>
+                        <Text>{usuario.nome}</Text>
                     </View>
+                    <View style={{ flex: 1 }}>
+                        <Text>{usuario.telefone.numero}</Text>
+                    </View>
+                </View>
+            ))}
+
 
         </>
     )

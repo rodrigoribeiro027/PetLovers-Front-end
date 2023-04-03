@@ -20,8 +20,9 @@ const MeusPets = ({ navigation }) => {
     const buscarPets = async () => {
         const token = await getStorageItem('token');
         axios.get('https://pet-lovers-back-end.vercel.app/pet/buscar-pets-usuario', { headers: { Authorization: token } }).then((res) => {
-            console.log(res.data)
             setPets(res.data);
+        }).catch(error => {
+            console.error('Erro', error.response)
         })
     }
 
