@@ -1,5 +1,5 @@
 
-import React from 'react';
+import { useState } from 'react';
 import {
     StyleSheet,
     Text,
@@ -9,22 +9,27 @@ import {
 import StatusBar from '../components/StatusBar.js';
 import * as Animatable from 'react-native-animatable'
 import stylesDefault from "../styles"
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const CadastrarServico = ({ navigation }) => {
+    const [items, setItems] = useState([
+        { label: 'Selecionar Tipo', value: 'Selecionar Tipo', disabled: true },
+        { label: 'Produto', value: 'Produto' },
+        { label: 'Serviço', value: 'Serviço' },
+    ]);
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
     return (
         <>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'position'}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-
                     <View style={{ ...stylesDefault.container }}>
                         <StatusBar />
                         <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Servicos")} >
                             <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
                         </TouchableOpacity>
-
-                        <Text style={styles.textPrincipal}>Cadastrar Serviço</Text>
-
-                        <TextInput placeholder='Nome' style={{ ...stylesDefault.input, marginTop: 40 }} />
+                        <Text style={styles.textPrincipal}>Cadastrar Serviços</Text>
+                        <TextInput placeholder='Nome' style={{ ...stylesDefault.input, marginTop: 2 }} />
                         <TextInput placeholder='Preço' style={{ ...stylesDefault.input }} />
                         <TextInput
                             placeholder='Descrição do serviço'
@@ -38,7 +43,17 @@ const CadastrarServico = ({ navigation }) => {
                                 textAlignVertical: 'top'
                             }}
                         />
-
+                        <DropDownPicker
+                            placeholder='Selecionar Tipo'
+                            open={open}
+                            value={value}
+                            items={items}
+                            setOpen={setOpen}
+                            setValue={setValue}
+                            setItems={setItems}
+                            dropDownContainerStyle={styles.DropDownServiço}
+                            style={{ ...stylesDefault.input, marginLeft: 20, borderWidth: 0 }}
+                        />
                         <TouchableOpacity style={{ ...stylesDefault.input, backgroundColor: "#399fff", alignItems: "center", marginTop: 40 }} onPress={() => navigation.navigate("Servicos")} >
                             <Text style={stylesDefault.buttonTextDefault}>Cadastrar</Text>
                         </TouchableOpacity>
@@ -56,6 +71,15 @@ const styles = StyleSheet.create({
         fontSize: 35,
         marginBottom: 25,
         marginTop: 40
+    },
+    DropDownServiço: {
+        backgroundColor: '#F4F3F3',
+        width: '90%',
+        padding: 8,
+        borderRadius: 5,
+        marginLeft: 20,
+        borderColor: '#E0E0E0',
+        borderWidth: 1
     },
 
 });

@@ -47,7 +47,7 @@ const Home = ({ navigation }) => {
                                 <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("Servicos")}>
                                     <Text style={styles.menuUsuarioText} >Servicos</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("Home")}>
+                                <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("HistoricoAgendamento")}>
                                     <Text style={styles.menuUsuarioText} >Historico de Agendamentos</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("Usuarios")}>

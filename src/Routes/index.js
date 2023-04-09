@@ -12,6 +12,8 @@ import CadastrarPet from '../Templates/CadastrarPet';
 import Servicos from '../Templates/Servicos';
 import CadastrarServico from '../Templates/CadastrarServico';
 import ListagemUsuarios from '../Templates/ListagemUsuarios';
+import HistoricoAgendamento from '../Templates/HistoricoAgendamento';
+import HistoricoPet from '../Templates/HistoricoPet';
 
 const Routes = () => {
     const Stack = createNativeStackNavigator();
@@ -28,6 +30,10 @@ const Routes = () => {
                 <Stack.Screen name='Servicos' component={Servicos} />
                 <Stack.Screen name='CadastrarServico' component={CadastrarServico} />
                 <Stack.Screen name='Usuarios' component={ListagemUsuarios} />
+                <Stack.Screen name='HistoricoAgendamento' component={HistoricoAgendamento} />
+                <Stack.Screen name='HistoricoPet' component={HistoricoPet} />
+
+                
             </Stack.Navigator>
         </NavigationContainer>
     )
