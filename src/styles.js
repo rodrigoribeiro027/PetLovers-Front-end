@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     buttonDefault: {
         width: '90%',
         marginTop: '5%',
-        backgroundColor: "#399fff",
+        backgroundColor: "#e0b0ff",
         height: 42,
         justifyContent: 'center',
         alignItems: "center",
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     },
     buttonVoltarDefault: {
         width: '100%',
-        backgroundColor: "#399fff",
+        backgroundColor: "#e0b0ff",
         height: 50,
         justifyContent: 'center',
         alignItems: "center",

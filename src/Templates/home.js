@@ -33,28 +33,14 @@ const Home = ({ navigation }) => {
                         <View style={styles.container}>
                             <StatusBar />
                             <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => deslogar()} >
-                                <Text style={stylesDefault.buttonTextDefault}>Logout</Text>
+                                <Text style={stylesDefault.buttonTextDefault}>Sair</Text>
                             </TouchableOpacity>
                             <Animatable.Text animation='fadeInRight' style={styles.TextPrincipaltextobv}>Seja Bem-Vindo(a)</Animatable.Text>
-                            <Animatable.Image animation='fadeInUp' source={require("../assets/Welcome.png")} style={styles.imgpets} />
-                            <Animatable.View animation='fadeInRight' style={styles.divButton}>
-                                <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("AgendarConsulta")}>
-                                    <Text style={styles.menuUsuarioText} >Agendar Consulta</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("MeusPets")}>
-                                    <Text style={styles.menuUsuarioText} >Meus Pets</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("Servicos")}>
-                                    <Text style={styles.menuUsuarioText} >Servicos</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("HistoricoAgendamento")}>
-                                    <Text style={styles.menuUsuarioText} >Historico de Agendamentos</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("Usuarios")}>
-                                    <Text style={styles.menuUsuarioText} >Listagem de Usuarios</Text>
-                                </TouchableOpacity>
-
-                            </Animatable.View>
+                            <View style={styles.HomeContainer}>
+                                <View style={styles.Texto}>
+                                    <Text >Cadastre Seus Pets</Text>
+                                </View>
+                            </View>
                         </View>
                     </TouchableWithoutFeedback>
                 </KeyboardAvoidingView>
@@ -63,6 +49,20 @@ const Home = ({ navigation }) => {
     )
 };
 const styles = StyleSheet.create({
+    texto:{
+        color:'red',
+    },
+    HomeContainer: {
+        marginTop: 25,
+        width: '90%',
+        borderWidth: 1.2,
+        borderRadius: 5,
+        fontSize: 10,
+        backgroundColor: "#D3E5ED",
+        marginBottom: 10,
+        height: 100,
+
+    },
     VoltarButon: {
         width: '100%',
         backgroundColor: "#399fff",
@@ -82,13 +82,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    imgpets: {
-        width: '100%',
-        height: 390,
-    },
     menuUsuario: {
         width: '90%',
         marginTop: '5%',
+        marginBottom: 5,
         backgroundColor: "#399fff",
         height: 42,
         justifyContent: 'center',

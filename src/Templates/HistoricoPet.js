@@ -26,7 +26,7 @@ const HistoricoPet = ({ navigation }) => {
                             <View style={styles.caixaTexto}>
                                 <Text style={styles.TextoDescricao}>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor</Text>
                             </View>
-                            <Text style={styles.PetHistorico}>Dia Do Diagnostico: 20/10/2000</Text>
+                            <Text style={styles.PetHistorico}>Diagnostico: 20/10/2000</Text>
                             <Text style={styles.PetHistorico}>Data do Tratamento:</Text>
                             <View style={styles.caixaTexto}>
                                 <Text style={styles.TextoDescricao}>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor</Text>

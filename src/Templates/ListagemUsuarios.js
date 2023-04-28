@@ -43,13 +43,13 @@ const ListagemUsuarios = ({ navigation }) => {
             <StatusBar />
 
             {usuarios.map((usuario) => (
-                <View style={styles.item} key={usuario.id}>
+                <View style={styles.item} key={usuario.id} >
                     <View style={styles.square}></View>
                     <View style={{ flex: 1 }}>
-                        <Text>{usuario.nome}</Text>
+                        <Text key={usuario.nome}>{usuario.nome} </Text>
                     </View>
                     <View style={{ flex: 1 }}>
-                        <Text>{usuario.telefone.numero}</Text>
+                        <Text key={usuario.telefone.numero}>{usuario.telefone.numero}</Text>
                     </View>
                 </View>
             ))}

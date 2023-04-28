@@ -4,7 +4,7 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform,
+    TouchableOpacity, 
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
 import * as Animatable from 'react-native-animatable'
@@ -34,7 +34,6 @@ const CriarServico = ({ navigation }) => {
                         Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos,
                         e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos.
                     </Text>
-
                 </View>
 
             </View>
