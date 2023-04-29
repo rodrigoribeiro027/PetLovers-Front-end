@@ -15,8 +15,9 @@ import ListagemUsuarios from '../Templates/ListagemUsuarios';
 import HistoricoAgendamento from '../Templates/HistoricoAgendamento';
 import HistoricoPet from '../Templates/HistoricoPet';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { COLORS } from '../colors';
+
 
 
 const Tab = createBottomTabNavigator();
@@ -24,33 +25,41 @@ const Tab = createBottomTabNavigator();
 
 Icon.loadFont();//Esse aqui
 function HomeTab() {
+    
     return (
+
         <Tab.Navigator initialRouteName="Login" screenOptions={({ route }) => ({
             headerShown: false, tabBarActiveTintColor: '#EE82EE', tabBarShowLabel: false,
             tabBarIcon: ({ focused, color, size }) => {
+                let tamanho = 30;
                 let iconName;
                 if (route.name === 'Home') {
                     iconName = 'home'
+                    let tamanho = 33;
                 }
-                else if(route.name === 'historicoAgendamento'){
+                else if (route.name === 'historicoAgendamento') {
                     iconName = 'plus-circle'
+                    tamanho = 38
                 }
-                else if(route.name === 'MeusPets'){
+                else if (route.name === 'MeusPets') {
                     iconName = 'github-alt'
                 }
-                
+
                 // You can return any component that you like here!
-                return <Icon name={iconName} size={size} color={color} />;
+                return <Icon name={iconName} size={tamanho} color={color} />;
             },
-            tabBarActiveTintColor: 'tomato',
+            tabBarActiveTintColor: COLORS.primary,
             tabBarInactiveTintColor: 'black',
         })}>
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="historicoAgendamento" component={HistoricoAgendamento} />
             <Tab.Screen name="MeusPets" component={MeusPets} />
+
         </Tab.Navigator>
+
     );
 }
+
 const Routes = () => {
     const Stack = createNativeStackNavigator();
     return (

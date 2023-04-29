@@ -26,9 +26,9 @@ const Home = ({ navigation }) => {
 
     return (
         <>
-            <ScrollView>
-                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'position'}>
-                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <ScrollView style={styles.screen}>
+                
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}  >
 
                         <View style={styles.container}>
                             <StatusBar />
@@ -38,12 +38,33 @@ const Home = ({ navigation }) => {
                             <Animatable.Text animation='fadeInRight' style={styles.TextPrincipaltextobv}>Seja Bem-Vindo(a)</Animatable.Text>
                             <View style={styles.HomeContainer}>
                                 <View style={styles.Texto}>
-                                    <Text >Cadastre Seus Pets</Text>
+                                    <Text ></Text>
                                 </View>
                             </View>
+
+                            <View style={styles.options}>
+                                <View style={styles.optionBtn}>
+                                    <Text ></Text>
+                                </View>
+
+                                <View style={styles.optionBtn}>
+                                    <Text ></Text>
+                                </View>
+                            </View>
+
+                            <View style={styles.options}>
+                                <View style={styles.optionBtn}>
+                                    <Text ></Text>
+                                </View>
+
+                                <View style={styles.optionBtn}>
+                                    <Text ></Text>
+                                </View>
+                            </View>
+
                         </View>
                     </TouchableWithoutFeedback>
-                </KeyboardAvoidingView>
+                
             </ScrollView>
         </>
     )
@@ -55,13 +76,26 @@ const styles = StyleSheet.create({
     HomeContainer: {
         marginTop: 25,
         width: '90%',
-        borderWidth: 1.2,
         borderRadius: 5,
         fontSize: 10,
         backgroundColor: "#D3E5ED",
         marginBottom: 10,
-        height: 100,
-
+        height: 150
+    },
+    options:{
+        display: 'flex',
+        flexDirection:'row',
+        marginTop: 25,
+        fontSize: 10,
+        marginBottom: 10,
+        height: 110,
+        width: '90%',
+        justifyContent:'space-between'
+    },
+    optionBtn:{
+        backgroundColor:"#D3E5ED",
+        borderRadius: 5,
+        width: '45%'
     },
     VoltarButon: {
         width: '100%',
@@ -100,14 +134,19 @@ const styles = StyleSheet.create({
         fontFamily: "Inter",
         fontWeight: 800,
         fontSize: 30,
-        marginTop: 20
+        marginTop: 40,
+        marginBottom:15
     },
     container: {
-        backgroundColor: "#FFF",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "center"
+    },
+    screen:{
+        flex:1,
+        backgroundColor: "#FFF"
+    },
 
-    }
+    
 
 });
 

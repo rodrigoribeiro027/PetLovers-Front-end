@@ -1,9 +1,9 @@
-import { StyleSheet } from "react-native"
-
+import { StyleSheet } from "react-native";
+import { COLORS } from './colors';
 
 const styles = StyleSheet.create({
     input: {
-        backgroundColor: "#F4F3F3",
+        backgroundColor: COLORS.secondary,
         width: '90%',
         height: 42,
         marginBottom: 20,
@@ -12,14 +12,14 @@ const styles = StyleSheet.create({
         borderColor: "#E0E0E0",
     },
     container: {
-        backgroundColor: "#FFF",
+        backgroundColor: COLORS.white,
         alignItems: "center",
         justifyContent: "center",
     },
     buttonDefault: {
         width: '90%',
         marginTop: '5%',
-        backgroundColor: "#e0b0ff",
+        backgroundColor: COLORS.primary,
         height: 42,
         justifyContent: 'center',
         alignItems: "center",
@@ -27,13 +27,13 @@ const styles = StyleSheet.create({
     },
     buttonVoltarDefault: {
         width: '100%',
-        backgroundColor: "#e0b0ff",
+        backgroundColor: COLORS.primary,
         height: 50,
         justifyContent: 'center',
         alignItems: "center",
     },
     buttonTextDefault: {
-        color: "#FFF",
+        color: COLORS.white,
         fontSize: 17
     }
 })
