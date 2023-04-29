@@ -17,6 +17,7 @@ import HistoricoPet from '../Templates/HistoricoPet';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { COLORS } from '../colors';
+import PerfilUsuario from '../Templates/PerfilUsuario';
 
 
 
@@ -41,8 +42,8 @@ function HomeTab() {
                     iconName = 'plus-circle'
                     tamanho = 38
                 }
-                else if (route.name === 'MeusPets') {
-                    iconName = 'github-alt'
+                else if (route.name === 'PerfilUsuario') {
+                    iconName = 'user'
                 }
 
                 // You can return any component that you like here!
@@ -53,7 +54,9 @@ function HomeTab() {
         })}>
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="historicoAgendamento" component={HistoricoAgendamento} />
-            <Tab.Screen name="MeusPets" component={MeusPets} />
+            {/* <Tab.Screen name="MeusPets" component={MeusPets} /> */}
+            <Tab.Screen name="PerfilUsuario" component={PerfilUsuario} />
+
 
         </Tab.Navigator>
 
@@ -64,7 +67,7 @@ const Routes = () => {
     const Stack = createNativeStackNavigator();
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+            <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} />
                 <Stack.Screen name="CadastrarUsuario" component={CadastrarUsuario} />
