@@ -35,7 +35,7 @@ function HomeTab() {
                 let iconName;
                 if (route.name === 'Home') {
                     iconName = 'home'
-                    let tamanho = 33;
+                    tamanho = 32;
                 }
                 else if (route.name === 'historicoAgendamento') {
                     iconName = 'plus-circle'
