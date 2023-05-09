@@ -4,7 +4,7 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, ScrollView
+    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, ScrollView, Image, ImageBackground
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
 import * as Animatable from 'react-native-animatable';
@@ -27,75 +27,155 @@ const Home = ({ navigation }) => {
     return (
         <>
             <ScrollView style={styles.screen}>
-                
-                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}  >
 
-                        <View style={styles.container}>
-                            <StatusBar />
-                            <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => deslogar()} >
-                                <Text style={stylesDefault.buttonTextDefault}>Sair</Text>
-                            </TouchableOpacity>
-                            <Animatable.Text animation='fadeInRight' style={styles.TextPrincipaltextobv}>Seja Bem-Vindo(a)</Animatable.Text>
-                            <View style={styles.HomeContainer}>
-                                <View style={styles.Texto}>
-                                    <Text ></Text>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}  >
+
+                    <View style={styles.container}>
+                        <StatusBar />
+                        <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => deslogar()} >
+                            <Text style={stylesDefault.buttonTextDefault}>Sair</Text>
+                        </TouchableOpacity>
+                        <Animatable.Text animation='fadeInRight' style={styles.TextPrincipaltextobv}>Seja Bem-Vindo(a)</Animatable.Text>
+                        <View style={styles.HomeContainer}>
+                            <View style={styles.options1}>
+                                <Image source={require("../assets/agendar.png")} style={styles.agendar} />
+                                <View>
+                                    <Text style={styles.TextoConsulta}>Faça agora mesmo sua consulta</Text>
+                                    <TouchableOpacity style={styles.agendarConsulta} onPress={() => navigation.navigate('AgendarConsulta')} >
+                                        <Text style={styles.TextoConsulta} >Agendar Consulta</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
-
-                            <View style={styles.options}>
-                                <View style={styles.optionBtn}>
-                                    <Text ></Text>
-                                </View>
-
-                                <View style={styles.optionBtn}>
-                                    <Text ></Text>
-                                </View>
-                            </View>
-
-                            <View style={styles.options}>
-                                <View style={styles.optionBtn}>
-                                    <Text ></Text>
-                                </View>
-
-                                <View style={styles.optionBtn}>
-                                    <Text ></Text>
-                                </View>
-                            </View>
-
                         </View>
-                    </TouchableWithoutFeedback>
-                
+                        <View style={styles.options}>
+                            <View style={styles.optionBtn}>
+                                <View>
+                                    <TouchableOpacity  onPress={() => navigation.navigate('MeusPets')} >
+                                        <View style={styles.container}>
+                                            <ImageBackground source={require("../assets/meusPets.png")} style={{width:150, height: 109 }} >
+                                                <Text style={styles.text}>Meus Pets</Text>
+                                            </ImageBackground>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                            <View style={styles.optionBtn}>
+                                <View>
+                                    <TouchableOpacity  onPress={() => navigation.navigate('HistoricoAgendamento')} >
+                                        <View style={styles.container}>
+                                            <ImageBackground source={require("../assets/historico.png")} style={{width:150, height: 109 }} >
+                                                <Text style={styles.text2}>Meus Agendamentos</Text>
+                                            </ImageBackground>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={styles.options}>
+                            <View style={styles.optionBtn}>
+                                <View>
+                                    <TouchableOpacity  onPress={() => navigation.navigate('HistoricoAgendamento')} >
+                                        <View style={styles.container}>
+                                            <ImageBackground source={require("../assets/historico-medico.png")} style={{width:150, height: 115 }} >
+                                                <Text style={styles.text}>histórico medico </Text>
+                                            </ImageBackground>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                            <View style={styles.optionBtn}>
+                                <View>
+                                    <TouchableOpacity  onPress={() => navigation.navigate('Servicos')} >
+                                        <View style={styles.container}>
+                                            <ImageBackground source={require("../assets/produtos.png")} style={{width:150, height: 121}} >
+                                                <Text style={styles.text}>Produtos</Text>
+                                            </ImageBackground>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+
+
+                    </View>
+                </TouchableWithoutFeedback>
+
             </ScrollView>
         </>
     )
 };
 const styles = StyleSheet.create({
-    texto:{
-        color:'red',
+
+    text: {
+        color: "black",
+        fontSize: 13,
+        fontWeight: "bold",
+        textAlign: "center",
+        
+    },
+    text2: {
+        color: "black",
+        fontSize: 13,
+        fontWeight: "bold",
+        textAlign: "center",
+        
+    },
+    meusPets: {
+        width: '70%',
+        height: 100,
+    },
+    TextoConsulta: {
+        width: '60%',
+        fontSize: 15,
+
+    },
+    agendarConsulta: {
+        justifyContent: 'center',
+        alignItems: "center",
+        marginTop: '20%',
+        width: '50%',
+        backgroundColor: "#BA68C8",
+        borderRadius: 100,
+    },
+    agendar: {
+        width: '70%',
+        height: 140,
+
+    },
+    texto: {
+        color: 'red',
     },
     HomeContainer: {
-        marginTop: 25,
         width: '90%',
         borderRadius: 5,
         fontSize: 10,
         backgroundColor: "#D3E5ED",
-        marginBottom: 10,
         height: 150
     },
-    options:{
+    options: {
         display: 'flex',
-        flexDirection:'row',
+        flexDirection: 'row',
         marginTop: 25,
         fontSize: 10,
-        marginBottom: 10,
         height: 110,
         width: '90%',
-        justifyContent:'space-between'
+        justifyContent: 'space-between'
     },
-    optionBtn:{
-        backgroundColor:"#D3E5ED",
+    options1: {
+        display: 'flex',
+        flexDirection: 'row',
+        fontSize: 10,
+        height: 110,
+        padding: 10,
+        width: '90%',
+
+    },
+    optionBtn: {
+        backgroundColor: "#D3E5ED",
         borderRadius: 5,
-        width: '45%'
+        width: '45%',
+        justifyContent: 'center',
+        alignItems: "center",
     },
     VoltarButon: {
         width: '100%',
@@ -135,18 +215,18 @@ const styles = StyleSheet.create({
         fontWeight: 800,
         fontSize: 30,
         marginTop: 40,
-        marginBottom:15
+        marginBottom: 15
     },
     container: {
         alignItems: "center",
         justifyContent: "center"
     },
-    screen:{
-        flex:1,
+    screen: {
+        flex: 1,
         backgroundColor: "#FFF"
     },
 
-    
+
 
 });
 

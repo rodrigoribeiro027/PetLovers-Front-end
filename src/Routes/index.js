@@ -79,6 +79,8 @@ const Routes = () => {
                 <Stack.Screen name="Usuarios" component={ListagemUsuarios} />
                 <Stack.Screen name="CadastrarServico" component={CadastrarServico} />
                 <Stack.Screen name="Servicos" component={Servicos} />
+                <Stack.Screen name="MeusPets" component={MeusPets} />
+
             </Stack.Navigator>
         </NavigationContainer>
     )
