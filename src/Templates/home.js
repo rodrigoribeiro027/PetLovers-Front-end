@@ -150,7 +150,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         fontSize: 10,
         backgroundColor: "#D3E5ED",
-        height: 150
+        height: 150,
+        marginTop: 40
     },
     options: {
         display: 'flex',
@@ -214,7 +215,7 @@ const styles = StyleSheet.create({
         fontFamily: "Inter",
         fontWeight: 800,
         fontSize: 30,
-        marginTop: 40,
+        marginTop: 50,
         marginBottom: 15
     },
     container: {
@@ -225,9 +226,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#FFF"
     },
-
-
-
 });
 
 export default Home;

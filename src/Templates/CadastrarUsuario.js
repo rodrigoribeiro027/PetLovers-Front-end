@@ -53,8 +53,29 @@ const CadastrarUsuario = ({ navigation }) => {
                 SetFoto(res.assets[0]);
             }
         })
+
     }
 
+
+    const sendImageToDrive = async () => {
+
+        let localUri = Foto.uri;
+        let filename = localUri.split('/').pop();
+
+        let match = /\.(\w+)$/.exec(filename);
+        let type = match ? `image/${match[1]}` : `image`;
+
+        let formData = new FormData();
+        formData.append('file', { uri: localUri, name: filename, type });
+
+        axios.post('https://pet-lovers-back-end.vercel.app/upload/drive', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        }).then(res => {
+            console.log('upload deu certo')
+        }).catch(error => {
+            console.error('Erro', error)
+        })
+    }
 
     const cadastrarUsuario = () => {
 
@@ -74,6 +95,7 @@ const CadastrarUsuario = ({ navigation }) => {
         }
 
         axios.post('https://pet-lovers-back-end.vercel.app/usuario/cadastrar', dados).then(res => {
+            sendImageToDrive()
             navigation.navigate("Login")
             Toast.show({
                 type: 'success',
