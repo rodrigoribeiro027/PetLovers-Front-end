@@ -31,6 +31,28 @@ const CadastrarPet = ({ navigation }) => {
     ]);
 
 
+    const sendImageToDrive = async (id, tipo) => {
+
+        let localUri = Foto.uri;
+        let filename = localUri.split('/').pop();
+
+        let match = /\.(\w+)$/.exec(filename);
+        let type = match ? `image/${match[1]}` : `image`;
+
+        let formData = new FormData();
+        formData.append('file', { uri: localUri, name: filename, type });
+        formData.append('id', id)
+        formData.append('tipo', tipo)
+        axios.post('https://pet-lovers-back-end.vercel.app/upload/drive', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        }).then(res => {
+            console.log('upload deu certo')
+        }).catch(error => {
+            console.error('Erro', error)
+        })
+    }
+
+
     const cadastrarPet = async () => {
         const token = await getStorageItem('token');
         const dados={
@@ -41,7 +63,7 @@ const CadastrarPet = ({ navigation }) => {
         }
 
         axios.post('https://pet-lovers-back-end.vercel.app/pet/cadastrar', dados, { headers: { Authorization: token } }).then((res)=>{
-            console.log(res);
+            sendImageToDrive(res.data._id, 'pet');
             navigation.navigate('MeusPets')
             Toast.show({
                 type: 'success',
@@ -62,7 +84,7 @@ const CadastrarPet = ({ navigation }) => {
     }
 
 
-    const uploadImage = () => {
+    const loadImage = () => {
         let options = {
             mediatype: 'photo',
             quality: 1,
@@ -83,6 +105,7 @@ const CadastrarPet = ({ navigation }) => {
         })
     }
 
+
     return (
         <ScrollView>
             <KeyboardAvoidingView>
@@ -95,9 +118,9 @@ const CadastrarPet = ({ navigation }) => {
                         </TouchableOpacity>
 
                         <Text style={styles.textCadastroPet}>Cadastrar Pet</Text>
-                        <Image onPress={() => uploadImage()} style={styles.imagemUploadPet} source={Foto ? { uri: Foto.uri } : require('../assets/user.png')} />
+                        <Image onPress={() => loadImage()} style={styles.imagemUploadPet} source={Foto ? { uri: Foto.uri } : require('../assets/user.png')} />
 
-                        <TouchableOpacity style={{ ...stylesDefault.buttonDefault, marginBottom: 20 }} onPress={() => uploadImage()} >
+                        <TouchableOpacity style={{ ...stylesDefault.buttonDefault, marginBottom: 20 }} onPress={() => loadImage()} >
                             <Text style={styles.uploadImageText} >Upload Foto</Text>
                         </TouchableOpacity>
 

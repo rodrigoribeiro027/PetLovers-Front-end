@@ -57,7 +57,7 @@ const CadastrarUsuario = ({ navigation }) => {
     }
 
 
-    const sendImageToDrive = async () => {
+    const sendImageToDrive = async (id, tipo) => {
 
         let localUri = Foto.uri;
         let filename = localUri.split('/').pop();
@@ -67,13 +67,15 @@ const CadastrarUsuario = ({ navigation }) => {
 
         let formData = new FormData();
         formData.append('file', { uri: localUri, name: filename, type });
+        formData.append('id', id);
+        formData.append('tipo', tipo);
 
         axios.post('https://pet-lovers-back-end.vercel.app/upload/drive', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
         }).then(res => {
-            console.log('upload deu certo')
+            console.log('upload deu certo');
         }).catch(error => {
-            console.error('Erro', error)
+            console.error('Erro', error);
         })
     }
 
@@ -95,8 +97,10 @@ const CadastrarUsuario = ({ navigation }) => {
         }
 
         axios.post('https://pet-lovers-back-end.vercel.app/usuario/cadastrar', dados).then(res => {
-            sendImageToDrive()
-            navigation.navigate("Login")
+            const user_id = res.data._id;
+            const tipo = 'usuario';
+            sendImageToDrive(user_id, tipo);
+            navigation.navigate("Login");
             Toast.show({
                 type: 'success',
                 text1: 'Cadastro Realizado com Sucesso.',
@@ -106,7 +110,7 @@ const CadastrarUsuario = ({ navigation }) => {
                 type: 'error',
                 text1: 'Ocorreu algum problema',
             });
-            console.error('Erro', error.response)
+            console.error('Erro', error.response);
         })
 
     }
