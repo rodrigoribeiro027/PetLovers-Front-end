@@ -18,6 +18,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { COLORS } from '../colors';
 import PerfilUsuario from '../Templates/PerfilUsuario';
+import CadastroFunc from '../Templates/CadastroFunc';
 
 
 
@@ -80,7 +81,7 @@ const Routes = () => {
                 <Stack.Screen name="CadastrarServico" component={CadastrarServico} />
                 <Stack.Screen name="Servicos" component={Servicos} />
                 <Stack.Screen name="MeusPets" component={MeusPets} />
-
+                <Stack.Screen name="CadastroFunc" component={CadastroFunc} />
             </Stack.Navigator>
         </NavigationContainer>
     )

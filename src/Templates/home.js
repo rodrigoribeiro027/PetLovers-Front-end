@@ -7,6 +7,7 @@ import {
     TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, ScrollView, Image, ImageBackground
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
+import TabsFuc from '../components/tabFunc.js'
 import * as Animatable from 'react-native-animatable';
 import stylesDefault from '../styles'
 import { clearStorageItem, getStorageItem } from '../functions/encryptedStorageFunctions.js';
@@ -50,9 +51,9 @@ const Home = ({ navigation }) => {
                         <View style={styles.options}>
                             <View style={styles.optionBtn}>
                                 <View>
-                                    <TouchableOpacity  onPress={() => navigation.navigate('MeusPets')} >
+                                    <TouchableOpacity onPress={() => navigation.navigate('MeusPets')} >
                                         <View style={styles.container}>
-                                            <ImageBackground source={require("../assets/meusPets.png")} style={{width:150, height: 109 }} >
+                                            <ImageBackground source={require("../assets/meusPets.png")} style={{ width: 150, height: 109 }} >
                                                 <Text style={styles.text}>Meus Pets</Text>
                                             </ImageBackground>
                                         </View>
@@ -61,9 +62,9 @@ const Home = ({ navigation }) => {
                             </View>
                             <View style={styles.optionBtn}>
                                 <View>
-                                    <TouchableOpacity  onPress={() => navigation.navigate('HistoricoAgendamento')} >
+                                    <TouchableOpacity onPress={() => navigation.navigate('HistoricoAgendamento')} >
                                         <View style={styles.container}>
-                                            <ImageBackground source={require("../assets/historico.png")} style={{width:150, height: 109 }} >
+                                            <ImageBackground source={require("../assets/historico.png")} style={{ width: 150, height: 109 }} >
                                                 <Text style={styles.text2}>Meus Agendamentos</Text>
                                             </ImageBackground>
                                         </View>
@@ -74,9 +75,9 @@ const Home = ({ navigation }) => {
                         <View style={styles.options}>
                             <View style={styles.optionBtn}>
                                 <View>
-                                    <TouchableOpacity  onPress={() => navigation.navigate('HistoricoAgendamento')} >
+                                    <TouchableOpacity onPress={() => navigation.navigate('HistoricoAgendamento')} >
                                         <View style={styles.container}>
-                                            <ImageBackground source={require("../assets/historico-medico.png")} style={{width:150, height: 115 }} >
+                                            <ImageBackground source={require("../assets/historico-medico.png")} style={{ width: 150, height: 115 }} >
                                                 <Text style={styles.text}>histórico medico </Text>
                                             </ImageBackground>
                                         </View>
@@ -85,9 +86,9 @@ const Home = ({ navigation }) => {
                             </View>
                             <View style={styles.optionBtn}>
                                 <View>
-                                    <TouchableOpacity  onPress={() => navigation.navigate('Servicos')} >
+                                    <TouchableOpacity onPress={() => navigation.navigate('Servicos')} >
                                         <View style={styles.container}>
-                                            <ImageBackground source={require("../assets/produtos.png")} style={{width:150, height: 121}} >
+                                            <ImageBackground source={require("../assets/produtos.png")} style={{ width: 150, height: 121 }} >
                                                 <Text style={styles.text}>Produtos</Text>
                                             </ImageBackground>
                                         </View>
@@ -95,8 +96,28 @@ const Home = ({ navigation }) => {
                                 </View>
                             </View>
                         </View>
-
-
+                        <View style={styles.HomeContainer}>
+                            <View style={styles.options1}>
+                                <Image source={require("../assets/listaUser.png")} style={styles.agendar} />
+                                <View>
+                                    <Text style={styles.TextoConsulta}>Listagem de Perfils de Usuarios</Text>
+                                    <TouchableOpacity style={styles.agendarConsulta} onPress={() => navigation.navigate('Usuarios')} >
+                                        <Text style={styles.TextoConsultaUsuario} >Usuarios</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={styles.HomeContainer}>
+                            <View style={styles.options1}>
+                                <Image source={require("../assets/CadastroFunc.png")} style={styles.agendar} />
+                                <View>
+                                    <Text style={styles.TextoConsulta}>Cadastramento de Funcionarios</Text>
+                                    <TouchableOpacity style={styles.agendarConsulta} onPress={() => navigation.navigate('CadastroFunc')} >
+                                        <Text style={styles.TextoConsultaFuncionario} >Cadastro Funcionario</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
                     </View>
                 </TouchableWithoutFeedback>
 
@@ -111,14 +132,14 @@ const styles = StyleSheet.create({
         fontSize: 13,
         fontWeight: "bold",
         textAlign: "center",
-        
+
     },
     text2: {
         color: "black",
         fontSize: 13,
         fontWeight: "bold",
         textAlign: "center",
-        
+
     },
     meusPets: {
         width: '70%',
@@ -128,6 +149,16 @@ const styles = StyleSheet.create({
         width: '60%',
         fontSize: 15,
 
+    }, TextoConsultaUsuario: {
+        textAlign: 'center',
+        width: '100%',
+        fontSize: 15,
+        height: 30,
+    },
+    TextoConsultaFuncionario: {
+        width: '80%',
+        fontSize: 15,
+        height: 40,
     },
     agendarConsulta: {
         justifyContent: 'center',
@@ -151,7 +182,7 @@ const styles = StyleSheet.create({
         fontSize: 10,
         backgroundColor: "#D3E5ED",
         height: 150,
-        marginTop: 40
+        marginTop: 10
     },
     options: {
         display: 'flex',
@@ -215,8 +246,7 @@ const styles = StyleSheet.create({
         fontFamily: "Inter",
         fontWeight: 800,
         fontSize: 30,
-        marginTop: 50,
-        marginBottom: 15
+        marginTop: 10,
     },
     container: {
         alignItems: "center",

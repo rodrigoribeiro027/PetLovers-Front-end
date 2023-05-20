@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         maxWidth: '100%',
         alignItems: 'center',
         height: 150,
-        marginBottom: 30
+        marginBottom: 30,       
     },
     textoPet: {
         fontFamily: 'Inter',
@@ -132,8 +132,11 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     meusImgPets: {
-        width: '100%',
-        height: '100%'
+        width: 180,
+        height: 150,
+        borderRadius: 5,
+        marginLeft:5,
+        marginRight:5
     },
     espacamento: {
         width: '90%',
