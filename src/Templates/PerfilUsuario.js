@@ -46,7 +46,7 @@ const PerfilUsuario = ({ navigation }) => {
                             </TouchableOpacity>
                             <View style={styles.PerfilContainer}>
                                 <View style={styles.linha}>
-                                    <Image style={styles.imagenUser} source={require('../assets/user.png')} />
+                                    <Image style={styles.imagenUser} source={{uri: usuario.upload?.link}} />
                                     <TouchableOpacity onPress={() => navigation.navigate("Home")}>
                                     <Icon name="cog" style={stylesDefault.voltar} size={45} color="black" />
                                     </TouchableOpacity>
@@ -55,7 +55,7 @@ const PerfilUsuario = ({ navigation }) => {
                             <Text style={styles.TextoCentral}>Informações Pessoais</Text>
                             <View style={styles.PerfilContainer2}>
                                 <View style={styles.linha2}>
-                                    <Text>Nome: {usuario.nome.charAt(0).toUpperCase() + usuario.nome.slice(1)}</Text>
+                                    <Text>Nome: {usuario.nome}</Text>
                                     <Text>Email: {usuario.email}</Text>
                                     <Text>{usuario.documento?.documento.toUpperCase()}: {usuario.documento?.numero}</Text>
                                     <Text>Telefone: {usuario.telefone?.numero}</Text>
