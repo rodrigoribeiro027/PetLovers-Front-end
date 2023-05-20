@@ -48,7 +48,7 @@ const MeusPets = ({ navigation }) => {
                     pets.map((pet) => (
                         <View style={styles.meusPets}>
                             <View style={styles.viewPetImage}>
-                            <Animatable.Image animation='fadeInUp' source={{uri:pet.upload.link}} style={styles.meusImgPets} />
+                            <Animatable.Image animation='fadeInUp' source={{uri:pet.upload?.link ? pet.upload?.link : require("../assets/pets.png")}} style={styles.meusImgPets} />
                             </View>
                             <View style={styles.containerCard}>
                                 <Text style={styles.textoPet}>Nome: {pet.nome ? pet.nome : 'Não informado'}</Text>

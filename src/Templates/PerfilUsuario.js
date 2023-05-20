@@ -9,8 +9,29 @@ import {
 import StatusBar from '../components/StatusBar.js';
 import stylesDefault from "../styles"
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { getStorageItem } from '../functions/encryptedStorageFunctions.js';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+
+
 
 const PerfilUsuario = ({ navigation }) => {
+
+    const [usuario, setUsuario] = useState('');
+
+    const buscarUsuario = async () => {
+        const token = await getStorageItem('token');
+        axios.get('https://pet-lovers-back-end.vercel.app/usuario/buscar-info', { headers: { Authorization: token } }).then(res => {
+            setUsuario(res.data);
+        }).catch(error => {
+            console.error('Erro', error.response);
+        })
+    }
+
+    useEffect(() => {
+        buscarUsuario();
+    }, []);
 
     return (
         <>
@@ -34,16 +55,10 @@ const PerfilUsuario = ({ navigation }) => {
                             <Text style={styles.TextoCentral}>Informações Pessoais</Text>
                             <View style={styles.PerfilContainer2}>
                                 <View style={styles.linha2}>
-                                    <Text>Nome:</Text>
-                                    <Text>Rodrigo Ribeiro Dos Santos</Text>
-                                    <Text>Email:</Text>
-                                    <Text>Rodrigo@gmail.com</Text>
-                                    <Text>Rg:</Text>
-                                    <Text>444.333.222-9</Text>
-                                    <Text>Cpf:</Text>
-                                    <Text>444.333.222-9</Text>
-                                    <Text>Telefone:</Text>
-                                    <Text>123944-8877</Text>
+                                    <Text>Nome: {usuario.nome.charAt(0).toUpperCase() + usuario.nome.slice(1)}</Text>
+                                    <Text>Email: {usuario.email}</Text>
+                                    <Text>{usuario.documento?.documento.toUpperCase()}: {usuario.documento?.numero}</Text>
+                                    <Text>Telefone: {usuario.telefone?.numero}</Text>
                                 </View>
                                 <View>
                                     <TouchableOpacity onPress={() => navigation.navigate("Home")}>
@@ -54,16 +69,10 @@ const PerfilUsuario = ({ navigation }) => {
                             <Text style={styles.TextoCentral}>Endereço</Text>
                             <View style={styles.PerfilContainer2}>
                                 <View style={styles.linha2}>
-                                    <Text>Nome:</Text>
-                                    <Text>Rodrigo Ribeiro Dos Santos</Text>
-                                    <Text>Email:</Text>
-                                    <Text>Rodrigo@gmail.com</Text>
-                                    <Text>Rg:</Text>
-                                    <Text>444.333.222-9</Text>
-                                    <Text>Cpf:</Text>
-                                    <Text>444.333.222-9</Text>
-                                    <Text>Telefone:</Text>
-                                    <Text>123944-8877</Text>
+                                    <Text>Bairro: {usuario.endereco?.bairro.charAt(0).toUpperCase() + usuario.endereco?.bairro.slice(1)}</Text>
+                                    <Text>Rua: {usuario.endereco?.rua.charAt(0).toUpperCase() + usuario.endereco?.rua.slice(1)}</Text>
+                                    <Text>Complemento: {usuario.endereco?.complemento.charAt(0).toUpperCase() + usuario.endereco?.complemento.slice(1)}</Text>
+                                    <Text>Número: {usuario.endereco?.numero}</Text>
                                 </View>
                                 <View>
                                     <TouchableOpacity onPress={() => navigation.navigate("Home")}>
