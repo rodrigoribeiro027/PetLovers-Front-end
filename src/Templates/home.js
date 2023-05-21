@@ -4,10 +4,9 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, ScrollView, Image, ImageBackground
+    TouchableOpacity, Keyboard, TouchableWithoutFeedback, ScrollView, Image, ImageBackground
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
-import TabsFuc from '../components/tabFunc.js'
 import * as Animatable from 'react-native-animatable';
 import stylesDefault from '../styles'
 import { clearStorageItem, getStorageItem } from '../functions/encryptedStorageFunctions.js';
