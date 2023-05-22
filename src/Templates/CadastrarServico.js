@@ -8,8 +8,40 @@ import {
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
 import stylesDefault from "../styles"
+import { getStorageItem } from '../functions/encryptedStorageFunctions.js';
+import { Toast } from 'react-native-toast-message/lib/src/Toast.js';
+import axios from 'axios';
+
+
 
 const CadastrarServico = ({ navigation }) => {
+    const [nome, setNome] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [preco, setPreco] = useState('');
+
+    const realizarCadastro = async () => {
+        const token = await getStorageItem('token');
+        const servico = {
+            nome,
+            descricao,
+            preco,
+            tipo: 'servico'
+        }
+
+        axios.post('https://pet-lovers-back-end.vercel.app/oferta/cadastrar', servico, { headers: { Authorization: token } }).then(res => {
+            Toast.show({
+                type: 'success',
+                text1: 'Cadastro Realizado com Sucesso.',
+            });
+            navigation.navigate("Servicos");
+        }).catch(error => {
+            Toast.show({
+                type: 'error',
+                text1: 'Ocorreu algum problema',
+            });
+            console.error(error)
+        })
+    }
 
     return (
         <>
@@ -21,9 +53,9 @@ const CadastrarServico = ({ navigation }) => {
                             <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
                         </TouchableOpacity>
                         <Text style={styles.textPrincipal}>Cadastrar Servico</Text>
-                        <TextInput placeholder='Nome' style={{ ...stylesDefault.input, marginTop: 2 }} />
+                        <TextInput placeholder='Nome' style={{ ...stylesDefault.input, marginTop: 2 }} value={nome} onChangeText={(e) => setNome(e)} />
                         <TextInput
-                            placeholder='Descrição do serviço'
+                            placeholder='Descrição do Produto'
                             multiline={true}
                             maxLength={300}
                             numberOfLines={5}
@@ -33,9 +65,11 @@ const CadastrarServico = ({ navigation }) => {
                                 paddingTop: 8,
                                 textAlignVertical: 'top'
                             }}
+                            value={descricao}
+                            onChangeText={(e) => setDescricao(e)}
                         />
-                        <TextInput placeholder='Preço' style={{ ...stylesDefault.input }} />
-                        <TouchableOpacity style={{ ...stylesDefault.input, backgroundColor: "#399fff", alignItems: "center", marginTop: 40 }} onPress={() => navigation.navigate("Servicos")} >
+                        <TextInput keyboardType={'numeric'} placeholder={'Preço'} style={{ ...stylesDefault.input }} value={preco} onChangeText={(e) => setPreco(e)} />
+                        <TouchableOpacity style={{ ...stylesDefault.input, backgroundColor: "#399fff", alignItems: "center", marginTop: 40 }} onPress={() => realizarCadastro()} >
                             <Text style={stylesDefault.buttonTextDefault}>Cadastrar</Text>
                         </TouchableOpacity>
                     </View>

@@ -12,6 +12,8 @@ import axios from 'axios';
 import { getStorageItem } from '../functions/encryptedStorageFunctions.js';
 import { Toast } from 'react-native-toast-message/lib/src/Toast.js';
 
+
+
 const CadastrarProduto = ({ navigation }) => {
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
@@ -23,7 +25,7 @@ const CadastrarProduto = ({ navigation }) => {
             nome,
             descricao,
             preco,
-            tipo:'produto'
+            tipo: 'produto'
         }
 
         axios.post('https://pet-lovers-back-end.vercel.app/oferta/cadastrar', produto, { headers: { Authorization: token } }).then(res => {
@@ -51,7 +53,7 @@ const CadastrarProduto = ({ navigation }) => {
                             <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
                         </TouchableOpacity>
                         <Text style={styles.textPrincipal}>Cadastrar Produto</Text>
-                        <TextInput placeholder='Nome' style={{ ...stylesDefault.input, marginTop: 2 }} value={nome} onChangeText={(e)=> setNome(e)}  />
+                        <TextInput placeholder='Nome' style={{ ...stylesDefault.input, marginTop: 2 }} value={nome} onChangeText={(e) => setNome(e)} />
                         <TextInput
                             placeholder='Descrição do Produto'
                             multiline={true}
@@ -66,7 +68,7 @@ const CadastrarProduto = ({ navigation }) => {
                             value={descricao}
                             onChangeText={(e) => setDescricao(e)}
                         />
-                        <TextInput keyboardType={'numeric'} placeholder={'Preço'}  style={{ ...stylesDefault.input }} value={preco} onChangeText={(e) => setPreco(e)} />
+                        <TextInput keyboardType={'numeric'} placeholder={'Preço'} style={{ ...stylesDefault.input }} value={preco} onChangeText={(e) => setPreco(e)} />
                         <TouchableOpacity style={{ ...stylesDefault.input, backgroundColor: "#399fff", alignItems: "center", marginTop: 40 }} onPress={() => realizarCadastro()} >
                             <Text style={stylesDefault.buttonTextDefault}>Cadastrar</Text>
                         </TouchableOpacity>
