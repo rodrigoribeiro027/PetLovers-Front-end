@@ -22,7 +22,6 @@ const CadastrarServico = ({ navigation }) => {
                         </TouchableOpacity>
                         <Text style={styles.textPrincipal}>Cadastrar Servico</Text>
                         <TextInput placeholder='Nome' style={{ ...stylesDefault.input, marginTop: 2 }} />
-                        <TextInput placeholder='Preço' style={{ ...stylesDefault.input }} />
                         <TextInput
                             placeholder='Descrição do serviço'
                             multiline={true}
@@ -35,6 +34,7 @@ const CadastrarServico = ({ navigation }) => {
                                 textAlignVertical: 'top'
                             }}
                         />
+                        <TextInput placeholder='Preço' style={{ ...stylesDefault.input }} />
                         <TouchableOpacity style={{ ...stylesDefault.input, backgroundColor: "#399fff", alignItems: "center", marginTop: 40 }} onPress={() => navigation.navigate("Servicos")} >
                             <Text style={stylesDefault.buttonTextDefault}>Cadastrar</Text>
                         </TouchableOpacity>
