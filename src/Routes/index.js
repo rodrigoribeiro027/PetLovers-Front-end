@@ -19,6 +19,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { COLORS } from '../colors';
 import PerfilUsuario from '../Templates/PerfilUsuario';
 import CadastroFunc from '../Templates/CadastroFunc';
+import CadastrarProduto from '../Templates/CadastrarProduto';
 
 
 
@@ -82,6 +83,7 @@ const Routes = () => {
                 <Stack.Screen name="Servicos" component={Servicos} />
                 <Stack.Screen name="MeusPets" component={MeusPets} />
                 <Stack.Screen name="CadastroFunc" component={CadastroFunc} />
+                <Stack.Screen name="CadastrarProduto" component={CadastrarProduto} />
             </Stack.Navigator>
         </NavigationContainer>
     )

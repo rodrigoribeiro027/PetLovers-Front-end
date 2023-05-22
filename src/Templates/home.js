@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
     StyleSheet,
     Text,
@@ -14,6 +14,7 @@ import { clearStorageItem, getStorageItem } from '../functions/encryptedStorageF
 
 const Home = ({ navigation }) => {
 
+    const [usuarios, setUsuarios] = useState([]);
 
     const deslogar = async () => {
         const token = await getStorageItem('token')
@@ -22,6 +23,8 @@ const Home = ({ navigation }) => {
         }
         navigation.navigate("Login")
     }
+
+    const isFuncionario = usuarios.tipoUsuario === 'Funcionario' || 'admin';
 
 
     return (
@@ -95,28 +98,51 @@ const Home = ({ navigation }) => {
                                 </View>
                             </View>
                         </View>
-                        <View style={styles.HomeContainer}>
-                            <View style={styles.options1}>
-                                <Image source={require("../assets/listaUser.png")} style={styles.agendar} />
-                                <View>
-                                    <Text style={styles.TextoConsulta}>Listagem de Perfils de Usuarios</Text>
-                                    <TouchableOpacity style={styles.agendarConsulta} onPress={() => navigation.navigate('Usuarios')} >
-                                        <Text style={styles.TextoConsultaUsuario} >Usuarios</Text>
-                                    </TouchableOpacity>
+
+                        {isFuncionario && (
+                            <>
+                                <View style={styles.HomeContainer}>
+                                    <View style={styles.options1}>
+                                        <Image
+                                            source={require('../assets/listaUser.png')}
+                                            style={styles.agendar}
+                                        />
+                                        <View>
+                                            <Text style={styles.TextoConsulta}>
+                                                Listagem de Perfils de Usuarios
+                                            </Text>
+                                            <TouchableOpacity
+                                                style={styles.agendarConsulta}
+                                                onPress={() => navigation.navigate('Usuarios')}
+                                            >
+                                                <Text style={styles.TextoConsultaUsuario}>Usuarios</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
                                 </View>
-                            </View>
-                        </View>
-                        <View style={styles.HomeContainer}>
-                            <View style={styles.options1}>
-                                <Image source={require("../assets/CadastroFunc.png")} style={styles.agendar} />
-                                <View>
-                                    <Text style={styles.TextoConsulta}>Cadastramento de Funcionarios</Text>
-                                    <TouchableOpacity style={styles.agendarConsulta} onPress={() => navigation.navigate('CadastroFunc')} >
-                                        <Text style={styles.TextoConsultaFuncionario} >Cadastro Funcionario</Text>
-                                    </TouchableOpacity>
+                                <View style={styles.HomeContainer}>
+                                    <View style={styles.options1}>
+                                        <Image
+                                            source={require('../assets/CadastroFunc.png')}
+                                            style={styles.agendar}
+                                        />
+                                        <View>
+                                            <Text style={styles.TextoConsulta}>
+                                                Cadastramento de Funcionarios
+                                            </Text>
+                                            <TouchableOpacity
+                                                style={styles.agendarConsulta}
+                                                onPress={() => navigation.navigate('CadastroFunc')}
+                                            >
+                                                <Text style={styles.TextoConsultaFuncionario}>
+                                                    Cadastro Funcionario
+                                                </Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
                                 </View>
-                            </View>
-                        </View>
+                            </>
+                        )}
                     </View>
                 </TouchableWithoutFeedback>
 

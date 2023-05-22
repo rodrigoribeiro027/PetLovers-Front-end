@@ -1,5 +1,4 @@
 
-import { useState } from 'react';
 import {
     StyleSheet,
     Text,
@@ -9,7 +8,7 @@ import {
 import StatusBar from '../components/StatusBar.js';
 import stylesDefault from "../styles"
 
-const CadastrarServico = ({ navigation }) => {
+const CadastrarProduto = ({ navigation }) => {
 
     return (
         <>
@@ -20,11 +19,11 @@ const CadastrarServico = ({ navigation }) => {
                         <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Servicos")} >
                             <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
                         </TouchableOpacity>
-                        <Text style={styles.textPrincipal}>Cadastrar Servico</Text>
+                        <Text style={styles.textPrincipal}>Cadastrar Produto</Text>
                         <TextInput placeholder='Nome' style={{ ...stylesDefault.input, marginTop: 2 }} />
                         <TextInput placeholder='Preço' style={{ ...stylesDefault.input }} />
                         <TextInput
-                            placeholder='Descrição do serviço'
+                            placeholder='Descrição do Produto'
                             multiline={true}
                             maxLength={300}
                             numberOfLines={5}
@@ -45,6 +44,7 @@ const CadastrarServico = ({ navigation }) => {
     )
 };
 
+
 const styles = StyleSheet.create({
     textPrincipal: {
         fontWeight: 800,
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default CadastrarServico;
+export default CadastrarProduto;

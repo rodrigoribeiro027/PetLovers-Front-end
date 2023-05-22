@@ -4,7 +4,7 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity, 
+    TouchableOpacity,  Image, ImageBackground
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
 import * as Animatable from 'react-native-animatable'
@@ -20,9 +20,30 @@ const CriarServico = ({ navigation }) => {
                 </TouchableOpacity>
                 <Animatable.Text animation='fadeInRight' style={styles.TextPrincipaltextoCadastro}>Serviços</Animatable.Text>
                 <Animatable.View animation='fadeInRight' style={styles.divButton}>
-                    <TouchableOpacity style={styles.menuUsuario} onPress={() => navigation.navigate("CadastrarServico")}>
-                        <Text style={styles.menuUsuarioText} >Cadastrar Serviços</Text>
-                    </TouchableOpacity>
+                <View style={styles.options}>
+                            <View style={styles.optionBtn}>
+                                <View>
+                                    <TouchableOpacity onPress={() => navigation.navigate('CadastrarServico')} >
+                                        <View style={styles.container}>
+                                            <ImageBackground source={require("../assets/servico.png")} style={{ width: 150, height: 115 }} >
+                                                <Text style={styles.text}>Serviços</Text>
+                                            </ImageBackground>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                            <View style={styles.optionBtn}>
+                                <View>
+                                    <TouchableOpacity onPress={() => navigation.navigate('CadastrarProduto')} >
+                                        <View style={styles.container}>
+                                            <ImageBackground source={require("../assets/Product.png")} style={{ width: 150, height: 121 }} >
+                                                <Text style={styles.text}>Produtos</Text>
+                                            </ImageBackground>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
                 </Animatable.View>
 
                 <View style={styles.ServicoConteiner}>
@@ -70,6 +91,7 @@ const styles = StyleSheet.create({
         width: "90%",
         alignItems: "center",
         justifyContent: "center",
+        marginBottom:25
     },
     TextPrincipaltextoCadastro: {
         fontFamily: 'Inter',
@@ -80,6 +102,34 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFF",
         alignItems: "center",
         justifyContent: "center",
+    }, options: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 25,
+        fontSize: 10,
+        height: 110,
+        width: '90%',
+        justifyContent: 'space-between'
+    }, 
+    TextoConsulta: {
+        fontSize: 15,
+
+    }, 
+    options1: {
+        display: 'flex',
+        flexDirection: 'row',
+        fontSize: 10,
+        height: 110,
+        padding: 10,
+        width: '90%',
+
+    },
+    optionBtn: {
+        backgroundColor: "#D3E5ED",
+        borderRadius: 5,
+        width: '45%',
+        justifyContent: 'center',
+        alignItems: "center",
     },
     menuUsuario: {
         width: '90%',
