@@ -1,7 +1,7 @@
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react'
+import React, { useState } from 'react'
+import { Modal, View, Text, TouchableOpacity } from 'react-native';
 import Login from '../Templates/login';
 import RecuperarSenha from '../Templates/RecuperarSenha';
 import CadastrarUsuario from '../Templates/CadastrarUsuario';
@@ -20,48 +20,100 @@ import { COLORS } from '../colors';
 import PerfilUsuario from '../Templates/PerfilUsuario';
 import CadastroFunc from '../Templates/CadastroFunc';
 import CadastrarProduto from '../Templates/CadastrarProduto';
-
+import { useNavigation } from '@react-navigation/native';
+import stylesDefault from "../styles";
 
 
 const Tab = createBottomTabNavigator();
 
+Icon.loadFont();
 
-Icon.loadFont();//Esse aqui
 function HomeTab() {
-    
+    const [modalVisible, setModalVisible] = useState(false);
+    const navigation = useNavigation();
+
+    const openModal = () => {
+        setModalVisible(true);
+    }
+
+    const closeModal = () => {
+        setModalVisible(false);
+    }
+
+    const navigateToStackScreen = (rota) => {
+        navigation.navigate(rota);
+        closeModal();
+    }
+
     return (
+        <View style={{ flex: 1 }}>
+            <Tab.Navigator initialRouteName="Login" screenOptions={({ route }) => ({
+                headerShown: false,
+                tabBarActiveTintColor: '#EE82EE',
+                tabBarShowLabel: false,
+                tabBarIcon: ({ focused, color, size }) => {
+                    let tamanho = 30;
+                    let iconName;
+                    if (route.name === 'Home') {
+                        iconName = 'home'
+                        tamanho = 32;
+                    } else if (route.name === 'historicoAgendamento') {
+                        iconName = 'plus-circle'
+                        tamanho = 38
+                    } else if (route.name === 'PerfilUsuario') {
+                        iconName = 'user'
+                    }
 
-        <Tab.Navigator initialRouteName="Login" screenOptions={({ route }) => ({
-            headerShown: false, tabBarActiveTintColor: '#EE82EE', tabBarShowLabel: false,
-            tabBarIcon: ({ focused, color, size }) => {
-                let tamanho = 30;
-                let iconName;
-                if (route.name === 'Home') {
-                    iconName = 'home'
-                    tamanho = 32;
-                }
-                else if (route.name === 'historicoAgendamento') {
-                    iconName = 'plus-circle'
-                    tamanho = 38
-                }
-                else if (route.name === 'PerfilUsuario') {
-                    iconName = 'user'
-                }
+                    return (
+                        <Icon
+                          name={iconName}
+                          size={tamanho}
+                          color={focused ? COLORS.primary : color} // Defina a cor do ícone ativo
+                          onPress={() => {
+                            if (iconName === 'plus-circle') {
+                              openModal();
+                            } else {
+                              navigation.navigate(route.name);
+                            }
+                          }}
+                        />
+                      );
+                },
+                tabBarActiveTintColor: COLORS.primary,
+                tabBarInactiveTintColor: 'black',
+            })}>
+                <Tab.Screen name="Home" component={Home} />
+                <Tab.Screen name="historicoAgendamento" component={HistoricoAgendamento} />
+                <Tab.Screen name="PerfilUsuario" component={PerfilUsuario} />
+            </Tab.Navigator>
 
-                // You can return any component that you like here!
-                return <Icon name={iconName} size={tamanho} color={color} />;
-            },
-            tabBarActiveTintColor: COLORS.primary,
-            tabBarInactiveTintColor: 'black',
-        })}>
-            <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="historicoAgendamento" component={HistoricoAgendamento} />
-            {/* <Tab.Screen name="MeusPets" component={MeusPets} /> */}
-            <Tab.Screen name="PerfilUsuario" component={PerfilUsuario} />
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={closeModal}
+            >
+                <TouchableOpacity style={{ flex: 1 }} onPress={closeModal}>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+                        <View style={{ backgroundColor: '#FFF', padding: 20, borderRadius: 10, width: '80%', alignItems: 'center' }}>
+                            <TouchableOpacity style={{ marginBottom: 20 }} onPress={() => navigateToStackScreen('CadastrarProduto')}>
+                                <Text style={{ textAlign: 'center' }}>Cadastro Produto</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{ marginBottom: 20 }} onPress={() => navigateToStackScreen('CadastrarServico')}>
+                                <Text style={{ textAlign: 'center' }}>Cadastro Servico</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{ marginBottom: 20 }} onPress={() => navigateToStackScreen('CadastroFunc')}>
+                                <Text style={{ textAlign: 'center' }}>Cadastro Funcionario</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigateToStackScreen('AgendarConsulta')}>
+                                <Text style={{ textAlign: 'center' }}>Cadastro 4</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            </Modal>
 
-
-        </Tab.Navigator>
-
+        </View>
     );
 }
 
