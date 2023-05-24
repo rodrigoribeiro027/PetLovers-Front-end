@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     StyleSheet,
     Text,
@@ -14,17 +14,25 @@ import { clearStorageItem, getStorageItem } from '../functions/encryptedStorageF
 
 const Home = ({ navigation }) => {
 
-    const [usuarios, setUsuarios] = useState([]);
+    const [usuario, setUsuario] = useState();
 
     const deslogar = async () => {
-        const token = await getStorageItem('token')
+        const token = await getStorageItem('token');
         if (token) {
             await clearStorageItem('token');
+            await clearStorageItem('acesso');
         }
         navigation.navigate("Login")
     }
 
-    const isFuncionario = usuarios.tipoUsuario === 'Funcionario' || 'admin';
+    const nivelDeAcessoDoUsuario = async () => {
+        const acesso = await getStorageItem('acesso');
+        setUsuario(acesso);
+    }
+
+    useEffect(()=>{
+        nivelDeAcessoDoUsuario()
+    },[])
 
 
     return (
@@ -99,7 +107,7 @@ const Home = ({ navigation }) => {
                             </View>
                         </View>
 
-                        {isFuncionario && (
+                        {usuario === "admin" && (
                             <>
                                 <View style={styles.HomeContainer}>
                                     <View style={styles.options1}>

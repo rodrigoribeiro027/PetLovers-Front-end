@@ -28,10 +28,11 @@ const Login = ({ navigation }) => {
         }
 
         axios.post('https://pet-lovers-back-end.vercel.app/login', dados).then(async (res) => {
-            //console.log(res.headers.authorization)
             const token = res.headers.authorization;
+            const acesso = res.data.permissao;
             try {
                 await storageItem('token', token);
+                await storageItem('acesso', acesso);
                 navigation.navigate('Home')
             } catch (error) {
                 console.error('Erro ao salvar token:', error);
