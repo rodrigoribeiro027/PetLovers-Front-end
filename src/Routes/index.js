@@ -66,18 +66,18 @@ function HomeTab() {
 
                     return (
                         <Icon
-                          name={iconName}
-                          size={tamanho}
-                          color={focused ? COLORS.primary : color} // Defina a cor do ícone ativo
-                          onPress={() => {
-                            if (iconName === 'plus-circle') {
-                              openModal();
-                            } else {
-                              navigation.navigate(route.name);
-                            }
-                          }}
+                            name={iconName}
+                            size={tamanho}
+                            color={focused ? COLORS.primary : color} // Defina a cor do ícone ativo
+                            onPress={() => {
+                                if (iconName === 'plus-circle') {
+                                    openModal();
+                                } else {
+                                    navigation.navigate(route.name);
+                                }
+                            }}
                         />
-                      );
+                    );
                 },
                 tabBarActiveTintColor: COLORS.primary,
                 tabBarInactiveTintColor: 'black',
@@ -86,7 +86,6 @@ function HomeTab() {
                 <Tab.Screen name="historicoAgendamento" component={HistoricoAgendamento} />
                 <Tab.Screen name="PerfilUsuario" component={PerfilUsuario} />
             </Tab.Navigator>
-
             <Modal
                 animationType="slide"
                 transparent={true}

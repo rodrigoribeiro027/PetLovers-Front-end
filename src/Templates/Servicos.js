@@ -1,18 +1,58 @@
 
-import React from 'react';
+import { useEffect, useState,useCallback } from 'react';
 import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity,  Image, ImageBackground
+    TouchableOpacity, Image, ImageBackground,ScrollView
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
 import * as Animatable from 'react-native-animatable'
 import stylesDefault from '../styles.js';
+import axios from 'axios';
+import { getStorageItem } from '../functions/encryptedStorageFunctions.js';
+import {useFocusEffect  } from '@react-navigation/native';
 
 const CriarServico = ({ navigation }) => {
+
+    const [ofertas, setOferta] = useState([])
+    const [tipo, setTipo] = useState('')
+    const buscarServicos = ()=>{
+        setTipo('Servicos')
+        buscarOfertas()
+    }
+    const buscarOfertas = async () => {
+        console.log(tipo === 'Produtos');
+        const url = 'https://pet-lovers-back-end.vercel.app/oferta/buscar'
+        if(tipo === 'Servicos'){
+            url= 'https://pet-lovers-back-end.vercel.app/oferta/buscarServicos'
+        }
+        if(tipo === 'Produtos'){
+            url= 'https://pet-lovers-back-end.vercel.app/oferta/buscarProdutos'
+            console.log('adawdawdawdawdawdawdw')
+        }
+        console.log(url);
+        const token = await getStorageItem('token');
+        axios.get(url, { headers: { Authorization: token } }).then((res) => {
+            setOferta(res.data);
+        }).catch(error => {
+            console.error('Erro', error.response);
+        })
+    }
+    useEffect(() => {
+        buscarOfertas();
+    }, [tipo]); // Atualiza a lista de ofertas quando o valor de 'tipo' é alterado
+
+    useFocusEffect(
+        useCallback(() => {
+            buscarOfertas(); // Atualiza a lista de ofertas quando a tela está em foco
+        }, [])
+    );
+
     return (
         <>
+            <ScrollView style={styles.screen}>
+
             <View style={styles.containerCadastro}>
                 <StatusBar />
                 <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Home")} >
@@ -20,49 +60,50 @@ const CriarServico = ({ navigation }) => {
                 </TouchableOpacity>
                 <Animatable.Text animation='fadeInRight' style={styles.TextPrincipaltextoCadastro}>Serviços</Animatable.Text>
                 <Animatable.View animation='fadeInRight' style={styles.divButton}>
-                <View style={styles.options}>
-                            <View style={styles.optionBtn}>
-                                <View>
-                                    <TouchableOpacity onPress={() => navigation.navigate('CadastrarServico')} >
-                                        <View style={styles.container}>
-                                            <ImageBackground source={require("../assets/servico.png")} style={{ width: 150, height: 115 }} >
-                                                <Text style={styles.text}>Serviços</Text>
-                                            </ImageBackground>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            <View style={styles.optionBtn}>
-                                <View>
-                                    <TouchableOpacity onPress={() => navigation.navigate('CadastrarProduto')} >
-                                        <View style={styles.container}>
-                                            <ImageBackground source={require("../assets/Product.png")} style={{ width: 150, height: 121 }} >
-                                                <Text style={styles.text}>Produtos</Text>
-                                            </ImageBackground>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
+                    <View style={styles.options}>
+                        <View style={styles.optionBtn}>
+                            <View>
+                                <TouchableOpacity onPress={() => buscarServicos()} >
+                                    <View style={styles.container}>
+                                        <ImageBackground source={require("../assets/servico.png")} style={{ width: 150, height: 115 }} >
+                                            <Text style={styles.text}>Serviços</Text>
+                                        </ImageBackground>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
                         </View>
-                </Animatable.View>
-
-                <View style={styles.ServicoConteiner}>
-                    <View style={styles.servicoText}>
-                        <Text style={styles.servicoTexto}>Banho e Tosa</Text>
-                        <Text style={styles.servicoTexto}>R$80</Text>
+                        <View style={styles.optionBtn}>
+                            <View>
+                                <TouchableOpacity onPress={() => setTipo('Produtos')} >
+                                    <View style={styles.container}>
+                                        <ImageBackground source={require("../assets/Product.png")} style={{ width: 150, height: 121 }} >
+                                            <Text style={styles.text}>Produtos</Text>
+                                        </ImageBackground>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
                     </View>
-                    <Text style={styles.servicoTexto}>Descrição:
-                        Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos,
-                        e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos.
-                    </Text>
-                </View>
-
+                </Animatable.View>
+                {ofertas.map((oferta) => (
+                            <View style={styles.ServicoConteiner} key={oferta._id}>
+                                <View style={styles.servicoText} >
+                                    <Text style={styles.servicoTexto}>{oferta.nome}</Text>
+                                    <Text style={styles.servicoTexto}>{oferta.preco}</Text>
+                                </View>
+                                <Text style={styles.servicoTexto}>
+                                    Descrição: {oferta.descricao}</Text>
+                            </View>
+                        ))}
             </View>
+            </ScrollView>
+
         </>
     )
 };
 const styles = StyleSheet.create({
     ServicoConteiner: {
+        width:'80%',
         borderWidth: 1.2,
         borderRadius: 5,
         padding: 5,
@@ -91,7 +132,7 @@ const styles = StyleSheet.create({
         width: "90%",
         alignItems: "center",
         justifyContent: "center",
-        marginBottom:25
+        marginBottom: 25
     },
     TextPrincipaltextoCadastro: {
         fontFamily: 'Inter',
@@ -110,11 +151,11 @@ const styles = StyleSheet.create({
         height: 110,
         width: '90%',
         justifyContent: 'space-between'
-    }, 
+    },
     TextoConsulta: {
         fontSize: 15,
 
-    }, 
+    },
     options1: {
         display: 'flex',
         flexDirection: 'row',
