@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     },
     cadastrarButonText: {
         color: '#FFF',
-        fontSize: 17
+        fontSize: 17,
     },
     dropDownContainer: {
         backgroundColor: '#F4F3F3',

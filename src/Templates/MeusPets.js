@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     novoPets: {
         width: '90%',
         borderRadius: 10,
-        marginVertical: 20
+        marginVertical: 40
     },
     viewPetImage: {
         flex: 0.5,
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         maxWidth: '100%',
         alignItems: 'center',
         height: 150,
-        marginBottom: 30,       
+        marginBottom: 30 
     },
     textoPet: {
         fontFamily: 'Inter',
