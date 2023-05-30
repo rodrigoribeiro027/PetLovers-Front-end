@@ -4,7 +4,7 @@ import {
     StyleSheet,
     Text,
     View, TextInput,
-    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, Icon,
+    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, Pressable,
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
 import * as Animatable from 'react-native-animatable';
@@ -20,6 +20,11 @@ const Login = ({ navigation }) => {
 
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+
+    handleDoubleTap = () => {
+        setEmail('nichollaslimma734@gmail.com');
+        setSenha('nicolas123');
+    }
 
     const logar = () => {
         const dados = {
@@ -55,7 +60,7 @@ const Login = ({ navigation }) => {
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <Animatable.View style={styles.container}>
                         <StatusBar />
-                        <Animatable.Text animation='fadeInRight' style={styles.TextPrincipal}>PetLovers</Animatable.Text>
+                        <Pressable onLongPress={handleDoubleTap}><Animatable.Text animation='fadeInRight' style={styles.TextPrincipal}>PetLovers</Animatable.Text></Pressable>
                         <Animatable.Image animation='fadeInUp' source={require("../assets/pets.png")} style={styles.imgpets} />
                         <Animatable.View animation='fadeInUp' style={styles.div}>
 

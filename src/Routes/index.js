@@ -120,7 +120,7 @@ const Routes = () => {
     const Stack = createNativeStackNavigator();
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+            <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} />
                 <Stack.Screen name="CadastrarUsuario" component={CadastrarUsuario} />

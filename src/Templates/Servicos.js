@@ -17,21 +17,16 @@ const CriarServico = ({ navigation }) => {
 
     const [ofertas, setOferta] = useState([])
     const [tipo, setTipo] = useState('')
-    const buscarServicos = ()=>{
-        setTipo('Servicos')
-        buscarOfertas()
-    }
+
+
     const buscarOfertas = async () => {
-        console.log(tipo === 'Produtos');
-        const url = 'https://pet-lovers-back-end.vercel.app/oferta/buscar'
-        if(tipo === 'Servicos'){
-            url= 'https://pet-lovers-back-end.vercel.app/oferta/buscarServicos'
+        let url = 'https://pet-lovers-back-end.vercel.app/oferta/buscar';
+        if(tipo == 'Servicos'){
+            url = 'https://pet-lovers-back-end.vercel.app/oferta/buscarServicos';
         }
-        if(tipo === 'Produtos'){
-            url= 'https://pet-lovers-back-end.vercel.app/oferta/buscarProdutos'
-            console.log('adawdawdawdawdawdawdw')
+        if(tipo == 'Produtos'){
+            url = 'https://pet-lovers-back-end.vercel.app/oferta/buscarProdutos';
         }
-        console.log(url);
         const token = await getStorageItem('token');
         axios.get(url, { headers: { Authorization: token } }).then((res) => {
             setOferta(res.data);
@@ -39,6 +34,7 @@ const CriarServico = ({ navigation }) => {
             console.error('Erro', error.response);
         })
     }
+
     useEffect(() => {
         buscarOfertas();
     }, [tipo]); // Atualiza a lista de ofertas quando o valor de 'tipo' é alterado
@@ -63,7 +59,7 @@ const CriarServico = ({ navigation }) => {
                     <View style={styles.options}>
                         <View style={styles.optionBtn}>
                             <View>
-                                <TouchableOpacity onPress={() => buscarServicos()} >
+                                <TouchableOpacity onPress={() => setTipo('Servicos')} >
                                     <View style={styles.container}>
                                         <ImageBackground source={require("../assets/servico.png")} style={{ width: 150, height: 115 }} >
                                             <Text style={styles.text}>Serviços</Text>
@@ -104,12 +100,12 @@ const CriarServico = ({ navigation }) => {
 const styles = StyleSheet.create({
     ServicoConteiner: {
         width:'80%',
-        borderWidth: 1.2,
         borderRadius: 5,
         padding: 5,
         fontSize: 10,
         backgroundColor: "#D3E5ED",
         marginBottom: 10,
+        padding:10
 
     },
     servicoText: {
