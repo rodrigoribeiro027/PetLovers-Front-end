@@ -85,7 +85,7 @@ const CriarServico = ({ navigation }) => {
                             <View style={styles.ServicoConteiner} key={oferta._id}>
                                 <View style={styles.servicoText} >
                                     <Text style={styles.servicoTexto}>{oferta.nome}</Text>
-                                    <Text style={styles.servicoTexto}>{oferta.preco}</Text>
+                                    <Text style={styles.servicoTexto}>R$ {oferta.preco}</Text>
                                 </View>
                                 <Text style={styles.servicoTexto}>
                                     Descrição: {oferta.descricao}</Text>
