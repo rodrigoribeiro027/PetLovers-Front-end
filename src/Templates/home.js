@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
         fontSize: 10,
         backgroundColor: "#D3E5ED",
         height: 150,
-        marginTop: 50
+        marginTop: 20
     },
     options: {
         display: 'flex',
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
         fontFamily: "Inter",
         fontWeight: 800,
         fontSize: 30,
-        marginTop: 50,
+        marginTop: 20,
     },
     container: {
         alignItems: "center",

@@ -130,7 +130,9 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         fontSize: 10,
         height: 100,
-        marginTop: 15
+        marginTop: 15,
+        paddingLeft:10,
+        paddingRight:10
     },
     imagenUser: {
         height: 100,

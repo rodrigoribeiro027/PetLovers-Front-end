@@ -1,51 +1,53 @@
 
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, TextInput
+    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, TextInput,Image,ScrollView,
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
-import stylesDefault from "../styles"
-import DropDownPicker from 'react-native-dropdown-picker';
+import { getStorageItem } from '../functions/encryptedStorageFunctions.js';
+import axios from 'axios';
+
 
 const HistoricoAgendamento = ({ navigation }) => {
-    const [items, setItems] = useState([
-        { label: 'Selecionar Pet', value: 'Selecionar Pet', disabled: true },
-        { label: 'bolinha', value: 'pequeno' },
-        { label: 'Romeu', value: 'medio' },
-    ]);
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
+    const [pets, setPets] = useState([]);
+
+    const buscarPets = async () => {
+        const token = await getStorageItem('token');
+        axios.get('https://pet-lovers-back-end.vercel.app/pet/buscar-pets-usuario', { headers: { Authorization: token } }).then((res) => {
+            setPets(res.data);
+            console.log(res.data)
+        }).catch(error => {
+            console.error('Erro', error.response)
+        })
+    }
+
+
+    useEffect(() => {
+        buscarPets()
+    }, [])
 
     return (
         <>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'position'}>
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                    <View style={{ ...stylesDefault.container }}>
-                        <StatusBar />
-                        <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Home")} >
-                            <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
-                        </TouchableOpacity>
-                        <Text style={styles.TextoCentral}>Historico de Agendamento</Text>
-                        <DropDownPicker
-                            placeholder='Tamanho do Pet'
-                            open={open}
-                            value={value}
-                            items={items}
-                            setOpen={setOpen}
-                            setValue={setValue}
-                            setItems={setItems}
-                            dropDownContainerStyle={styles.DropDown}
-                            style={{ ...stylesDefault.input, marginLeft: 20, borderWidth: 0 }}
-                        />
-                        <TouchableOpacity style={styles.containerHistorico} onPress={() => navigation.navigate("HistoricoPet")} >
-                            <Text style={styles.PetHistorico}>Registro:</Text>
-                            <Text style={styles.PetHistorico}>10/08/2023</Text>
-                        </TouchableOpacity>
+            <ScrollView>
+            <Text style={styles.titulo}>Listagem dos Pets</Text>
+            <Text style={styles.selecione}>Selecione um pet para ver o Historico</Text>
+            {
+                    pets.map((pet) => (
+            <TouchableOpacity  key={pet._id} onPress={() => navigation.navigate("PetHistoricoID")}>
+                <View style={styles.item} key={pet._id}>
+                    <Image  style={styles.ifImage} source={{uri:pet.upload.link}}></Image>
+                    <View style={{ flex: 1 }}>
+                        <Text>Nome: {pet.nome ? pet.nome : 'Não informado'}</Text>
                     </View>
-                </TouchableWithoutFeedback>
+                </View>
+            </TouchableOpacity>
+            ))
+        }
+            </ScrollView>
             </KeyboardAvoidingView>
         </>
     )
@@ -53,6 +55,16 @@ const HistoricoAgendamento = ({ navigation }) => {
 
 
 const styles = StyleSheet.create({
+    titulo: {
+        textAlign: "center",
+        fontSize: 30,
+        marginTop:10
+    },
+    selecione: {
+        textAlign: "center",
+        fontSize: 18,
+        marginTop:10
+    },
     TextoCentral: {
         fontWeight: 800,
         fontSize: 30,
@@ -91,8 +103,37 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginTop: 20,
-    }
+    },
+    item: {
+        backgroundColor: '#FFF',
+        padding: 15,
+        borderRadius: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginTop: 20,
+        marginHorizontal: 15
 
+    },
+    itemLeft: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        flexWrap: 'wrap'
+    },
+    ifNotImage: {
+        width: 50,
+        height: 50,
+        backgroundColor: 'blue',
+        opacity: 0.4,
+        borderRadius: 5,
+        marginRight: 15,
+    },
+    ifImage: {
+        width: 50,
+        height: 50,
+        borderRadius: 5,
+        marginRight: 15,
+    },
 });
 
 export default HistoricoAgendamento;
