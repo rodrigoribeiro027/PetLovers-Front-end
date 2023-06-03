@@ -4,10 +4,10 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, TextInput,Image,ScrollView,
+    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, TextInput, Image, ScrollView,
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
-import { getStorageItem } from '../functions/encryptedStorageFunctions.js';
+import { getStorageItem, storageItem } from '../functions/encryptedStorageFunctions.js';
 import axios from 'axios';
 
 
@@ -16,9 +16,8 @@ const HistoricoAgendamento = ({ navigation }) => {
 
     const buscarPets = async () => {
         const token = await getStorageItem('token');
-        axios.get('https://pet-lovers-back-end.vercel.app/pet/buscar-pets-usuario', { headers: { Authorization: token } }).then((res) => {
+        axios.get('https://pet-lovers-back-end.vercel.app/pet/buscar-pets-usuario', { headers: { Authorization: token } }).then(async (res) => {
             setPets(res.data);
-            console.log(res.data)
         }).catch(error => {
             console.error('Erro', error.response)
         })
@@ -28,26 +27,34 @@ const HistoricoAgendamento = ({ navigation }) => {
     useEffect(() => {
         buscarPets()
     }, [])
+    const selecionarPet = async (id) => {
+        try {
+            await storageItem('pet',id)
+            navigation.navigate('PetHistoricoID')
+        } catch (error) {
+            console.error('Erro', error.response)
+        }
+    }
 
     return (
         <>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'position'}>
-            <ScrollView>
-            <Text style={styles.titulo}>Listagem dos Pets</Text>
-            <Text style={styles.selecione}>Selecione um pet para ver o Historico</Text>
-            {
-                    pets.map((pet) => (
-            <TouchableOpacity  key={pet._id} onPress={() => navigation.navigate("PetHistoricoID")}>
-                <View style={styles.item} key={pet._id}>
-                    <Image  style={styles.ifImage} source={{uri:pet.upload.link}}></Image>
-                    <View style={{ flex: 1 }}>
-                        <Text>Nome: {pet.nome ? pet.nome : 'Não informado'}</Text>
-                    </View>
-                </View>
-            </TouchableOpacity>
-            ))
-        }
-            </ScrollView>
+                <ScrollView>
+                    <Text style={styles.titulo}>Listagem dos Pets</Text>
+                    <Text style={styles.selecione}>Selecione um pet para ver o Historico</Text>
+                    {
+                        pets.map((pet) => (
+                            <TouchableOpacity key={pet._id} onPress={() =>selecionarPet(pet._id) }>
+                                <View style={styles.item} key={pet._id}>
+                                    <Image style={styles.ifImage} source={{ uri: pet.upload.link }}></Image>
+                                    <View style={{ flex: 1 }}>
+                                        <Text>{pet.nome ? pet.nome : 'Não informado'}</Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                        ))
+                    }
+                </ScrollView>
             </KeyboardAvoidingView>
         </>
     )
@@ -58,12 +65,12 @@ const styles = StyleSheet.create({
     titulo: {
         textAlign: "center",
         fontSize: 30,
-        marginTop:10
+        marginTop: 10
     },
     selecione: {
         textAlign: "center",
         fontSize: 18,
-        marginTop:10
+        marginTop: 10
     },
     TextoCentral: {
         fontWeight: 800,
