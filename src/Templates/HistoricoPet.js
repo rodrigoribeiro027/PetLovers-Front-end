@@ -1,86 +1,85 @@
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
+const HistoricoPet = () => {
+    const [isCollapsed, setCollapsed] = useState(true);
 
-import {
-    StyleSheet,
-    Text,
-    View,
-    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, TextInput, ScrollView,
-} from 'react-native';
-import StatusBar from '../components/StatusBar.js';
-import stylesDefault from "../styles"
-
-const HistoricoPet = ({ navigation }) => {
+    const toggleCollapse = () => {
+        setCollapsed(!isCollapsed);
+    };
 
     return (
-        <>
-            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'position'}>
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                    <View style={{ ...stylesDefault.container }}>
-                        <StatusBar />
-                        <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Home")} >
-                            <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
-                        </TouchableOpacity>
-                        <Text style={styles.TextoCentral}>Registro 10/08/2023</Text>
-                        <View style={styles.containerHistorico}>
-                            <Text style={styles.PetHistorico}>Diagnostico:</Text>
-                            <View style={styles.caixaTexto}>
-                                <Text style={styles.TextoDescricao}>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor</Text>
-                            </View>
-                            <Text style={styles.PetHistorico}>Diagnostico: 20/10/2000</Text>
-                            <Text style={styles.PetHistorico}>Data do Tratamento:</Text>
-                            <View style={styles.caixaTexto}>
-                                <Text style={styles.TextoDescricao}>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor</Text>
-                            </View>
-                            <Text style={styles.PetHistorico}>Dia Do Diagnostico: 20/10/2000</Text>
-                        </View>
-                    </View>
-                </TouchableWithoutFeedback>
-            </KeyboardAvoidingView>
-        </>
-    )
+        <View style={styles.container}>
+            <Text style={styles.header}>Registro 10/08/2023</Text>
+            <View style={styles.historicoContainer}>
+                <Text style={styles.historicoItem}>Diagnóstico:</Text>
+                <View style={styles.caixaTexto}>
+                    <Text style={styles.textoDescricao}>
+                        Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor
+                    </Text>
+                </View>
+                <Text style={styles.historicoItem}>Diagnóstico: 20/10/2000</Text>
+                <Text style={styles.historicoItem}>Data do Tratamento:</Text>
+                <View style={styles.caixaTexto}>
+                    <Text style={styles.textoDescricao}>
+                        Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor
+                    </Text>
+                </View>
+                <Text style={styles.historicoItem}>Dia Do Diagnóstico: 20/10/2000</Text>
+            </View>
+
+
+        </View>
+    );
 };
 
-
 const styles = StyleSheet.create({
-    TextoCentral: {
-        fontWeight: 700,
-        fontSize: 37,
-        marginTop: 15
+    container: {
+        flex: 1,
+        padding: 20,
     },
-    PetHistorico: {
+    header: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    historicoContainer: {
+        backgroundColor: '#399fff',
+        padding: 10,
+        borderRadius: 10,
+        marginBottom: 10,
+    },
+    historicoItem: {
         color: '#FFF',
         fontSize: 17,
-        padding: 2
-    },
-    buttonDefaultHist: {
-        width: '90%',
-        marginTop: '5%',
-        backgroundColor: "#399fff",
-        height: 42,
-        justifyContent: 'center',
-        alignItems: "center",
-        borderRadius: 5
-    },
-    containerHistorico: {
-        width: "96%",
-        backgroundColor: "#399fff",
-        padding: 4,
-        borderRadius: 10,
-        flexDirection: 'column',
-        marginTop: 10,
+        marginBottom: 5,
     },
     caixaTexto: {
-        width: '100%',
-        alignItems: 'center',
-        backgroundColor: "#FFFF",
-        padding: 4,
-        borderRadius: 5
+        backgroundColor: '#FFFF',
+        padding: 10,
+        borderRadius: 5,
     },
-    TextoDescricao: {
-        color: 'black',
-        fontSize: 18
-    }
-
+    textoDescricao: {
+        fontSize: 18,
+    },
+    button: {
+        backgroundColor: '#399fff',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    buttonText: {
+        color: '#FFF',
+        fontSize: 16,
+    },
+    collapsibleContent: {
+        backgroundColor: '#EEE',
+        padding: 10,
+        marginTop: 10,
+        borderRadius: 5,
+    },
 });
 
 export default HistoricoPet;
