@@ -45,7 +45,7 @@ const PetHistoricoID = () => {
             <ScrollView>
                 <Text style={styles.titulo}>Historico do Pet</Text>
                 {historico.map((pet, index) => (
-                    <View key={pet._id} style={{ flex: 1 }}>
+                    <View key={pet._id} style={{ flex: 1, marginVertical:10 }}>
                         <TouchableOpacity style={styles.registro} onPress={() => toggleCollapse(index)}>
                             <Text style={styles.buttonText}>Registro: {formatDate(pet?.data_registro)}</Text>
                         </TouchableOpacity>
@@ -53,8 +53,8 @@ const PetHistoricoID = () => {
                             <View style={styles.containerHistorico}>
                                 <Text style={styles.PetHistorico}>Nome: {pet.diagnostico ? pet.diagnostico.diagnostico : 'Não informado'}</Text>
                                 <Text style={styles.PetHistorico}>Registro: {pet.data_registro ? pet.data_registro : 'Não informado'}</Text>
-                                <Text style={styles.PetHistorico}>Diagnóstico: {pet.diagnostico ? pet.diagnostico.descricao : 'Não informado'}</Text>
-                                <Text style={styles.PetHistorico}>Tratamento: {pet.diagnostico ? pet.diagnostico.tratamento : 'Não informado'}</Text>
+                                <Text style={styles.PetHistorico}>Diagnóstico: {pet.diagnostico ? pet.diagnostico?.descricao : 'Não informado'}</Text>
+                                <Text style={styles.PetHistorico}>Tratamento: {pet.tratamento ? pet.tratamento?.tratamento : 'Não informado'}</Text>
                             </View>
                         )}
                     </View>
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         flexDirection: 'column',
-        marginTop: 10,
+        marginTop: 5,
         width: '90%',
         marginLeft: 'auto',
         marginRight: 'auto',
