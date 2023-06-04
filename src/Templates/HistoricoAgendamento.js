@@ -9,6 +9,7 @@ import {
 import StatusBar from '../components/StatusBar.js';
 import { getStorageItem, storageItem } from '../functions/encryptedStorageFunctions.js';
 import axios from 'axios';
+import styleDefault from "../styles";
 
 
 const HistoricoAgendamento = ({ navigation }) => {
@@ -40,6 +41,9 @@ const HistoricoAgendamento = ({ navigation }) => {
         <>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'position'}>
                 <ScrollView>
+                <TouchableOpacity style={styleDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Home")} >
+                            <Text style={styleDefault.buttonTextDefault}>Voltar</Text>
+                </TouchableOpacity>
                     <Text style={styles.titulo}>Listagem dos Pets</Text>
                     <Text style={styles.selecione}>Selecione um pet para ver o Historico</Text>
                     {

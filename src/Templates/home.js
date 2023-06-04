@@ -88,7 +88,7 @@ const Home = ({ navigation }) => {
                                     <TouchableOpacity onPress={() => navigation.navigate('HistoricoAgendamento')} >
                                         <View style={styles.container}>
                                             <ImageBackground source={require("../assets/historico-medico.png")} style={{ width: 150, height: 115 }} >
-                                                <Text style={styles.text}>histórico medico </Text>
+                                                <Text style={styles.text}>Histórico medico </Text>
                                             </ImageBackground>
                                         </View>
                                     </TouchableOpacity>

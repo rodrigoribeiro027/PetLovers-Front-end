@@ -3,8 +3,10 @@ import { StyleSheet, Text, View, TouchableOpacity, KeyboardAvoidingView, Keyboar
 import axios from 'axios';
 import { getStorageItem } from '../functions/encryptedStorageFunctions';
 import { COLORS } from '../colors';
+import styleDefault from "../styles";
 
-const PetHistoricoID = () => {
+
+const PetHistoricoID = ({ navigation }) => {
     const [historico, setHistorico] = useState([]);
 
     const toggleCollapse = (index) => {
@@ -15,9 +17,14 @@ const PetHistoricoID = () => {
         });
     };
 
-    const formatDate = (data) => {
-        const [formated,] = new Date(data).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" }).split(' ')
-        return formated;
+    const formatDate = (data, time=false) => {
+        if(time){
+            const [formated,] = new Date(data).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" }).split(',');
+            return formated
+        }else{
+            const [formated,] = new Date(data).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" }).split(' ');
+            return formated;
+        }
     }
 
     const buscarHistoricos = async () => {
@@ -43,6 +50,9 @@ const PetHistoricoID = () => {
     return (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'position'}>
             <ScrollView>
+            <TouchableOpacity style={styleDefault.buttonVoltarDefault} onPress={() => navigation.navigate("HistoricoAgendamento")} >
+                            <Text style={styleDefault.buttonTextDefault}>Voltar</Text>
+                </TouchableOpacity>
                 <Text style={styles.titulo}>Historico do Pet</Text>
                 {historico.map((pet, index) => (
                     <View key={pet._id} style={{ flex: 1, marginVertical:10 }}>
@@ -52,7 +62,7 @@ const PetHistoricoID = () => {
                         {!pet.isCollapsed && (
                             <View style={styles.containerHistorico}>
                                 <Text style={styles.PetHistorico}>Nome: {pet.diagnostico ? pet.diagnostico.diagnostico : 'Não informado'}</Text>
-                                <Text style={styles.PetHistorico}>Registro: {pet.data_registro ? pet.data_registro : 'Não informado'}</Text>
+                                <Text style={styles.PetHistorico}>Registro: {pet.data_registro ? formatDate(pet?.data_registro, time=true) : 'Não informado'}</Text>
                                 <Text style={styles.PetHistorico}>Diagnóstico: {pet.diagnostico ? pet.diagnostico?.descricao : 'Não informado'}</Text>
                                 <Text style={styles.PetHistorico}>Tratamento: {pet.tratamento ? pet.tratamento?.tratamento : 'Não informado'}</Text>
                             </View>
