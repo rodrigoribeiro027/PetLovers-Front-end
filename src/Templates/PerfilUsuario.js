@@ -47,7 +47,7 @@ const PerfilUsuario = ({ navigation }) => {
                             <View style={styles.PerfilContainer}>
                                 <View style={styles.linha}>
                                     <Image style={styles.imagenUser} source={{uri: usuario.upload?.link}} />
-                                    <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+                                    <TouchableOpacity onPress={() => console.log("config")}>
                                     <Icon name="cog" style={stylesDefault.voltar} size={45} color="black" />
                                     </TouchableOpacity>
                                 </View>
@@ -61,7 +61,7 @@ const PerfilUsuario = ({ navigation }) => {
                                     <Text>Telefone: {usuario.telefone?.numero}</Text>
                                 </View>
                                 <View>
-                                    <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+                                    <TouchableOpacity onPress={() => console.log("edit")}>
                                         <Icon name="pencil" style={stylesDefault.voltar} size={25} color="black" /> 
                                     </TouchableOpacity>
                                 </View>
@@ -75,7 +75,7 @@ const PerfilUsuario = ({ navigation }) => {
                                     <Text>Número: {usuario.endereco?.numero}</Text>
                                 </View>
                                 <View>
-                                    <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+                                    <TouchableOpacity onPress={() => console.log("edit")}>
                                         <Icon name="pencil" style={stylesDefault.voltar} size={25} color="black" /> 
                                     </TouchableOpacity>
                                 </View>
@@ -98,9 +98,8 @@ const styles = StyleSheet.create({
         width: '90%',
         borderRadius: 5,
         fontSize: 10,
-        marginTop: 10,
         backgroundColor:'#D3E5ED',
-        marginBottom:10,
+        marginVertical:20,
         padding:5
     },
     linha2: {
@@ -130,7 +129,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         fontSize: 10,
         height: 100,
-        marginTop: 15,
+        marginVertical:40,
         paddingLeft:10,
         paddingRight:10
     },
@@ -143,8 +142,7 @@ const styles = StyleSheet.create({
     },
     TextoCentral: {
         fontWeight: 500,
-        fontSize: 25,
-        marginTop: 5
+        fontSize: 25
     },
     bordaPadrao: {
         flexDirection: 'row',
