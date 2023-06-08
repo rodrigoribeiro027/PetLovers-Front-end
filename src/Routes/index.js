@@ -85,7 +85,7 @@ function HomeTab() {
                 tabBarInactiveTintColor: 'black',
             })}>
                 <Tab.Screen name="Home" component={Home} />
-                <Tab.Screen name="HistoricoAgendamento" component={HistoricoAgendamento} />
+                <Tab.Screen name="historicoAgendamento" component={HistoricoAgendamento} />
                 <Tab.Screen name="PerfilUsuario" component={PerfilUsuario} />
             </Tab.Navigator>
             <Modal

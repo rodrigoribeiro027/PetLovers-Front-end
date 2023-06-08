@@ -90,11 +90,6 @@ const ListagemAgendamentoFunc = ({ navigation }) => {
                             <View style={{ flex: 1 }}>
                                 <Text >Status: {agendamento.status}</Text>
                             </View>
-
-                            <View style={{ flex: 1 }}>
-                                <Text >Status: {agendamento.complemento}</Text>
-                            </View>
-
                         </View>
                     </View>
                 </TouchableOpacity>
