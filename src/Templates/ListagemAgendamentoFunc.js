@@ -73,8 +73,6 @@ const ListagemAgendamentoFunc = ({ navigation }) => {
             {agendamentos.map(agendamento => (
                 <TouchableOpacity onPress={() => selecionarAgendamento(agendamento._id)} >
                     <View style={styles.item} key={agendamento._id} >
-                        {/* {usuario.upload ? (<Image source={{uri:usuario.upload?.link}} style={styles.ifImage}></Image>): (<View style={styles.ifNotImage}></View>)} */}
-
                         <View style={{ flex: 1 }}>
 
                             <View style={{ flex: 1 }}>
@@ -93,8 +91,11 @@ const ListagemAgendamentoFunc = ({ navigation }) => {
                                 <Text >Status: {agendamento.status}</Text>
                             </View>
 
-                        </View>
+                            <View style={{ flex: 1 }}>
+                                <Text >Status: {agendamento.complemento}</Text>
+                            </View>
 
+                        </View>
                     </View>
                 </TouchableOpacity>
             ))}
