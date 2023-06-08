@@ -24,10 +24,6 @@ const HistoricoAgendamento = ({ navigation }) => {
         })
     }
 
-
-    useEffect(() => {
-        buscarPets()
-    }, [])
     const selecionarPet = async (id) => {
         try {
             await storageItem('pet',id)
@@ -36,6 +32,10 @@ const HistoricoAgendamento = ({ navigation }) => {
             console.error('Erro', error.response)
         }
     }
+
+    useEffect(() => {
+        buscarPets()
+    }, [])
 
     return (
         <>

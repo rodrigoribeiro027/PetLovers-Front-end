@@ -50,7 +50,7 @@ const AgendarConsulta = ({ navigation }) => {
         setDate(currentDate)
         let tempDate = new Date(currentDate);
         let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
-        let fTime = 'Marcado: ' + tempDate.getHours() + ' Horas e ' + tempDate.getMinutes() + ' Minutos: ';
+        let fTime = 'Marcado: ' + tempDate.getHours() + ' Horas e ' + tempDate.getMinutes() + ' Minutos';
         setText(fDate)
         setText2(fTime)
     }
