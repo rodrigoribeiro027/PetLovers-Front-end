@@ -1,21 +1,20 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-    Image, Button,
+    Button,
     StyleSheet,
     Text,
     View, TextInput,
-    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, Icon, ScrollView,
+    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, Icon, ScrollView, ToastAndroid
 } from 'react-native';
-import DropDownPicker from 'react-native-dropdown-picker';
-
 import * as Animatable from 'react-native-animatable'
-
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import StatusBar from '../components/StatusBar.js';
 import stylesDefault from "../styles"
-
+import { Picker } from '@react-native-picker/picker';
+import { getStorageItem, storageItem } from '../functions/encryptedStorageFunctions.js';
+import axios from 'axios';
+import Toast from 'react-native-toast-message';
 
 const AgendarConsulta = ({ navigation }) => {
     const [date, setDate] = useState(new Date());
@@ -23,16 +22,28 @@ const AgendarConsulta = ({ navigation }) => {
     const [show, setShow] = useState(false);
     const [text, setText] = useState('Data');
     const [text2, setText2] = useState('Hora:');
-    const [open, setOpen] = React.useState(false);
-    const [value, setValue] = React.useState(null);
-    const [items, setItems] = React.useState([
-        { label: 'Tamanho do Pet', value: 'Tamanho do Pet', disabled: true },
-        { label: 'Pequeno', value: 'pequeno' },
-        { label: 'Médio', value: 'medio' },
-        { label: 'Grande', value: 'grande' }
-    ]);
+    const [selectedValue, setSelectedValue] = useState("");
+    const [pets, setPets] = useState([])
+    const [tipo_Consulta, setTipo_Consulta] = useState("");
+    const [complemento, setComplemento] = useState("");
+    
+    const setToast = (msg) => {
+        ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
+    }
 
+    const buscarPets = async () => {
+        const token = await getStorageItem('token');
+        axios.get('https://pet-lovers-back-end.vercel.app/pet/buscar-pets-usuario', { headers: { Authorization: token } }).then(async (res) => {
+            setPets(res.data);
+        }).catch(error => {
+            console.error('Erro', error.response)
+        })
+    }
 
+    useEffect(() => {
+        buscarPets()
+    }, [])
+    
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
@@ -42,13 +53,38 @@ const AgendarConsulta = ({ navigation }) => {
         let fTime = 'Marcado: ' + tempDate.getHours() + ' Horas e ' + tempDate.getMinutes() + ' Minutos: ';
         setText(fDate)
         setText2(fTime)
-        console.log(fDate + ' (' + fTime + ')')
     }
 
     const showMode = (currentMode) => {
         setShow(true)
         setMode(currentMode);
     }
+
+    const cadastrarAgendamento = async () => {
+        const token = await getStorageItem('token');
+        const data = {
+            tipo_Consulta: tipo_Consulta,
+            complemento: complemento,
+            id_pet: selectedValue,
+            data_agendamento: text,
+            horario: text2,
+        };
+        axios.post('https://pet-lovers-back-end.vercel.app/agendamento/cadastrar', data, { headers: { Authorization: token } })
+            .then(response => {
+                console.log('Consulta cadastrada com sucesso:', response.data);
+                Toast.show({
+                    type: 'success',
+                    text1: 'Cadastro Realizado com Sucesso.',
+                });
+            })
+            .catch(error => {
+                console.error('Erro ao cadastrar consulta:', error.response);
+                Toast.show({
+                    type: 'error',
+                    text1: 'Ocorreu algum problema',
+                });
+            });
+    };
 
     return (
         <>
@@ -64,7 +100,8 @@ const AgendarConsulta = ({ navigation }) => {
 
                             <View style={styles.espacoagendamento}></View>
 
-                            <TextInput placeholder='tipo de Consulta'
+                            <TextInput placeholder='Tipo de Consulta' value={tipo_Consulta}
+                                onChangeText={setTipo_Consulta}
                                 style={styles.input}>
                             </TextInput>
                             <TextInput
@@ -78,20 +115,9 @@ const AgendarConsulta = ({ navigation }) => {
                                     paddingTop: 8,
                                     textAlignVertical: 'top'
                                 }}
+                                value={complemento}
+                                onChangeText={setComplemento}
                             />
-
-                            <DropDownPicker
-                                placeholder='Selecione seu Pet'
-                                open={open}
-                                value={value}
-                                items={items}
-                                setOpen={setOpen}
-                                setValue={setValue}
-                                setItems={setItems}
-                                dropDownContainerStyle={styles.dropDownContainer}
-                                style={{ ...stylesDefault.input, marginLeft: 20, borderWidth: 0, marginBottom: 40 }}
-                            />
-
                             <View style={styles.DataButon}>
                                 <Button title='Data da Consulta' onPress={() => showMode('date')} />
                                 <Text style={styles.TextDataHora}>{text}</Text>
@@ -103,7 +129,17 @@ const AgendarConsulta = ({ navigation }) => {
                                     is24Hour={true} display='default' onChange={onChange}
                                 />
                             )}
-                            <TouchableOpacity style={styles.AgendamentoButon} >
+                            <Picker
+                                selectedValue={selectedValue}
+                                style={{ ...stylesDefault.input, borderWidth: 0, marginBottom: 40 }}
+                                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue._id)}
+                            >
+                                {pets.map((pet) => (
+                                    <Picker.Item key={pet.id} label={pet.nome} value={pet} />
+                                ))}
+                            </Picker>
+
+                            <TouchableOpacity style={styles.AgendamentoButon} onPress={cadastrarAgendamento} >
                                 <Text style={styles.AgendamentoButonText} onPress={() => navigation.navigate("Home")}>Agendar</Text>
                             </TouchableOpacity>
 

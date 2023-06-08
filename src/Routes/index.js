@@ -105,7 +105,7 @@ function HomeTab() {
                             <TouchableOpacity style={{ marginBottom: 20 }} onPress={() => navigateToStackScreen('CadastroFunc')}>
                                 <Text style={{ textAlign: 'center' }}>Cadastro Funcionario</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigateToStackScreen('AgendarConsulta')}>
+                            <TouchableOpacity onPress={() => navigateToStackScreen('HistoricoPet')}>
                                 <Text style={{ textAlign: 'center' }}>Cadastro 4</Text>
                             </TouchableOpacity>
                         </View>
