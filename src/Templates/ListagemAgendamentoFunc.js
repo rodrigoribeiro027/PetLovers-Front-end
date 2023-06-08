@@ -27,11 +27,12 @@ const ListagemAgendamentoFunc = ({ navigation }) => {
             </TouchableOpacity>
 
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'padding'} style={{ paddingTop: 30 }}>
-                <Text style={styles.titulo}>Listagem dos Usuarios</Text>
+                <Text style={styles.titulo}>Agendamentos</Text>
             </KeyboardAvoidingView>
             <StatusBar />
 
-            <View style={styles.item}>
+            <TouchableOpacity  onPress={() => navigation.navigate("HistoricoPet")} >
+            <View style={styles.item} >
                     {/* {usuario.upload ? (<Image source={{uri:usuario.upload?.link}} style={styles.ifImage}></Image>): (<View style={styles.ifNotImage}></View>)} */}
                     
                     <View style={{ flex: 1 }}>
@@ -50,6 +51,7 @@ const ListagemAgendamentoFunc = ({ navigation }) => {
 
                     > </Icon.Button>
                 </View>
+                </TouchableOpacity>
 
         </ScrollView>
     )

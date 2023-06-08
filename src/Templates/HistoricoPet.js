@@ -9,7 +9,7 @@ import stylesDefault from "../styles"
 
 
 
-const HistoricoPet = () => {
+const HistoricoPet = ({ navigation }) => {
     const [isCollapsed, setCollapsed] = useState(true);
 
     const toggleCollapse = () => {
@@ -20,35 +20,38 @@ const HistoricoPet = () => {
         <>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'position'}>
                 <ScrollView>
+                    <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("ListagemAgendamentoFunc")} >
+                        <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
+                    </TouchableOpacity>
                     <View style={styles.container}>
                         <Text style={styles.titulo}>Fazer Diagnóstico</Text>
                         <View style={styles.historicoContainer}>
                             <Text style={styles.historicoItem}>Diagnóstico:</Text>
                             <TextInput
-                                    placeholder='Diagnóstico'
-                                    multiline={true}
-                                    maxLength={300}
-                                    numberOfLines={5}
-                                    style={{
-                                        ...stylesDefault.input,
-                                        height: 150,
-                                        paddingTop: 8,
-                                        textAlignVertical: 'top'
-                                    }}
-                                />
+                                placeholder='Diagnóstico'
+                                multiline={true}
+                                maxLength={300}
+                                numberOfLines={5}
+                                style={{
+                                    ...stylesDefault.input,
+                                    height: 150,
+                                    paddingTop: 8,
+                                    textAlignVertical: 'top'
+                                }}
+                            />
                             <Text style={styles.historicoItem}>Tratamento:</Text>
                             <TextInput
-                                    placeholder='Tratamento'
-                                    multiline={true}
-                                    maxLength={300}
-                                    numberOfLines={5}
-                                    style={{
-                                        ...stylesDefault.input,
-                                        height: 150,
-                                        paddingTop: 8,
-                                        textAlignVertical: 'top'
-                                    }}
-                                />
+                                placeholder='Tratamento'
+                                multiline={true}
+                                maxLength={300}
+                                numberOfLines={5}
+                                style={{
+                                    ...stylesDefault.input,
+                                    height: 150,
+                                    paddingTop: 8,
+                                    textAlignVertical: 'top'
+                                }}
+                            />
                             <TouchableOpacity style={styles.AgendamentoButon} >
                                 <Text style={styles.AgendamentoButonText} onPress={() => navigation.navigate("Home")}>Agendar</Text>
                             </TouchableOpacity>
