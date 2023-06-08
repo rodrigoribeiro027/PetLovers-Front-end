@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, TextInput, Image, ScrollView,
+} from 'react-native';
+import stylesDefault from "../styles"
+
+
 
 const HistoricoPet = () => {
     const [isCollapsed, setCollapsed] = useState(true);
@@ -9,31 +17,70 @@ const HistoricoPet = () => {
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.header}>Registro 10/08/2023</Text>
-            <View style={styles.historicoContainer}>
-                <Text style={styles.historicoItem}>Diagnóstico:</Text>
-                <View style={styles.caixaTexto}>
-                    <Text style={styles.textoDescricao}>
-                        Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor
-                    </Text>
-                </View>
-                <Text style={styles.historicoItem}>Diagnóstico: 20/10/2000</Text>
-                <Text style={styles.historicoItem}>Data do Tratamento:</Text>
-                <View style={styles.caixaTexto}>
-                    <Text style={styles.textoDescricao}>
-                        Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor
-                    </Text>
-                </View>
-                <Text style={styles.historicoItem}>Dia Do Diagnóstico: 20/10/2000</Text>
-            </View>
-
-
-        </View>
+        <>
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'position'}>
+                <ScrollView>
+                    <View style={styles.container}>
+                        <Text style={styles.titulo}>Fazer Diagnóstico</Text>
+                        <View style={styles.historicoContainer}>
+                            <Text style={styles.historicoItem}>Diagnóstico:</Text>
+                            <TextInput
+                                    placeholder='Diagnóstico'
+                                    multiline={true}
+                                    maxLength={300}
+                                    numberOfLines={5}
+                                    style={{
+                                        ...stylesDefault.input,
+                                        height: 150,
+                                        paddingTop: 8,
+                                        textAlignVertical: 'top'
+                                    }}
+                                />
+                            <Text style={styles.historicoItem}>Tratamento:</Text>
+                            <TextInput
+                                    placeholder='Tratamento'
+                                    multiline={true}
+                                    maxLength={300}
+                                    numberOfLines={5}
+                                    style={{
+                                        ...stylesDefault.input,
+                                        height: 150,
+                                        paddingTop: 8,
+                                        textAlignVertical: 'top'
+                                    }}
+                                />
+                            <TouchableOpacity style={styles.AgendamentoButon} >
+                                <Text style={styles.AgendamentoButonText} onPress={() => navigation.navigate("Home")}>Agendar</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </ScrollView>
+            </KeyboardAvoidingView>
+        </>
     );
 };
 
 const styles = StyleSheet.create({
+    AgendamentoButon: {
+        width: '100%',
+        marginTop: '2%',
+        backgroundColor: "#399fff",
+        height: 42,
+        justifyContent: 'center',
+        alignItems: "center",
+        borderRadius: 5
+    },
+    AgendamentoButonText: {
+        color: "#FFF",
+        fontSize: 17,
+        fontWeight: 'bold'
+
+    },
+    titulo: {
+        textAlign: "center",
+        fontSize: 30,
+        marginTop: 10
+    },
     container: {
         flex: 1,
         padding: 20,
