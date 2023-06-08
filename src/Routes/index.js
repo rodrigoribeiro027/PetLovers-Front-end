@@ -23,6 +23,7 @@ import CadastrarProduto from '../Templates/CadastrarProduto';
 import { useNavigation } from '@react-navigation/native';
 import stylesDefault from "../styles";
 import PetHistoricoID from '../Templates/PetHistoricoID';
+import ListagemAgendamentoFunc from '../Templates/ListagemAgendamentoFunc';
 
 
 const Tab = createBottomTabNavigator();
@@ -137,6 +138,7 @@ const Routes = () => {
                 <Stack.Screen name="CadastroFunc" component={CadastroFunc} />
                 <Stack.Screen name="CadastrarProduto" component={CadastrarProduto} />
                 <Stack.Screen name="PetHistoricoID" component={PetHistoricoID} />
+                <Stack.Screen name="ListagemAgendamentoFunc" component={ListagemAgendamentoFunc} />
             </Stack.Navigator>
         </NavigationContainer>
     )

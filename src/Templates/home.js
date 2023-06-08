@@ -72,7 +72,7 @@ const Home = ({ navigation }) => {
                             </View>
                             <View style={styles.optionBtn}>
                                 <View>
-                                    <TouchableOpacity onPress={() => navigation.navigate('HistoricoAgendamento')} >
+                                    <TouchableOpacity onPress={() => navigation.navigate('ListagemAgendamentoFunc')} >
                                         <View style={styles.container}>
                                             <ImageBackground source={require("../assets/historico.png")} style={{ width: 150, height: 109 }} >
                                                 <Text style={styles.text2}>Meus Agendamentos</Text>
