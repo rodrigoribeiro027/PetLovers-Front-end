@@ -7,6 +7,8 @@ import { getStorageItem, storageItem } from '../functions/encryptedStorageFuncti
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { Picker } from '@react-native-picker/picker';
 import { useFocusEffect } from '@react-navigation/native';
+import { COLORS } from '../colors.js';
+
 
 const ListagemAgendamentoFunc = ({ navigation }) => {
     const [agendamentos, setAgendamentos] = useState([]);
@@ -15,12 +17,14 @@ const ListagemAgendamentoFunc = ({ navigation }) => {
     const buscarAgendamentos = async () => {
         const token = await getStorageItem("token")
         let url = "https://pet-lovers-back-end.vercel.app/agendamento/buscar";
+
         if (selectedValue === "andamento") {
             url = "https://pet-lovers-back-end.vercel.app/agendamento/buscar-andamento";
         }
         if (selectedValue === "concluido") {
             url = "https://pet-lovers-back-end.vercel.app/agendamento/buscar-concluido";
         }
+
         axios.get(url, { headers: { Authorization: token } }).then(res => {
             console.log(res.data)
             setAgendamentos(res.data);
@@ -53,7 +57,7 @@ const ListagemAgendamentoFunc = ({ navigation }) => {
     );
 
     return (
-        <ScrollView>
+        <ScrollView style={{flex:1}}>
             <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Home")} >
                 <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
             </TouchableOpacity>
@@ -65,7 +69,7 @@ const ListagemAgendamentoFunc = ({ navigation }) => {
 
             <Picker
                 selectedValue={selectedValue}
-                style={{ ...stylesDefault.input, borderWidth: 0, marginBottom: 40 }}
+                style={styles.selectInput}
                 onValueChange={(e) => setSelectedValue(e)}
             >
                 <Picker.Item key={"todos"} label={"Todos"} value={"todos"} />
@@ -112,6 +116,15 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginHorizontal: 15
     },
+    selectInput: {
+        backgroundColor: COLORS.white,
+        width: '90%',
+        padding: 15,
+        borderColor: "#E0E0E0",
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: 20   
+    }
 });
 
 export default ListagemAgendamentoFunc;

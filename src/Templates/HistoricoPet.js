@@ -17,7 +17,7 @@ const HistoricoPet = ({ navigation }) => {
     const [custo, setcusto] = useState();
 
 
-const [agendamento, setAgendamento] = useState('');
+    const [agendamento, setAgendamento] = useState('');
 
     const buscarAgendamento = async () => {
         const token = await getStorageItem('token');
@@ -34,21 +34,21 @@ const [agendamento, setAgendamento] = useState('');
         const id = await getStorageItem('agendamento')
         const id_pet = agendamento.id_pet._id
         const dados = {
-            tratamento:{
-                tratamento:tratamento
+            tratamento: {
+                tratamento: tratamento
             },
-            diagnostico:{
-                diagnostico:diagnostico
+            diagnostico: {
+                diagnostico: diagnostico
             },
-            custo:custo
+            custo: custo
         }
-        axios.post(`https://pet-lovers-back-end.vercel.app/historico/cadastrar/${id_pet}`,dados, { headers: { Authorization: token } }).then(async (res) => {
+        axios.post(`https://pet-lovers-back-end.vercel.app/historico/cadastrar/${id_pet}`, dados, { headers: { Authorization: token } }).then(async (res) => {
             // concluirAgendamento(token,id)
         }).catch(error => {
             console.error('Erro', error.response)
         })
     }
-    const concluirAgendamento = async (token,id) => {
+    const concluirAgendamento = async (token, id) => {
         axios.put(`https://pet-lovers-back-end.vercel.app/agendamento/concluir/${id}`, { headers: { Authorization: token } }).then(async (res) => {
         }).catch(error => {
             console.error(error)
@@ -68,28 +68,24 @@ const [agendamento, setAgendamento] = useState('');
                     <View style={styles.container}>
                         <Text style={styles.titulo}>Fazer Diagnóstico</Text>
                         <View style={styles.item} key={agendamento._id} >
-                        <View style={{ flex: 1 }}>
-
                             <View style={{ flex: 1 }}>
-                                <Text >Tipo de consulta: {agendamento.tipo_Consulta ?  agendamento.tipo_Consulta : "Não informado"}</Text>
-                            </View>
-
-                            <View style={{ flex: 1 }}>
-                                <Text >Data da consulta: {agendamento.data_agendamento} </Text>
-                            </View>
-
-                            <View style={{ flex: 1 }}>
-                                <Text >Horario: {agendamento.horario}</Text>
-                            </View>
-
-                            <View style={{ flex: 1 }}>
-                                <Text >Status: {agendamento.status}</Text>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <Text >Descrição:  {agendamento.complemento}</Text>
+                                <View style={{ flex: 1 }}>
+                                    <Text >Tipo de consulta: {agendamento.tipo_Consulta ? agendamento.tipo_Consulta : "Não informado"}</Text>
+                                </View>
+                                <View style={{ flex: 1 }}>
+                                    <Text >Data da consulta: {agendamento.data_agendamento} </Text>
+                                </View>
+                                <View style={{ flex: 1 }}>
+                                    <Text >Descrição:  {agendamento.complemento}</Text>
+                                </View>
+                                <View style={{ flex: 1 }}>
+                                    <Text >Cliente:  {agendamento.id_usuario.nome}</Text>
+                                </View>
+                                <View style={{ flex: 1 }}>
+                                    <Text >Pet:  {agendamento.id_pet.nome}</Text>
+                                </View>
                             </View>
                         </View>
-                    </View>
                         <View style={styles.historicoContainer}>
                             <Text style={styles.historicoItem}>Diagnóstico:</Text>
                             <TextInput
@@ -125,10 +121,10 @@ const [agendamento, setAgendamento] = useState('');
                                 onChangeText={setTratamento}
                             />
                             <Text style={styles.historicoItem}>Custos do Tratamentos:</Text>
-                            <TextInput  keyboardType={'numeric'} placeholder='Prescrever Custos'  style={styles.input} value={custo}
-                            onChangeText={e => setcusto(e)}>
+                            <TextInput keyboardType={'numeric'} placeholder='Prescrever Custos' style={styles.input} value={custo}
+                                onChangeText={e => setcusto(e)}>
                             </TextInput>
-                            <TouchableOpacity style={styles.AgendamentoButon}  onPress={()=>{Cadastrarhistorico()}}>
+                            <TouchableOpacity style={styles.AgendamentoButon} onPress={() => { Cadastrarhistorico() }}>
                                 <Text style={styles.AgendamentoButonText} onPress={() => navigation.navigate("Home")}>Agendar</Text>
                             </TouchableOpacity>
                         </View>
