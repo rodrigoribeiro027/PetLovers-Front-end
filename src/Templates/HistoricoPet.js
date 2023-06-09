@@ -79,10 +79,10 @@ const HistoricoPet = ({ navigation }) => {
                                     <Text >Descrição:  {agendamento.complemento}</Text>
                                 </View>
                                 <View style={{ flex: 1 }}>
-                                    <Text >Cliente:  {agendamento.id_usuario.nome}</Text>
+                                    <Text >Cliente:  {agendamento.id_usuario?.nome}</Text>
                                 </View>
                                 <View style={{ flex: 1 }}>
-                                    <Text >Pet:  {agendamento.id_pet.nome}</Text>
+                                    <Text >Pet:  {agendamento.id_pet?.nome}</Text>
                                 </View>
                             </View>
                         </View>

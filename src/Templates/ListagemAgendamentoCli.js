@@ -10,23 +10,22 @@ import { useFocusEffect } from '@react-navigation/native';
 import { COLORS } from '../colors.js';
 
 
-const ListagemAgendamentoFunc = ({ navigation }) => {
+const ListagemAgendamentoCli = ({ navigation }) => {
     const [agendamentos, setAgendamentos] = useState([]);
     const [selectedValue, setSelectedValue] = useState("todos");
 
     const buscarAgendamentos = async () => {
-        const token = await getStorageItem("token")
-        let url = "https://pet-lovers-back-end.vercel.app/agendamento/buscar";
+        const token = await getStorageItem("token");
 
-        if (selectedValue === "andamento") {
-            url = "https://pet-lovers-back-end.vercel.app/agendamento/buscar-andamento";
-        }
-        if (selectedValue === "concluido") {
-            url = "https://pet-lovers-back-end.vercel.app/agendamento/buscar-concluido";
-        }
-
-        axios.get(url, { headers: { Authorization: token } }).then(res => {
-            setAgendamentos(res.data);
+        axios.get("https://pet-lovers-back-end.vercel.app/agendamento/buscar-cliente", { headers: { Authorization: token } }).then(res => {
+            let dados = res.data;
+            if (selectedValue === "andamento") {
+                dados = dados.filter(agendamento => agendamento.status === "andamento");
+            }
+            if (selectedValue === "concluido") {
+                dados = dados.filter(agendamento => agendamento.status === "concluido");
+            }
+            setAgendamentos(dados);
         }).catch(error => {
             Toast.show({
                 type: 'error',
@@ -34,15 +33,6 @@ const ListagemAgendamentoFunc = ({ navigation }) => {
             });
             console.error('Erro', error);
         })
-    }
-
-    const selecionarAgendamento = async (id) => {
-        try {
-            await storageItem('agendamento', id);
-            navigation.navigate('HistoricoPet');
-        } catch (error) {
-            console.error('Erro', error.response);
-        }
     }
 
     useEffect(() => {
@@ -56,7 +46,7 @@ const ListagemAgendamentoFunc = ({ navigation }) => {
     );
 
     return (
-        <ScrollView style={{flex:1}}>
+        <ScrollView style={{ flex: 1 }}>
             <TouchableOpacity style={stylesDefault.buttonVoltarDefault} onPress={() => navigation.navigate("Home")} >
                 <Text style={stylesDefault.buttonTextDefault}>Voltar</Text>
             </TouchableOpacity>
@@ -77,24 +67,24 @@ const ListagemAgendamentoFunc = ({ navigation }) => {
             </Picker>
 
             {agendamentos.map(agendamento => (
-                <TouchableOpacity onPress={() => selecionarAgendamento(agendamento._id)} key={agendamento._id}>
-                    <View style={styles.item}>
+
+                <View style={styles.item}>
+                    <View style={{ flex: 1 }}>
                         <View style={{ flex: 1 }}>
-                            <View style={{ flex: 1 }}>
-                                <Text >Tipo de consulta: {agendamento.tipo_Consulta ? agendamento.tipo_Consulta : "Não informado"}</Text>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <Text >Data da consulta: {agendamento.data_agendamento} </Text>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <Text >Horario: {agendamento.horario}</Text>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <Text >Status: {agendamento.status}</Text>
-                            </View>
+                            <Text >Tipo de consulta: {agendamento.tipo_Consulta ? agendamento.tipo_Consulta : "Não informado"}</Text>
+                        </View>
+                        <View style={{ flex: 1 }}>
+                            <Text >Data da consulta: {agendamento.data_agendamento} </Text>
+                        </View>
+                        <View style={{ flex: 1 }}>
+                            <Text >Horario: {agendamento.horario}</Text>
+                        </View>
+                        <View style={{ flex: 1 }}>
+                            <Text >Status: {agendamento.status}</Text>
                         </View>
                     </View>
-                </TouchableOpacity>
+                </View>
+
             ))}
         </ScrollView>
     );
@@ -122,8 +112,8 @@ const styles = StyleSheet.create({
         borderColor: "#E0E0E0",
         marginLeft: 'auto',
         marginRight: 'auto',
-        marginTop: 20   
+        marginTop: 20
     }
 });
 
-export default ListagemAgendamentoFunc;
+export default ListagemAgendamentoCli;

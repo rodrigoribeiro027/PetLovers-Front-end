@@ -14,7 +14,7 @@ import { clearStorageItem, getStorageItem } from '../functions/encryptedStorageF
 
 const Home = ({ navigation }) => {
 
-    const [usuario, setUsuario] = useState();
+    const [acesso, setAcesso] = useState();
 
     const deslogar = async () => {
         const token = await getStorageItem('token');
@@ -27,7 +27,7 @@ const Home = ({ navigation }) => {
 
     const nivelDeAcessoDoUsuario = async () => {
         const acesso = await getStorageItem('acesso');
-        setUsuario(acesso);
+        setAcesso(acesso);
     }
 
     useEffect(()=>{
@@ -72,7 +72,7 @@ const Home = ({ navigation }) => {
                             </View>
                             <View style={styles.optionBtn}>
                                 <View>
-                                    <TouchableOpacity onPress={() => navigation.navigate('ListagemAgendamentoFunc')} >
+                                    <TouchableOpacity onPress={() => acesso != "cliente" ? navigation.navigate('ListagemAgendamentoFunc') : navigation.navigate('ListagemAgendamentoCli')} >
                                         <View style={styles.container}>
                                             <ImageBackground source={require("../assets/historico.png")} style={{ width: 150, height: 109 }} >
                                                 <Text style={styles.text2}>Meus Agendamentos</Text>
@@ -107,7 +107,7 @@ const Home = ({ navigation }) => {
                             </View>
                         </View>
 
-                        {usuario === "admin" && (
+                        {acesso === "admin" && (
                             <>
                                 <View style={styles.HomeContainer}>
                                     <View style={styles.options1}>

@@ -24,6 +24,7 @@ import { useNavigation } from '@react-navigation/native';
 import stylesDefault from "../styles";
 import PetHistoricoID from '../Templates/PetHistoricoID';
 import ListagemAgendamentoFunc from '../Templates/ListagemAgendamentoFunc';
+import ListagemAgendamentoCli from '../Templates/ListagemAgendamentoCli';
 
 
 const Tab = createBottomTabNavigator();
@@ -139,6 +140,7 @@ const Routes = () => {
                 <Stack.Screen name="CadastrarProduto" component={CadastrarProduto} />
                 <Stack.Screen name="PetHistoricoID" component={PetHistoricoID} />
                 <Stack.Screen name="ListagemAgendamentoFunc" component={ListagemAgendamentoFunc} />
+                <Stack.Screen name="ListagemAgendamentoCli" component={ListagemAgendamentoCli} />
             </Stack.Navigator>
         </NavigationContainer>
     )
