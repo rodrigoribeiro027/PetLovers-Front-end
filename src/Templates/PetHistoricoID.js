@@ -65,6 +65,7 @@ const PetHistoricoID = ({ navigation }) => {
                                 <Text style={styles.PetHistorico}>Registro: {pet.data_registro ? formatDate(pet?.data_registro, time=true) : 'Não informado'}</Text>
                                 <Text style={styles.PetHistorico}>Diagnóstico: {pet.diagnostico ? pet.diagnostico?.descricao : 'Não informado'}</Text>
                                 <Text style={styles.PetHistorico}>Tratamento: {pet.tratamento ? pet.tratamento?.tratamento : 'Não informado'}</Text>
+                                <Text style={styles.PetHistorico}>Custo: {pet.custo ? pet.custo?.custo : 'Não informado'}</Text>
                             </View>
                         )}
                     </View>

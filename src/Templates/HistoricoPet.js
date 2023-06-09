@@ -24,11 +24,11 @@ const HistoricoPet = ({ navigation }) => {
         const id = await getStorageItem('agendamento')
         axios.get(`https://pet-lovers-back-end.vercel.app/agendamento/buscar/${id}`, { headers: { Authorization: token } }).then(async (res) => {
             setAgendamento(res.data);
-            console.log(res.data);
         }).catch(error => {
             console.error('Erro', error.response)
         })
     }
+
     const Cadastrarhistorico = async () => {
         const token = await getStorageItem('token');
         const id = await getStorageItem('agendamento')
@@ -40,18 +40,21 @@ const HistoricoPet = ({ navigation }) => {
             diagnostico: {
                 diagnostico: diagnostico
             },
+            id_agendamento:id,
             custo: custo
         }
         axios.post(`https://pet-lovers-back-end.vercel.app/historico/cadastrar/${id_pet}`, dados, { headers: { Authorization: token } }).then(async (res) => {
-            // concluirAgendamento(token,id)
+            // concluirAgendamento(token, id)
         }).catch(error => {
             console.error('Erro', error.response)
         })
     }
+
     const concluirAgendamento = async (token, id) => {
+        console.log(token)
         axios.put(`https://pet-lovers-back-end.vercel.app/agendamento/concluir/${id}`, { headers: { Authorization: token } }).then(async (res) => {
         }).catch(error => {
-            console.error(error)
+            //console.error(error.response)
         })
     }
 
