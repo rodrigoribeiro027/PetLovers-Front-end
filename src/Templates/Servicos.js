@@ -60,7 +60,7 @@ const CriarServico = ({ navigation }) => {
                         <View style={styles.optionBtn}>
                             <View>
                                 <TouchableOpacity onPress={() => setTipo('Servicos')} >
-                                    <View style={styles.container}>
+                                    <View style={{...styles.container, borderWidth: tipo === "Servicos" ?  1 : 0}}>
                                         <ImageBackground source={require("../assets/servico.png")} style={{ width: 150, height: 115 }} >
                                             <Text style={styles.text}>Serviços</Text>
                                         </ImageBackground>
@@ -71,7 +71,7 @@ const CriarServico = ({ navigation }) => {
                         <View style={styles.optionBtn}>
                             <View>
                                 <TouchableOpacity onPress={() => setTipo('Produtos')} >
-                                    <View style={styles.container}>
+                                    <View style={{...styles.container, borderWidth: tipo === "Produtos" ?  1 : 0}}>
                                         <ImageBackground source={require("../assets/Product.png")} style={{ width: 150, height: 121 }} >
                                             <Text style={styles.text}>Produtos</Text>
                                         </ImageBackground>

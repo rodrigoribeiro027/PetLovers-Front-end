@@ -31,7 +31,7 @@ const Tab = createBottomTabNavigator();
 
 Icon.loadFont();
 
-function HomeTab() {
+function Routes() {
     const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation();
 
@@ -50,14 +50,14 @@ function HomeTab() {
 
     return (
         <View style={{ flex: 1 }}>
-            <Tab.Navigator initialRouteName="Login" screenOptions={({ route }) => ({
+            <Tab.Navigator initialRouteName="HomeTab" screenOptions={({ route }) => ({
                 headerShown: false,
                 tabBarActiveTintColor: '#EE82EE',
                 tabBarShowLabel: false,
                 tabBarIcon: ({ focused, color, size }) => {
                     let tamanho = 30;
                     let iconName;
-                    if (route.name === 'Home') {
+                    if (route.name === 'HomeTab') {
                         iconName = 'home'
                         tamanho = 32;
                     } else if (route.name === 'historicoAgendamento') {
@@ -85,7 +85,7 @@ function HomeTab() {
                 tabBarActiveTintColor: COLORS.primary,
                 tabBarInactiveTintColor: 'black',
             })}>
-                <Tab.Screen name="Home" component={Home} />
+                <Tab.Screen name="HomeTab" component={Stack} initialParams={{screen:"Home"}} />
                 <Tab.Screen name="historicoAgendamento" component={HistoricoAgendamento} />
                 <Tab.Screen name="PerfilUsuario" component={PerfilUsuario} />
             </Tab.Navigator>
@@ -116,31 +116,40 @@ function HomeTab() {
     );
 }
 
-const Routes = () => {
+const Stack = () => {
     const Stack = createNativeStackNavigator();
     return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} />
-                <Stack.Screen name="CadastrarUsuario" component={CadastrarUsuario} />
-                <Stack.Screen name="Home" component={HomeTab} />
-                <Stack.Screen name="CadastrarPet" component={CadastrarPet} />
-                <Stack.Screen name="AgendarConsulta" component={AgendarConsulta} />
-                <Stack.Screen name="HistoricoAgendamento" component={HistoricoAgendamento} />
-                <Stack.Screen name="HistoricoPet" component={HistoricoPet} />
-                <Stack.Screen name="Usuarios" component={ListagemUsuarios} />
-                <Stack.Screen name="CadastrarServico" component={CadastrarServico} />
-                <Stack.Screen name="Servicos" component={Servicos} />
-                <Stack.Screen name="MeusPets" component={MeusPets} />
-                <Stack.Screen name="CadastroFunc" component={CadastroFunc} />
-                <Stack.Screen name="CadastrarProduto" component={CadastrarProduto} />
-                <Stack.Screen name="PetHistoricoID" component={PetHistoricoID} />
-                <Stack.Screen name="ListagemAgendamentoFunc" component={ListagemAgendamentoFunc} />
-                <Stack.Screen name="ListagemAgendamentoCli" component={ListagemAgendamentoCli} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} />
+            <Stack.Screen name="CadastrarUsuario" component={CadastrarUsuario} />
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="CadastrarPet" component={CadastrarPet} />
+            <Stack.Screen name="AgendarConsulta" component={AgendarConsulta} />
+            <Stack.Screen name="HistoricoAgendamento" component={HistoricoAgendamento} />
+            <Stack.Screen name="HistoricoPet" component={HistoricoPet} />
+            <Stack.Screen name="Usuarios" component={ListagemUsuarios} />
+            <Stack.Screen name="CadastrarServico" component={CadastrarServico} />
+            <Stack.Screen name="Servicos" component={Servicos} />
+            <Stack.Screen name="MeusPets" component={MeusPets} />
+            <Stack.Screen name="CadastroFunc" component={CadastroFunc} />
+            <Stack.Screen name="CadastrarProduto" component={CadastrarProduto} />
+            <Stack.Screen name="PetHistoricoID" component={PetHistoricoID} />
+            <Stack.Screen name="ListagemAgendamentoFunc" component={ListagemAgendamentoFunc} />
+            <Stack.Screen name="ListagemAgendamentoCli" component={ListagemAgendamentoCli} />
+        </Stack.Navigator>
     )
 };
 
-export default Routes;
+const BaseStack = () => {
+    const Stack = createNativeStackNavigator();
+    return(
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Routes" component={Routes} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
+}
+
+export default BaseStack;

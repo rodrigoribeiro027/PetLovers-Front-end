@@ -40,7 +40,7 @@ const Login = ({ navigation }) => {
                 await storageItem('acesso', acesso);
                 setEmail('')
                 setSenha('')
-                navigation.navigate('Home')
+                navigation.navigate('Routes')
             } catch (error) {
                 console.error('Erro ao salvar token:', error);
             }
