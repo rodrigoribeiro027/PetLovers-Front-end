@@ -26,10 +26,7 @@ const AgendarConsulta = ({ navigation }) => {
     const [pets, setPets] = useState([])
     const [tipo_Consulta, setTipo_Consulta] = useState("");
     const [complemento, setComplemento] = useState("");
-    
-    const setToast = (msg) => {
-        ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
-    }
+
 
     const buscarPets = async () => {
         const token = await getStorageItem('token');
@@ -43,7 +40,7 @@ const AgendarConsulta = ({ navigation }) => {
     useEffect(() => {
         buscarPets()
     }, [])
-    
+
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
@@ -51,6 +48,9 @@ const AgendarConsulta = ({ navigation }) => {
         let tempDate = new Date(currentDate);
         let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
         let fTime = 'Marcado: ' + tempDate.getHours() + ' Horas e ' + tempDate.getMinutes() + ' Minutos';
+        console.log(fDate)
+        console.log(fTime)
+        console.log(currentDate.getHours())
         setText(fDate)
         setText2(fTime)
     }
@@ -66,8 +66,7 @@ const AgendarConsulta = ({ navigation }) => {
             tipo_Consulta: tipo_Consulta,
             complemento: complemento,
             id_pet: selectedValue,
-            data_agendamento: text,
-            horario: text2,
+            data_agendamento: date
         };
         axios.post('https://pet-lovers-back-end.vercel.app/agendamento/cadastrar', data, { headers: { Authorization: token } })
             .then(response => {

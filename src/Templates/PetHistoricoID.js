@@ -4,6 +4,7 @@ import axios from 'axios';
 import { getStorageItem } from '../functions/encryptedStorageFunctions';
 import { COLORS } from '../colors';
 import styleDefault from "../styles";
+import formatDate from '../functions/formatDate';
 
 
 const PetHistoricoID = ({ navigation }) => {
@@ -16,16 +17,6 @@ const PetHistoricoID = ({ navigation }) => {
             return updatedHistorico;
         });
     };
-
-    const formatDate = (data, time=false) => {
-        if(time){
-            const [formated,] = new Date(data).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" }).split(',');
-            return formated
-        }else{
-            const [formated,] = new Date(data).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" }).split(' ');
-            return formated;
-        }
-    }
 
     const buscarHistoricos = async () => {
         const token = await getStorageItem('token');
@@ -78,7 +69,7 @@ const PetHistoricoID = ({ navigation }) => {
 const styles = StyleSheet.create({
     containerHistorico: {
         flex: 1,
-        backgroundColor: "#399fff",
+        backgroundColor: "#E0E0E0",
         padding: 10,
         borderRadius: 10,
         flexDirection: 'column',
@@ -88,7 +79,7 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
     },
     PetHistorico: {
-        color: '#FFF',
+        color:"#000",
         fontSize: 17,
         padding: 10
     },

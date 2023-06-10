@@ -8,6 +8,7 @@ import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { Picker } from '@react-native-picker/picker';
 import { useFocusEffect } from '@react-navigation/native';
 import { COLORS } from '../colors.js';
+import formatDate from '../functions/formatDate.js';
 
 
 const ListagemAgendamentoCli = ({ navigation }) => {
@@ -19,11 +20,8 @@ const ListagemAgendamentoCli = ({ navigation }) => {
 
         axios.get("https://pet-lovers-back-end.vercel.app/agendamento/buscar-cliente", { headers: { Authorization: token } }).then(res => {
             let dados = res.data;
-            if (selectedValue === "andamento") {
-                dados = dados.filter(agendamento => agendamento.status === "andamento");
-            }
-            if (selectedValue === "concluido") {
-                dados = dados.filter(agendamento => agendamento.status === "concluido");
+            if(selectedValue != "todos"){
+                dados = dados.filter(agendamento => agendamento.status === selectedValue);
             }
             setAgendamentos(dados);
         }).catch(error => {
@@ -74,10 +72,7 @@ const ListagemAgendamentoCli = ({ navigation }) => {
                             <Text >Tipo de consulta: {agendamento.tipo_Consulta ? agendamento.tipo_Consulta : "Não informado"}</Text>
                         </View>
                         <View style={{ flex: 1 }}>
-                            <Text >Data da consulta: {agendamento.data_agendamento} </Text>
-                        </View>
-                        <View style={{ flex: 1 }}>
-                            <Text >Horario: {agendamento.horario}</Text>
+                            <Text >Data e hora da consulta: {formatDate(agendamento.data_agendamento, true)} </Text>
                         </View>
                         <View style={{ flex: 1 }}>
                             <Text >Status: {agendamento.status}</Text>
