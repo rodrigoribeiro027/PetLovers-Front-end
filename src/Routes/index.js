@@ -21,7 +21,6 @@ import PerfilUsuario from '../Templates/PerfilUsuario';
 import CadastroFunc from '../Templates/CadastroFunc';
 import CadastrarProduto from '../Templates/CadastrarProduto';
 import { useNavigation } from '@react-navigation/native';
-import stylesDefault from "../styles";
 import PetHistoricoID from '../Templates/PetHistoricoID';
 import ListagemAgendamentoFunc from '../Templates/ListagemAgendamentoFunc';
 import ListagemAgendamentoCli from '../Templates/ListagemAgendamentoCli';
@@ -85,7 +84,7 @@ function Routes() {
                 tabBarActiveTintColor: COLORS.primary,
                 tabBarInactiveTintColor: 'black',
             })}>
-                <Tab.Screen name="HomeTab" component={Stack} initialParams={{screen:"Home"}} />
+                <Tab.Screen name="HomeTab" component={Stack} initialParams={{ screen: "Home" }} />
                 <Tab.Screen name="historicoAgendamento" component={HistoricoAgendamento} />
                 <Tab.Screen name="PerfilUsuario" component={PerfilUsuario} />
             </Tab.Navigator>
@@ -142,7 +141,7 @@ const Stack = () => {
 
 const BaseStack = () => {
     const Stack = createNativeStackNavigator();
-    return(
+    return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Login" component={Login} />
