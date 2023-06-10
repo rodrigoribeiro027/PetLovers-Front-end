@@ -38,6 +38,8 @@ const Login = ({ navigation }) => {
             try {
                 await storageItem('token', token);
                 await storageItem('acesso', acesso);
+                setEmail('')
+                setSenha('')
                 navigation.navigate('Home')
             } catch (error) {
                 console.error('Erro ao salvar token:', error);

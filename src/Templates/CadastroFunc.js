@@ -129,7 +129,9 @@ const CadastroFunc = ({ navigation }) => {
                         </TouchableOpacity>
 
                         <Text style={styles.TextPrincipalCadastro}>Cadastrar Funcionario</Text>
-
+                        <TouchableOpacity style={{ ...styles.loginButon, marginBottom: 20 }} onPress={() => navigation.navigate("CadastrarUsuario")} >
+                            <Text style={styles.uploadImageText} >Cadastrar Cliente</Text>
+                        </TouchableOpacity>
                         <Image onPress={() => uploadImage()} style={styles.imagenUploadUsuario} source={Foto ? { uri: Foto.uri } : require('../assets/user.png')} />
 
                         <TouchableOpacity style={{ ...styles.loginButon, marginBottom: 20 }} onPress={() => uploadImage()} >

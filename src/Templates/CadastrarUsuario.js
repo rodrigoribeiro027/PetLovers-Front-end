@@ -13,6 +13,7 @@ import styleDefault from "../styles";
 import StatusBar from '../components/StatusBar.js';
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
+import { clearStorageItem, getStorageItem } from '../functions/encryptedStorageFunctions.js';
 
 
 const CadastrarUsuario = ({ navigation }) => {
@@ -26,8 +27,17 @@ const CadastrarUsuario = ({ navigation }) => {
     const [numero, setNumero] = useState('');
     const [complemento, setComplemento] = useState('');
     const [telefone, setTelefone] = useState('');
-
     const [Foto, SetFoto] = useState('');
+    const [acesso, setAcesso] = useState();
+
+    const nivelDeAcessoDoUsuario = async () => {
+        const acesso = await getStorageItem('acesso');
+        setAcesso(acesso);
+    }
+
+    useEffect(()=>{
+        nivelDeAcessoDoUsuario()
+    },[])
 
     const setToast = (msg) => {
         ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
@@ -100,7 +110,7 @@ const CadastrarUsuario = ({ navigation }) => {
             const user_id = res.data._id;
             const tipo = 'usuario';
             sendImageToDrive(user_id, tipo);
-            navigation.navigate("Login");
+            acesso != "cliente" ? navigation.navigate('Login') : navigation.navigate('CadastroFunc')
             Toast.show({
                 type: 'success',
                 text1: 'Cadastro Realizado com Sucesso.',
