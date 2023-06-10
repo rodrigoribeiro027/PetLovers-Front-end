@@ -40,6 +40,7 @@ const ListagemAgendamentoFunc = ({ navigation }) => {
         try {
             await storageItem('agendamento', id);
             navigation.navigate('HistoricoPet');
+            setSelectedValue('todos');
         } catch (error) {
             console.error('Erro', error.response);
         }

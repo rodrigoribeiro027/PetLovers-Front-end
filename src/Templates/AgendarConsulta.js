@@ -76,6 +76,7 @@ const AgendarConsulta = ({ navigation }) => {
                     type: 'success',
                     text1: 'Cadastro Realizado com Sucesso.',
                 });
+                navigation.navigate('Home');
             })
             .catch(error => {
                 console.error('Erro ao cadastrar consulta:', error.response);

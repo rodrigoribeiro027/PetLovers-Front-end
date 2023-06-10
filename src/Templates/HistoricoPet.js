@@ -44,19 +44,20 @@ const HistoricoPet = ({ navigation }) => {
             custo: custo
         }
         axios.post(`https://pet-lovers-back-end.vercel.app/historico/cadastrar/${id_pet}`, dados, { headers: { Authorization: token } }).then(async (res) => {
-            // concluirAgendamento(token, id)
+            Toast.show({
+                type: 'success',
+                text1: 'Consulta Agendada com sucesso...',
+            });
+            navigation.navigate('ListagemAgendamentoFunc');
         }).catch(error => {
+            Toast.show({
+                type: 'error',
+                text1: 'Ocorreu algum problema',
+            }); 
             console.error('Erro', error.response)
         })
     }
 
-    const concluirAgendamento = async (token, id) => {
-        console.log(token)
-        axios.put(`https://pet-lovers-back-end.vercel.app/agendamento/concluir/${id}`, { headers: { Authorization: token } }).then(async (res) => {
-        }).catch(error => {
-            //console.error(error.response)
-        })
-    }
 
     useEffect(() => {
         buscarAgendamento()
@@ -128,7 +129,7 @@ const HistoricoPet = ({ navigation }) => {
                                 onChangeText={e => setcusto(e)}>
                             </TextInput>
                             <TouchableOpacity style={styles.AgendamentoButon} onPress={() => { Cadastrarhistorico() }}>
-                                <Text style={styles.AgendamentoButonText} onPress={() => navigation.navigate("Home")}>Agendar</Text>
+                                <Text style={styles.AgendamentoButonText}>Agendar</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
