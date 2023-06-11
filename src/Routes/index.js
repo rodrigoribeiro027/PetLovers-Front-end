@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Modal, View, Text, TouchableOpacity } from 'react-native';
 import Login from '../Templates/login';
 import RecuperarSenha from '../Templates/RecuperarSenha';
@@ -24,6 +24,8 @@ import { useNavigation } from '@react-navigation/native';
 import PetHistoricoID from '../Templates/PetHistoricoID';
 import ListagemAgendamentoFunc from '../Templates/ListagemAgendamentoFunc';
 import ListagemAgendamentoCli from '../Templates/ListagemAgendamentoCli';
+import ListagemCompras from '../Templates/ListagemCompras';
+import { getStorageItem } from '../functions/encryptedStorageFunctions.js';
 
 
 const Tab = createBottomTabNavigator();
@@ -34,6 +36,16 @@ function Routes() {
     const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation();
 
+    const [acesso, setAcesso] = useState();
+
+
+    const nivelDeAcessoDoUsuario = async () => {
+        const acesso = await getStorageItem('acesso');
+        setAcesso(acesso);
+    }
+    useEffect(()=>{
+        nivelDeAcessoDoUsuario()
+    },[])
     const openModal = () => {
         setModalVisible(true);
     }
@@ -97,6 +109,17 @@ function Routes() {
                 <TouchableOpacity style={{ flex: 1 }} onPress={closeModal}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
                         <View style={{ backgroundColor: '#FFF', padding: 20, borderRadius: 10, width: '80%', alignItems: 'center' }}>
+                            <TouchableOpacity style={{ marginBottom: 20 }} onPress={() => navigateToStackScreen('AgendarConsulta')}>
+                                <Text style={{ textAlign: 'center' }}>Agendar Consulta</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{ marginBottom: 20 }} onPress={() => navigateToStackScreen('CadastrarPet')}>
+                                <Text style={{ textAlign: 'center' }}>Cadastrar Pet</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{ marginBottom: 20 }} onPress={() => navigateToStackScreen('Servicos')}>
+                                <Text style={{ textAlign: 'center' }}>Loja</Text>
+                            </TouchableOpacity>
+                        {acesso === "admin" && (
+                            <>
                             <TouchableOpacity style={{ marginBottom: 20 }} onPress={() => navigateToStackScreen('CadastrarProduto')}>
                                 <Text style={{ textAlign: 'center' }}>Cadastro Produto</Text>
                             </TouchableOpacity>
@@ -106,6 +129,7 @@ function Routes() {
                             <TouchableOpacity style={{ marginBottom: 20 }} onPress={() => navigateToStackScreen('CadastroFunc')}>
                                 <Text style={{ textAlign: 'center' }}>Cadastro Funcionario</Text>
                             </TouchableOpacity>
+                            </>)}
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -135,6 +159,7 @@ const Stack = () => {
             <Stack.Screen name="PetHistoricoID" component={PetHistoricoID} />
             <Stack.Screen name="ListagemAgendamentoFunc" component={ListagemAgendamentoFunc} />
             <Stack.Screen name="ListagemAgendamentoCli" component={ListagemAgendamentoCli} />
+            <Stack.Screen name="ListagemCompras" component={ListagemCompras} />
         </Stack.Navigator>
     )
 };

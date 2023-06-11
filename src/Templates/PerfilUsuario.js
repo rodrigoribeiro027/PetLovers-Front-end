@@ -4,7 +4,7 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, TextInput, ScrollView, Image
+    TouchableOpacity, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, Platform, TextInput, ScrollView, Image, Modal
 } from 'react-native';
 import StatusBar from '../components/StatusBar.js';
 import stylesDefault from "../styles"
@@ -20,6 +20,15 @@ const PerfilUsuario = ({ navigation }) => {
 
     const [usuario, setUsuario] = useState('');
 
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const openModal = () => {
+        setModalVisible(true);
+    }
+
+    const closeModal = () => {
+        setModalVisible(false);
+    }
     const buscarUsuario = async () => {
         const token = await getStorageItem('token');
         axios.get('https://pet-lovers-back-end.vercel.app/usuario/buscar-info', { headers: { Authorization: token } }).then(res => {
@@ -28,6 +37,16 @@ const PerfilUsuario = ({ navigation }) => {
             console.error('Erro', error.response);
         })
     }
+    // const excluirUsuario = async () => {
+    //     const token = await getStorageItem('token');
+    //     const dados = await getStorageItem('_id');
+    //     axios.delete(`https://pet-lovers-back-end.vercel.app/usuario/excluir/${dados}`, { headers: { Authorization: token } }).then(res => {
+    //         navigation.navigate('Login')
+    //         console.log("---------Usuario deletado --------");
+    //     }).catch(error => {
+    //         console.error('Erro', error.response);
+    //     })
+    // }
 
     useEffect(() => {
         buscarUsuario();
@@ -46,9 +65,9 @@ const PerfilUsuario = ({ navigation }) => {
                             </TouchableOpacity>
                             <View style={styles.PerfilContainer}>
                                 <View style={styles.linha}>
-                                    <Image style={styles.imagenUser} source={{uri: usuario.upload?.link}} />
-                                    <TouchableOpacity onPress={() => console.log("config")}>
-                                    <Icon name="cog" style={stylesDefault.voltar} size={45} color="black" />
+                                    <Image style={styles.imagenUser} source={{ uri: usuario.upload?.link }} />
+                                    <TouchableOpacity onPress={() => openModal()}>
+                                        <Icon name="cog" style={stylesDefault.voltar} size={45} color="black" />
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -62,7 +81,7 @@ const PerfilUsuario = ({ navigation }) => {
                                 </View>
                                 <View>
                                     <TouchableOpacity onPress={() => console.log("edit")}>
-                                        <Icon name="pencil" style={stylesDefault.voltar} size={25} color="black" /> 
+                                        <Icon name="pencil" style={stylesDefault.voltar} size={25} color="black" />
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -76,10 +95,25 @@ const PerfilUsuario = ({ navigation }) => {
                                 </View>
                                 <View>
                                     <TouchableOpacity onPress={() => console.log("edit")}>
-                                        <Icon name="pencil" style={stylesDefault.voltar} size={25} color="black" /> 
+                                        <Icon name="pencil" style={stylesDefault.voltar} size={25} color="black" />
                                     </TouchableOpacity>
                                 </View>
                             </View>
+                            <Modal
+                                animationType="slide"
+                                transparent={true}
+                                visible={modalVisible}
+                                onRequestClose={closeModal}>
+                                <TouchableOpacity style={{ flex: 1 }} onPress={closeModal}>
+                                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+                                        <View style={{ backgroundColor: '#FFF', padding: 20, borderRadius: 10, width: '80%', alignItems: 'center' }}>
+                                            <TouchableOpacity style={{ marginBottom: 10 }} >
+                                                <Text style={{ textAlign: 'center' }}>Desativar Conta</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                            </Modal>
                         </View >
                     </TouchableWithoutFeedback>
                 </KeyboardAvoidingView>
@@ -98,16 +132,16 @@ const styles = StyleSheet.create({
         width: '90%',
         borderRadius: 5,
         fontSize: 10,
-        backgroundColor:'#D3E5ED',
-        marginVertical:20,
-        padding:5
+        backgroundColor: '#D3E5ED',
+        marginVertical: 20,
+        padding: 5
     },
     linha2: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        padding:10,
-        fontSize:5
+        padding: 10,
+        fontSize: 5
     },
     screen: {
         flex: 1,
@@ -129,9 +163,9 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         fontSize: 10,
         height: 100,
-        marginVertical:40,
-        paddingLeft:10,
-        paddingRight:10
+        marginVertical: 40,
+        paddingLeft: 10,
+        paddingRight: 10
     },
     imagenUser: {
         height: 100,

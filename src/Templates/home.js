@@ -106,7 +106,17 @@ const Home = ({ navigation }) => {
                                 </View>
                             </View>
                         </View>
-
+                        <View style={styles.HomeContainer}>
+                            <View style={styles.options1}>
+                                <Image source={require("../assets/recibo.png")} style={styles.agendar} />
+                                <View>
+                                    <Text style={styles.TextoConsulta}>consulte suas compras no app</Text>
+                                    <TouchableOpacity style={styles.agendarConsulta} onPress={() => navigation.navigate('ListagemCompras')} >
+                                        <Text style={styles.TextoConsulta} >Minhas Compras</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
                         {acesso === "admin" && (
                             <>
                                 <View style={styles.HomeContainer}>
