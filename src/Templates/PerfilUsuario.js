@@ -37,16 +37,16 @@ const PerfilUsuario = ({ navigation }) => {
             console.error('Erro', error.response);
         })
     }
-    // const excluirUsuario = async () => {
-    //     const token = await getStorageItem('token');
-    //     const dados = await getStorageItem('_id');
-    //     axios.delete(`https://pet-lovers-back-end.vercel.app/usuario/excluir/${dados}`, { headers: { Authorization: token } }).then(res => {
-    //         navigation.navigate('Login')
-    //         console.log("---------Usuario deletado --------");
-    //     }).catch(error => {
-    //         console.error('Erro', error.response);
-    //     })
-    // }
+    const excluirUsuario = async () => {
+        const token = await getStorageItem('token');
+        const dados = await getStorageItem('_id');
+        axios.delete(`https://pet-lovers-back-end.vercel.app/usuario/excluir/${dados}`, { headers: { Authorization: token } }).then(res => {
+            navigation.navigate('Login')
+            console.log("---------Usuario deletado --------");
+        }).catch(error => {
+            console.error('Erro', error.response);
+        })
+    }
 
     useEffect(() => {
         buscarUsuario();

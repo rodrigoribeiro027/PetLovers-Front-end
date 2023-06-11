@@ -42,12 +42,13 @@ const CriarServico = ({ navigation }) => {
                 console.error('Erro', error.response);
             });
     };
+
     const toggleSelection = (index) => {
         const updatedOfertas = [...ofertas];
         updatedOfertas[index].selecionado = !updatedOfertas[index].selecionado;
-        console.log(updatedOfertas);
         setOferta(updatedOfertas);
     };
+
     const realizarCompra = async () =>{
         const token = await getStorageItem('token');
         const selecionados = ofertas.filter(oferta=> oferta.selecionado).map(oferta=>oferta._id)

@@ -14,23 +14,36 @@ import formatDate from '../functions/formatDate.js';
 const ListagemCompras = ({ navigation }) => {
     const [compras, setCompras] = useState([]);
 
+    const toggleCollapse = (index) => {
+        setCompras((compra) => {
+            const updatedCompra = [...compra];
+            updatedCompra[index].isCollapsed = !updatedCompra[index].isCollapsed;
+            return updatedCompra;
+        });
+    };
+
     const comprasClientes = async () => {
         const token = await getStorageItem("token");
-        axios.get("https://pet-lovers-back-end.vercel.app/compra/buscar", { headers: { Authorization: token } }).then(res => {
-            setCompras(res.data);
-        }).catch(error => {
+        axios.get("https://pet-lovers-back-end.vercel.app/compra/buscar", { headers: { Authorization: token } })
+        .then(res => {
+            const compraComCollapse = res.data.map((compra) => ({
+                ...compra,
+                isCollapsed: true,
+            }));
+            setCompras(compraComCollapse);
+        })
+        .catch(error => {
             Toast.show({
                 type: 'error',
                 text1: 'Ocorreu algum problema...',
             });
             console.error('Erro', error);
-        })
-    }
+        });
+    };
 
     useEffect(() => {
-        comprasClientes()
+        comprasClientes();
     }, []);
-
 
     return (
         <ScrollView style={{ flex: 1 }}>
@@ -43,45 +56,51 @@ const ListagemCompras = ({ navigation }) => {
             </View>
             <View style={styles.containerCadastro}>
                 {compras.map((compra, index) => (
-                    <View style={styles.ServicoConteiner} key={`${compra._id}-${index}`}>
-                        <View style={styles.servicoText}>
-                            <Text style={styles.servicoTexto}>{compra.nome}</Text>
-                            <Text style={styles.servicoTexto}>R$ {compra.preco}</Text>
-                        </View>
-                        <Text style={styles.servicoTexto}>Tipo: {compra.tipo}</Text>
-                        <Text style={styles.servicoTexto}>Descrição: {compra.descricao}</Text>
+                    <View style={styles.ServicoConteiner} key={compra._id}>
+                        <TouchableOpacity  onPress={() => toggleCollapse(index)}>
+                            <Text style={styles.buttonText}>Compra realizada dia: {formatDate(compra?.data_compra)}</Text>
+                        </TouchableOpacity>
+                        
+                        {!compra.isCollapsed && (
+                            compra.ofertas.map((oferta,index) => (
+                                <View key={oferta.id} style={{ flex: 1, marginVertical:15 }}>
+                                    <Text style={styles.servicoTexto}>Item #{index+1}</Text>
+                                    <View style={styles.servicoText}>
+                                        <Text style={styles.servicoTexto}>{oferta.nome}</Text>
+                                        <Text style={styles.servicoTexto}>R$ {oferta.preco}</Text>
+                                    </View>
+                                    <Text style={styles.servicoTexto}>Tipo: {oferta.tipo}</Text>
+                                    <Text style={styles.servicoTexto}>Descrição: {oferta.descricao}</Text>
+                                </View>
+                            ))
+                        )}
                     </View>
                 ))}
-
             </View>
             <StatusBar />
         </ScrollView>
     );
-}
+};
 
 const styles = StyleSheet.create({
     ServicoConteiner: {
         width: '80%',
         borderRadius: 5,
-        padding: 5,
-        fontSize: 10,
+        padding: 10,
         backgroundColor: "#D3E5ED",
         marginBottom: 10,
-        padding: 10
-
     },
     servicoText: {
         flexDirection: "row",
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 10,
     },
     servicoTexto: {
-        color: 'black'
+        color: 'black',
     },
     titulo: {
         textAlign: "center",
-        fontSize: 30
+        fontSize: 30,
     },
     item: {
         backgroundColor: '#FFF',
@@ -91,7 +110,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginTop: 20,
-        marginHorizontal: 15
+        marginHorizontal: 15,
     },
     selectInput: {
         backgroundColor: COLORS.white,
@@ -100,12 +119,16 @@ const styles = StyleSheet.create({
         borderColor: "#E0E0E0",
         marginLeft: 'auto',
         marginRight: 'auto',
-        marginTop: 20
+        marginTop: 20,
     },
     containerCadastro: {
         paddingTop: "5%",
         alignItems: "center",
         justifyContent: "center",
+    },
+    buttonText: {
+        fontSize: 15,
+        padding:10
     },
 });
 
