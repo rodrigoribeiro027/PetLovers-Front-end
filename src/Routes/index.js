@@ -171,6 +171,7 @@ const BaseStack = () => {
             <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Routes" component={Routes} />
+                <Stack.Screen name="CadastrarUsuario" component={CadastrarUsuario} />
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -115,8 +115,8 @@ const CriarServico = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
                     ))}
-                    <TouchableOpacity  onPress={() => realizarCompra()}>
-                            <Text>botao</Text>
+                    <TouchableOpacity style={styles.AgendamentoButon}  onPress={() => realizarCompra()}>
+                            <Text style={styles.AgendamentoButonText}>Comprar</Text>
                         </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -124,6 +124,21 @@ const CriarServico = ({ navigation }) => {
     )
 };
 const styles = StyleSheet.create({
+    AgendamentoButon: {
+        width: '90%',
+        marginTop: '2%',
+        backgroundColor: "#399fff",
+        height: 42,
+        justifyContent: 'center',
+        alignItems: "center",
+        borderRadius: 5
+    },
+    AgendamentoButonText: {
+        color: "#FFF",
+        fontSize: 17,
+        fontWeight: 'bold'
+
+    },
     ServicoConteiner: {
         width: '80%',
         borderRadius: 5,

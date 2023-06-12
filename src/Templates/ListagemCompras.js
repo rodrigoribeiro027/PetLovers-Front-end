@@ -58,7 +58,7 @@ const ListagemCompras = ({ navigation }) => {
                 {compras.map((compra, index) => (
                     <View style={styles.ServicoConteiner} key={compra._id}>
                         <TouchableOpacity  onPress={() => toggleCollapse(index)}>
-                            <Text style={styles.buttonText}>Compra realizada dia: {formatDate(compra?.data_compra)}</Text>
+                            <Text style={styles.buttonText}>Compra realizada dia: {formatDate(compra?.data_compra,true)}</Text>
                         </TouchableOpacity>
                         
                         {!compra.isCollapsed && (
